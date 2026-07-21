@@ -6,7 +6,314 @@
 :root{
   --black:#0B0B0C;
   --surface:#1A1A1C;
-  --surface-2:#232326;
+  --surface-2:#232326;<!DOCTYPE html>
+<html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kart Altum Experience</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Saira+Condensed:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --black:#0B0B0C;--surface:#1A1A1C;--surface-2:#232326;--gold:#C9A227;--gold-hi:#E8C558;--gold-lo:#8A6E1E;
+  --white:#FFFFFF;--muted:#9A968C;--line:#2E2E31;--navy:#0A1628;
+  --sem-good:#2E7D32;--sem-mid:#E0A800;--sem-bad:#C0392B;
+  --font-display:"Saira Condensed","Oswald","Arial Narrow",sans-serif;--font-sans:Arial,Helvetica,sans-serif;--font-serif:Georgia,"Times New Roman",serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--black);color:var(--white);font-family:var(--font-sans);line-height:1.5;-webkit-font-smoothing:antialiased;min-height:100vh}
+a{color:inherit;text-decoration:none}
+.checker{height:10px;background:repeating-conic-gradient(var(--white) 0% 25%, transparent 0% 50%) 0/20px 20px,var(--gold);opacity:.9}
+header.top{background:linear-gradient(180deg,#111 0%,var(--black) 100%);border-bottom:1px solid var(--line);padding:18px 20px 14px}
+.brand-row{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;max-width:1200px;margin:0 auto}
+.brand h1{font-family:var(--font-display);font-style:italic;font-weight:700;letter-spacing:.5px;font-size:30px;line-height:1;text-transform:uppercase}
+.brand h1 .k{color:var(--gold)}
+nav.tabs{display:flex;gap:6px;flex-wrap:wrap}
+nav.tabs a{font-weight:700;font-size:12px;letter-spacing:1.5px;text-transform:uppercase;padding:9px 14px;border:1px solid var(--line);border-radius:6px;color:var(--muted);transition:.15s}
+nav.tabs a:hover{color:var(--white);border-color:var(--gold-lo)}
+nav.tabs a.active{color:var(--black);background:var(--gold);border-color:var(--gold)}
+main{max-width:1200px;margin:0 auto;padding:26px 20px 60px}
+.section-title{font-family:var(--font-display);font-style:italic;font-weight:700;text-transform:uppercase;font-size:22px;letter-spacing:.5px;margin:6px 0 14px;display:flex;align-items:center;gap:10px}
+.section-title::before{content:"";width:26px;height:12px;background:repeating-conic-gradient(var(--white) 0% 25%, transparent 0% 50%) 0/6px 6px}
+.sub{color:var(--muted);font-size:13px;margin-bottom:18px}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:22px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px}
+.card .label{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--muted)}
+.card .value{font-family:var(--font-display);font-weight:700;font-size:30px;color:var(--gold);margin-top:4px;line-height:1}
+.card .value.white{color:var(--white)}
+.card .value small{font-size:14px;color:var(--muted);font-family:var(--font-sans);font-weight:400}
+.table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:10px}
+table{width:100%;border-collapse:collapse;font-size:14px;min-width:560px}
+thead th{background:var(--surface-2);color:var(--muted);text-transform:uppercase;letter-spacing:1px;font-size:11px;text-align:left;padding:11px 12px;border-bottom:1px solid var(--line);white-space:nowrap}
+tbody td{padding:11px 12px;border-bottom:1px solid var(--line);vertical-align:middle}
+tbody tr:last-child td{border-bottom:none}
+tbody tr:hover{background:#141416}
+td.num,th.num{text-align:center;font-variant-numeric:tabular-nums}
+.pos{font-family:var(--font-display);font-weight:700;font-size:17px}
+.pilot-name{font-weight:700}
+.pilot-name small{display:block;color:var(--muted);font-weight:400;font-size:11px}
+.pts{font-family:var(--font-display);font-weight:700;font-size:18px;color:var(--gold)}
+tr.podium-1 td:first-child{box-shadow:inset 3px 0 0 var(--gold)}
+tr.podium-2 td:first-child{box-shadow:inset 3px 0 0 #C0C0C0}
+tr.podium-3 td:first-child{box-shadow:inset 3px 0 0 #CD7F32}
+tr.podium-4 td:first-child{box-shadow:inset 3px 0 0 #8A6E1E}
+tr.podium-5 td:first-child{box-shadow:inset 3px 0 0 #6B6359}
+.badge{display:inline-block;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:3px 7px;border-radius:4px;margin-left:5px;vertical-align:middle}
+.badge.pole{background:var(--gold);color:var(--black)}
+.badge.fl{background:transparent;color:var(--gold-hi);border:1px solid var(--gold-lo)}
+.badge.dnf{background:#3a1e1e;color:#e88}
+.badge.bond{background:var(--surface-2);color:var(--muted);border:1px solid var(--line)}
+.dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:7px;vertical-align:middle}
+.sem-good{color:var(--sem-good)} .sem-good .dot,.dot.sem-good{background:var(--sem-good)}
+.sem-mid{color:var(--sem-mid)} .sem-mid .dot,.dot.sem-mid{background:var(--sem-mid)}
+.sem-bad{color:var(--sem-bad)} .sem-bad .dot,.dot.sem-bad{background:var(--sem-bad)}
+td.sem-cell{font-weight:700;font-variant-numeric:tabular-nums}
+.controls{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:20px}
+.field{display:flex;flex-direction:column;gap:6px}
+.field label{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted)}
+select,input,textarea{background:var(--surface);color:var(--white);border:1px solid var(--line);border-radius:8px;padding:11px 12px;font-family:var(--font-sans);font-size:14px;min-width:220px}
+select:focus,input:focus,textarea:focus{outline:none;border-color:var(--gold)}
+.hint{font-size:12px;color:var(--muted)}
+.notice{background:#141416;border:1px solid var(--line);border-left:3px solid var(--gold);border-radius:8px;padding:12px 14px;color:var(--muted);font-size:13px;margin:14px 0}
+footer{border-top:1px solid var(--line);margin-top:40px;padding:26px 20px;text-align:center}
+footer .altum{font-family:var(--font-serif);font-size:26px;letter-spacing:6px;color:var(--white)}
+footer .tagline{font-family:var(--font-serif);font-style:italic;color:var(--gold);font-size:14px;margin-top:2px}
+footer .meta{color:var(--muted);font-size:11px;margin-top:10px;letter-spacing:1px}
+.legend{display:flex;gap:16px;flex-wrap:wrap;margin-top:12px;font-size:12px;color:var(--muted)}
+.legend span{display:flex;align-items:center}
+.empty{color:var(--muted);padding:20px;text-align:center}
+tr.podium-4 td:first-child{box-shadow:inset 3px 0 0 #8A6E1E}
+tr.podium-5 td:first-child{box-shadow:inset 3px 0 0 #6B6359}
+.podium5{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:4px 0 22px}
+.pcard{background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--line);border-radius:10px;padding:13px 15px}
+.pcard.p1{border-left-color:#C9A227}
+.pcard.p2{border-left-color:#C0C0C0}
+.pcard.p3{border-left-color:#CD7F32}
+.pcard.p4{border-left-color:#8A6E1E}
+.pcard.p5{border-left-color:#6B6359}
+.pcard .prank{font-family:var(--font-display);font-style:italic;font-weight:700;font-size:13px;color:var(--muted);text-transform:uppercase;letter-spacing:1px}
+.pcard .pname{font-weight:700;font-size:15px;margin-top:2px;line-height:1.2}
+.pcard .ppts{font-family:var(--font-display);font-weight:700;font-size:22px;color:var(--gold);margin-top:4px}
+.pcard .ppts small{font-size:12px;color:var(--muted);font-family:var(--font-sans);font-weight:400}
+.mini-stats{display:flex;gap:20px;flex-wrap:wrap;margin-bottom:16px;color:var(--muted);font-size:13px}
+.mini-stats b{color:var(--white);font-weight:700}
+.mini-stats .g{color:var(--gold);font-weight:700}
+.chart-box{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px;margin:6px 0 24px}
+.chart-box .chart-title{font-family:var(--font-display);font-style:italic;font-weight:700;text-transform:uppercase;font-size:15px;letter-spacing:.5px;margin-bottom:12px}
+.chart-wrap{position:relative;width:100%;height:280px}
+@media (max-width:560px){.brand h1{font-size:24px}main{padding:20px 14px 50px}}
+</style></head><body>
+<main><div id="app"></div></main>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script>window.__DB__ = 
+{
+  "config": {
+    "championship": "Kart Altum Experience","season": 2026,"edition": "1ª Edição","tagline": "Elevação que gera legado.",
+    "total_rounds": 6,"points_by_position": [25, 18, 15, 12, 10, 8, 6, 4, 2, 1],"presence_points": 2,"fastest_lap_points": 1,"pole_points": 2,"discard_worst": 2,
+    "bond_labels": {"member": "Membro","referred": "Indicado","guest": "Convidado","member_child": "Filho de Membro","unconfirmed": "A confirmar"}
+  },
+  "pilots": [
+    { "pilot_id": "P001", "name": "Handerson Argenta", "nickname": null, "bond_type": "unconfirmed" },
+    { "pilot_id": "P002", "name": "Rodrigo Alves", "nickname": null, "bond_type": "unconfirmed" },
+    { "pilot_id": "P003", "name": "Igor Pinheiro", "nickname": null, "bond_type": "unconfirmed" },
+    { "pilot_id": "P004", "name": "Victor Hugo Gouveia De Lucena", "nickname": null, "bond_type": "unconfirmed" },
+    { "pilot_id": "P005", "name": "Bruno Kaleb", "nickname": null, "bond_type": "unconfirmed" },
+    { "pilot_id": "P006", "name": "Lucas Gratão Lemos", "nickname": null, "bond_type": "unconfirmed" },
+    { "pilot_id": "P007", "name": "Rodrigo Canal", "nickname": null, "bond_type": "member" },
+    { "pilot_id": "P008", "name": "Rodrigo Villalva", "nickname": null, "bond_type": "unconfirmed" },
+    { "pilot_id": "P009", "name": "Rafael Carvalho De Paula", "nickname": null, "bond_type": "unconfirmed" },
+    { "pilot_id": "P010", "name": "Guilherme Zveiter", "nickname": null, "bond_type": "unconfirmed" },
+    { "pilot_id": "P011", "name": "Arthur Gabriel Souza De Moraes", "nickname": null, "bond_type": "unconfirmed" },
+    { "pilot_id": "P012", "name": "Bruno Menck", "nickname": null, "bond_type": "unconfirmed" },
+    { "pilot_id": "P013", "name": "Madson Cardoso", "nickname": null, "bond_type": "unconfirmed" },
+    { "pilot_id": "P014", "name": "Victor Silvério", "nickname": null, "bond_type": "unconfirmed" },
+    { "pilot_id": "P015", "name": "Giuseppe Bandeira", "nickname": null, "bond_type": "member" },
+    { "pilot_id": "P016", "name": "Cefora Bezerra Souza", "nickname": null, "bond_type": "unconfirmed" },
+    { "pilot_id": "P017", "name": "Franck Rodrigues", "nickname": null, "bond_type": "unconfirmed" }
+  ],
+  "races": [
+    { "race_id": "R2026-01","round": 1,"date": "2026-07-15","time": "19:15","venue": "Kart Point","track": "Arena Mané Garrincha","layout": "Pista 01 H","kart_category": "rental_13hp","hp": 13 }
+  ],
+  "results": [
+    { "race_id": "R2026-01", "pilot_id": "P001", "kart_number": 25, "grid_pole": false, "finish_pos": 1,  "best_lap_ms": 51956, "laps_completed": 15, "gap_display": "—",         "status": "classified" },
+    { "race_id": "R2026-01", "pilot_id": "P002", "kart_number": 17, "grid_pole": false, "finish_pos": 2,  "best_lap_ms": 51733, "laps_completed": 15, "gap_display": "+00:02.933", "status": "classified" },
+    { "race_id": "R2026-01", "pilot_id": "P003", "kart_number": 10, "grid_pole": false, "finish_pos": 3,  "best_lap_ms": 53122, "laps_completed": 15, "gap_display": "+00:06.245", "status": "classified" },
+    { "race_id": "R2026-01", "pilot_id": "P004", "kart_number": 14, "grid_pole": false, "finish_pos": 4,  "best_lap_ms": 53730, "laps_completed": 15, "gap_display": "+00:18.313", "status": "classified" },
+    { "race_id": "R2026-01", "pilot_id": "P005", "kart_number": 15, "grid_pole": false, "finish_pos": 5,  "best_lap_ms": 54165, "laps_completed": 15, "gap_display": "+00:25.291", "status": "classified" },
+    { "race_id": "R2026-01", "pilot_id": "P006", "kart_number": 24, "grid_pole": false, "finish_pos": 6,  "best_lap_ms": 55192, "laps_completed": 15, "gap_display": "+00:51.286", "status": "classified" },
+    { "race_id": "R2026-01", "pilot_id": "P007", "kart_number": 23, "grid_pole": false, "finish_pos": 7,  "best_lap_ms": 55537, "laps_completed": 15, "gap_display": "+00:51.358", "status": "classified" },
+    { "race_id": "R2026-01", "pilot_id": "P008", "kart_number": 31, "grid_pole": false, "finish_pos": 8,  "best_lap_ms": 55636, "laps_completed": 14, "gap_display": "+1 volta",   "status": "classified" },
+    { "race_id": "R2026-01", "pilot_id": "P009", "kart_number": 21, "grid_pole": false, "finish_pos": 9,  "best_lap_ms": 55697, "laps_completed": 14, "gap_display": "+1 volta",   "status": "classified" },
+    { "race_id": "R2026-01", "pilot_id": "P010", "kart_number": 18, "grid_pole": false, "finish_pos": 10, "best_lap_ms": 54578, "laps_completed": 14, "gap_display": "+1 volta",   "status": "classified" },
+    { "race_id": "R2026-01", "pilot_id": "P011", "kart_number": 4,  "grid_pole": false, "finish_pos": 11, "best_lap_ms": 55400, "laps_completed": 14, "gap_display": "+1 volta",   "status": "classified" },
+    { "race_id": "R2026-01", "pilot_id": "P012", "kart_number": 43, "grid_pole": false, "finish_pos": 12, "best_lap_ms": 55816, "laps_completed": 14, "gap_display": "+1 volta",   "status": "classified" },
+    { "race_id": "R2026-01", "pilot_id": "P013", "kart_number": 44, "grid_pole": false, "finish_pos": 13, "best_lap_ms": 58916, "laps_completed": 14, "gap_display": "+1 volta",   "status": "classified" },
+    { "race_id": "R2026-01", "pilot_id": "P014", "kart_number": 19, "grid_pole": false, "finish_pos": 14, "best_lap_ms": 58750, "laps_completed": 13, "gap_display": "+2 voltas",  "status": "classified" },
+    { "race_id": "R2026-01", "pilot_id": "P015", "kart_number": 38, "grid_pole": true,  "finish_pos": 15, "best_lap_ms": 54677, "laps_completed": 13, "gap_display": "+2 voltas",  "status": "classified" },
+    { "race_id": "R2026-01", "pilot_id": "P016", "kart_number": 33, "grid_pole": false, "finish_pos": null, "best_lap_ms": 54930, "laps_completed": null, "gap_display": "-4 voltas", "status": "dnf" },
+    { "race_id": "R2026-01", "pilot_id": "P017", "kart_number": 1,  "grid_pole": false, "finish_pos": null, "best_lap_ms": 55948, "laps_completed": null, "gap_display": "-6 voltas", "status": "dnf" }
+  ]
+}
+;
+const KartGP = (function () {
+  function msToTime(ms) {
+    if (ms == null) return "—";
+    const totalSec = ms / 1000;const m = Math.floor(totalSec / 60);const s = (totalSec - m * 60).toFixed(3).padStart(6, "0");
+    return (m > 0 ? m + ":" : "0:") + s;
+  }
+  function fastestLapPilot(db, raceId) {
+    const rows = db.results.filter(r => r.race_id === raceId && r.best_lap_ms != null);
+    if (!rows.length) return null;
+    return rows.reduce((a, b) => (b.best_lap_ms < a.best_lap_ms ? b : a)).pilot_id;
+  }
+  function pointsForResult(db, result) {
+    const cfg = db.config;const table = cfg.points_by_position;const flPilot = fastestLapPilot(db, result.race_id);
+    const position = (result.finish_pos && result.finish_pos >= 1 && result.finish_pos <= table.length) ? table[result.finish_pos - 1] : 0;
+    const presence = cfg.presence_points;const fastest = (result.pilot_id === flPilot) ? cfg.fastest_lap_points : 0;const pole = result.grid_pole ? cfg.pole_points : 0;
+    return { position, presence, fastest, pole, total: position + presence + fastest + pole, is_fastest: fastest > 0, is_pole: pole > 0 };
+  }
+  function raceTable(db, raceId) {
+    const rows = db.results.filter(r => r.race_id === raceId).map(r => {
+      const pilot = db.pilots.find(p => p.pilot_id === r.pilot_id) || { name: r.pilot_id };
+      return { ...r, pilot, points: pointsForResult(db, r) };
+    });
+    rows.sort((a, b) => {
+      if (a.finish_pos == null && b.finish_pos == null) return 0;
+      if (a.finish_pos == null) return 1;if (b.finish_pos == null) return -1;return a.finish_pos - b.finish_pos;
+    });
+    return rows;
+  }
+  function championship(db) {
+    const cfg = db.config;const keep = Math.max(1, cfg.total_rounds - cfg.discard_worst);
+    const byPilot = {};
+    db.results.forEach(r => {
+      const pts = pointsForResult(db, r).total;
+      if (!byPilot[r.pilot_id]) byPilot[r.pilot_id] = [];
+      byPilot[r.pilot_id].push({ race_id: r.race_id, points: pts, finish_pos: r.finish_pos });
+    });
+    const standings = Object.keys(byPilot).map(pid => {
+      const races = byPilot[pid];const played = races.length;const sorted = [...races].sort((a, b) => b.points - a.points);
+      const kept = sorted.slice(0, Math.min(played, keep));const total = kept.reduce((s, x) => s + x.points, 0);const grossTotal = races.reduce((s, x) => s + x.points, 0);
+      const pilot = db.pilots.find(p => p.pilot_id === pid) || { name: pid };
+      const wins = races.filter(x => x.finish_pos === 1).length;const poles = db.results.filter(r => r.pilot_id === pid && r.grid_pole).length;const fastest = db.races.filter(rc => fastestLapPilot(db, rc.race_id) === pid).length;
+      return { pilot_id: pid, pilot, played, total, grossTotal, dropped_points: grossTotal - total, wins, poles, fastest_laps: fastest };
+    });
+    standings.sort((a, b) => b.total - a.total || b.wins - a.wins || b.poles - a.poles || b.fastest_laps - a.fastest_laps);
+    standings.forEach((s, i) => s.rank = i + 1);
+    return standings;
+  }
+  function pilotPortrait(db, pilotId) {
+    const pilot = db.pilots.find(p => p.pilot_id === pilotId);
+    const rows = db.results.filter(r => r.pilot_id === pilotId).map(r => {
+      const race = db.races.find(rc => rc.race_id === r.race_id);return { ...r, race, points: pointsForResult(db, r) };
+    });
+    rows.sort((a, b) => (a.race?.round || 0) - (b.race?.round || 0));
+    const standings = championship(db);const me = standings.find(s => s.pilot_id === pilotId);
+    const bestLap = rows.reduce((best, r) => (r.best_lap_ms != null && (best == null || r.best_lap_ms < best)) ? r.best_lap_ms : best, null);
+    return { pilot, rows, season: me, best_lap_ms: bestLap };
+  }
+  function semaphoreRacePosition(finishPos, fieldSize) {
+    if (finishPos == null) return "sem-bad";const t = fieldSize / 3;if (finishPos <= t) return "sem-good";if (finishPos <= 2 * t) return "sem-mid";return "sem-bad";
+  }
+  function semaphoreVsSelf(finishPos, avgPos) {
+    if (finishPos == null || avgPos == null) return "sem-bad";if (finishPos <= avgPos - 1) return "sem-good";if (finishPos >= avgPos + 1) return "sem-bad";return "sem-mid";
+  }
+  function semaphoreRank(rank, total) {
+    const t = total / 3;if (rank <= t) return "sem-good";if (rank <= 2 * t) return "sem-mid";return "sem-bad";
+  }
+  return { msToTime, fastestLapPilot, pointsForResult, raceTable, championship, pilotPortrait, semaphoreRacePosition, semaphoreVsSelf, semaphoreRank };
+})();
+</script><script>
+(function () {
+  const db = window.__DB__;const cfg = db.config;
+  const VIEWS = [{ key: "campeonato", label: "Campeonato" },{ key: "corrida", label: "Corridas" },{ key: "piloto", label: "Pilotos" }];
+  const PALETTE = ["#C9A227","#C0C0C0","#CD7F32","#8A6E1E","#6B6359"];
+  function add(root,html){const t=document.createElement("template");t.innerHTML=html.trim();root.appendChild(t.content);}
+  function esc(s){return String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));}
+  function two(p){const t=(p.name||"").trim().split(/\s+/);return t.length>1?t[0]+" "+t[t.length-1]:t[0];}
+  function surname(p){const t=(p.name||"").trim().split(/\s+/);return t[t.length-1];}
+  function bondBadge(p){const l=cfg.bond_labels[p.bond_type]||p.bond_type;return `<span class="badge bond">${esc(l)}</span>`;}
+  function buildChrome(active){
+    document.querySelectorAll(".kae-chrome").forEach(n=>n.remove());
+    add(document.body,`<div class="kae-chrome"><div class="checker"></div><header class="top"><div class="brand-row">
+      <div class="brand"><h1><span class="k">KART</span> ALTUM EXPERIENCE</h1></div>
+      <nav class="tabs">${VIEWS.map(v=>`<a href="#" data-view="${v.key}" class="${v.key===active?"active":""}">${v.label}</a>`).join("")}</nav></div></header></div>`);
+    document.querySelector(".kae-chrome").querySelectorAll("a[data-view]").forEach(a=>a.addEventListener("click",e=>{e.preventDefault();setView(a.getAttribute("data-view"));}));
+    if(!document.querySelector(".kae-foot")) add(document.body,`<footer class="kae-foot"><div class="altum">ALTUM</div><div class="tagline">${esc(cfg.tagline)}</div><div class="meta">${esc(cfg.championship)} · Temporada ${cfg.season}</div></footer>`);
+  }
+  function setView(view){buildChrome(view);const root=document.getElementById("app");root.innerHTML="";
+    if(view==="campeonato")renderChampionship(root);else if(view==="corrida")renderRace(root);else if(view==="piloto")renderPilot(root);window.scrollTo(0,0);}
+  function podium5(list,getName,getPts){return `<div class="podium5">${list.slice(0,5).map((x,i)=>`<div class="pcard p${i+1}"><div class="prank">${i+1}º lugar</div><div class="pname">${esc(getName(x))}</div><div class="ppts">${getPts(x)}<small> pts</small></div></div>`).join("")}</div>`;}
+  function renderChampionship(root){
+    const st=KartGP.championship(db);const fk=[...st].sort((a,b)=>b.fastest_laps-a.fastest_laps)[0];
+    add(root,`<div class="mini-stats"><span>Etapas rodadas <b>${db.races.length}</b></span><span>Pilotos <b>${db.pilots.length}</b></span><span>Rei da volta rápida <span class="g">${fk&&fk.fastest_laps?esc(two(fk.pilot)):"—"}</span></span></div>`);
+    add(root,`<h2 class="section-title">Pódio do campeonato</h2>`);
+    add(root,podium5(st,s=>two(s.pilot),s=>s.total));
+    if(window.Chart){add(root,`<div class="chart-box"><div class="chart-title">Evolução do campeonato — top 5</div><div class="chart-wrap"><canvas id="champChart" role="img" aria-label="Evolução de pontos do campeonato"></canvas></div></div>`);drawChampChart(st);}
+    add(root,`<h2 class="section-title">Classificação geral</h2>`);
+    add(root,`<div class="sub">Descartamos as <strong>2 piores etapas</strong> dos pilotos que correrem todas as etapas, para equilibrar a competição. Semáforo pela posição no pelotão ou campeonato.</div>`);
+    const rows=st.map(s=>{const sem=KartGP.semaphoreRank(s.rank,st.length);const pod=s.rank<=5?`podium-${s.rank}`:"";
+      return `<tr class="${pod}"><td class="num"><span class="pos">${s.rank}</span></td><td class="pilot-name">${esc(s.pilot.name)} ${s.pilot.nickname?`<small>“${esc(s.pilot.nickname)}”</small>`:""}</td><td>${bondBadge(s.pilot)}</td><td class="num pts">${s.total}</td><td class="num">${s.played}</td><td class="num">${s.wins||"—"}</td><td class="num">${s.poles||"—"}</td><td class="num">${s.fastest_laps||"—"}</td><td class="num sem-cell ${sem}"><span class="dot ${sem}"></span></td></tr>`;}).join("");
+    add(root,`<div class="table-wrap"><table><thead><tr><th class="num">#</th><th>Piloto</th><th>Vínculo</th><th class="num">Pontos</th><th class="num">Provas</th><th class="num">Vit.</th><th class="num">Poles</th><th class="num">V.Rápida</th><th class="num">Nível</th></tr></thead><tbody>${rows}</tbody></table></div>`);
+    add(root,`<div class="legend"><span><span class="dot sem-good"></span>Topo do pelotão</span><span><span class="dot sem-mid"></span>Meio</span><span><span class="dot sem-bad"></span>Fundo</span></div>`);
+  }
+  function renderRace(root){
+    add(root,`<h2 class="section-title">Resultado por etapa</h2>`);
+    add(root,`<div class="sub">Escolha a corrida. Cálculo de pontos aberto por piloto; semáforo pela posição no grid do dia.</div>`);
+    add(root,`<div class="controls"><div class="field"><label>Etapa</label><select id="raceSelect">${db.races.slice().sort((a,b)=>b.round-a.round).map(r=>`<option value="${r.race_id}">Etapa ${r.round} · ${r.date.split("-").reverse().join("/")} · ${esc(r.venue)}</option>`).join("")}</select></div></div>`);
+    add(root,`<div id="raceBody"></div>`);const body=root.querySelector("#raceBody");
+    function draw(raceId){
+      body.innerHTML="";const race=db.races.find(r=>r.race_id===raceId);const table=KartGP.raceTable(db,raceId);
+      const fs=table.length;const flP=KartGP.fastestLapPilot(db,raceId);const flRow=table.find(r=>r.pilot_id===flP);const pole=table.find(r=>r.grid_pole);
+      add(body,`<div class="mini-stats"><span>${esc(race.venue)} · ${esc(race.track)}</span><span>Kart <b>${race.hp} HP</b></span><span>Pole <span class="g">${pole?esc(surname(pole.pilot)):"—"}</span></span><span>Volta mais rápida <span class="g">${flRow?esc(surname(flRow.pilot)):"—"}</span> ${flRow?KartGP.msToTime(flRow.best_lap_ms):""}</span></div>`);
+      add(body,`<h2 class="section-title">Pódio da etapa</h2>`);
+      add(body,podium5(table,r=>surname(r.pilot),r=>r.points.total));
+      const rows=table.map(r=>{const p=r.points;const sem=KartGP.semaphoreRacePosition(r.finish_pos,fs);
+        const pl=r.finish_pos==null?`<span class="badge dnf">DNF</span>`:`<span class="pos">${r.finish_pos}</span>`;const pod=r.finish_pos&&r.finish_pos<=5?`podium-${r.finish_pos}`:"";
+        return `<tr class="${pod}"><td class="num">${pl}</td><td class="pilot-name">${esc(r.pilot.name)} ${p.is_pole?'<span class="badge pole">Pole</span>':""} ${p.is_fastest?'<span class="badge fl">V. Rápida</span>':""}</td><td class="num">#${r.kart_number}</td><td class="num">${KartGP.msToTime(r.best_lap_ms)}</td><td class="num">${r.laps_completed??"—"}</td><td class="num">${esc(r.gap_display)}</td><td class="num" style="color:var(--muted)">${p.position}+${p.presence}${p.pole?"+"+p.pole:""}${p.fastest?"+"+p.fastest:""}</td><td class="num pts">${p.total}</td><td class="num sem-cell ${sem}"><span class="dot ${sem}"></span></td></tr>`;}).join("");
+      add(body,`<h2 class="section-title">Resultado completo</h2><div class="table-wrap"><table><thead><tr><th class="num">Pos</th><th>Piloto</th><th class="num">Kart</th><th class="num">Melhor volta</th><th class="num">Voltas</th><th class="num">Gap</th><th class="num">Cálculo</th><th class="num">Pontos</th><th class="num">Nível</th></tr></thead><tbody>${rows}</tbody></table></div>`);
+    }
+    root.querySelector("#raceSelect").addEventListener("change",e=>draw(e.target.value));
+    draw(db.races.slice().sort((a,b)=>b.round-a.round)[0].race_id);
+  }
+  function renderPilot(root){
+    add(root,`<h2 class="section-title">Retrato individual</h2>`);
+    add(root,`<div class="sub">Escolha um piloto e o recorte: temporada inteira ou uma corrida específica. Transparência total.</div>`);
+    const ps=db.pilots.slice().sort((a,b)=>a.name.localeCompare(b.name));
+    add(root,`<div class="controls"><div class="field"><label>Piloto</label><select id="pilotSelect">${ps.map(p=>`<option value="${p.pilot_id}">${esc(p.name)}</option>`).join("")}</select></div><div class="field"><label>Recorte</label><select id="viewSelect"></select></div></div>`);
+    add(root,`<div id="pilotBody"></div>`);
+    const pilotSelect=root.querySelector("#pilotSelect"),viewSelect=root.querySelector("#viewSelect"),body=root.querySelector("#pilotBody");
+    function refreshOpts(port){viewSelect.innerHTML=[`<option value="season">Retrato de campeonato</option>`].concat(port.rows.map(r=>`<option value="${r.race_id}">Etapa ${r.race.round} · ${r.race.date.split("-").reverse().join("/")}</option>`)).join("");}
+    function drawSeason(port){
+      body.innerHTML="";const s=port.season,p=port.pilot;
+      const ps2=port.rows.filter(r=>r.finish_pos!=null).map(r=>r.finish_pos);const avg=ps2.length?ps2.reduce((a,b)=>a+b,0)/ps2.length:null;
+      add(body,`<h2 class="section-title">${esc(p.name)} ${p.nickname?`— “${esc(p.nickname)}”`:""}</h2><div class="sub">${bondBadge(p)} &nbsp; Retrato da temporada ${cfg.season}</div>`);
+      add(body,`<div class="cards"><div class="card"><div class="label">Posição no campeonato</div><div class="value">${s?s.rank+"º":"—"}</div></div><div class="card"><div class="label">Pontos (contam)</div><div class="value">${s?s.total:0}</div><div class="hint">${s&&s.dropped_points?"descartados: "+s.dropped_points:"sem descarte"}</div></div><div class="card"><div class="label">Provas</div><div class="value white">${s?s.played:0}</div></div><div class="card"><div class="label">Vitórias</div><div class="value white">${s?s.wins:0}</div></div><div class="card"><div class="label">Poles</div><div class="value white">${s?s.poles:0}</div></div><div class="card"><div class="label">Voltas rápidas</div><div class="value white">${s?s.fastest_laps:0}</div></div><div class="card"><div class="label">Melhor volta pessoal</div><div class="value" style="font-size:22px">${KartGP.msToTime(port.best_lap_ms)}</div></div></div>`);
+      if(window.Chart){add(body,`<div class="chart-box"><div class="chart-title">Sua evolução na temporada</div><div class="chart-wrap"><canvas id="pilotChart" role="img" aria-label="Evolução de pontos do piloto"></canvas></div></div>`);drawPilotChart(port.pilot.pilot_id);}
+      add(body,`<h2 class="section-title">Corrida a corrida</h2><div class="sub">Semáforo compara cada etapa à sua média de posição (${avg?avg.toFixed(1)+"º":"—"}).</div>`);
+      const rows=port.rows.map(r=>{const sem=KartGP.semaphoreVsSelf(r.finish_pos,avg);const pl=r.finish_pos==null?`<span class="badge dnf">DNF</span>`:`<span class="pos">${r.finish_pos}º</span>`;
+        return `<tr><td class="num">${r.race.round}</td><td>${r.race.date.split("-").reverse().join("/")} · ${esc(r.race.venue)}</td><td class="num">${pl} ${r.points.is_pole?'<span class="badge pole">Pole</span>':""} ${r.points.is_fastest?'<span class="badge fl">V.R.</span>':""}</td><td class="num">${KartGP.msToTime(r.best_lap_ms)}</td><td class="num">${db.races.find(x=>x.race_id===r.race_id).hp} HP</td><td class="num pts">${r.points.total}</td><td class="num sem-cell ${sem}"><span class="dot ${sem}"></span></td></tr>`;}).join("");
+      add(body,`<div class="table-wrap"><table><thead><tr><th class="num">Et.</th><th>Corrida</th><th class="num">Pos</th><th class="num">Melhor volta</th><th class="num">Kart</th><th class="num">Pontos</th><th class="num">vs média</th></tr></thead><tbody>${rows||`<tr><td colspan="7" class="empty">Sem resultados ainda.</td></tr>`}</tbody></table></div>`);
+    }
+    function drawRace(port,raceId){
+      body.innerHTML="";const r=port.rows.find(x=>x.race_id===raceId),p=port.pilot;
+      if(!r){add(body,`<div class="empty">${esc(p.name)} não correu esta etapa.</div>`);return;}
+      const full=KartGP.raceTable(db,raceId);const sem=KartGP.semaphoreRacePosition(r.finish_pos,full.length);
+      add(body,`<h2 class="section-title">${esc(p.name)} — Etapa ${r.race.round}</h2><div class="sub">${r.race.date.split("-").reverse().join("/")} · ${esc(r.race.venue)} · ${esc(r.race.track)} · ${r.race.hp} HP</div>`);
+      add(body,`<div class="cards"><div class="card"><div class="label">Resultado</div><div class="value ${sem}">${r.finish_pos==null?"DNF":r.finish_pos+"º"}</div></div><div class="card"><div class="label">Melhor volta</div><div class="value" style="font-size:22px">${KartGP.msToTime(r.best_lap_ms)}</div></div><div class="card"><div class="label">Voltas</div><div class="value white">${r.laps_completed??"—"}</div></div><div class="card"><div class="label">Gap p/ líder</div><div class="value white" style="font-size:18px">${esc(r.gap_display)}</div></div><div class="card"><div class="label">Pontos na etapa</div><div class="value">${r.points.total}</div><div class="hint">${r.points.position} pos + ${r.points.presence} pres${r.points.pole?` + ${r.points.pole} pole`:""}${r.points.fastest?` + ${r.points.fastest} v.rápida`:""}</div></div></div>`);
+      add(body,`<div class="notice">${r.points.is_pole?"Cravou a <strong>pole</strong>. ":""}${r.points.is_fastest?"Fez a <strong>volta mais rápida</strong> da corrida. ":""}Posição ${r.finish_pos==null?"não classificado":r.finish_pos+"º"} entre ${full.length} pilotos.</div>`);
+    }
+    function load(){const port=KartGP.pilotPortrait(db,pilotSelect.value);refreshOpts(port);viewSelect.value="season";drawSeason(port);}
+    pilotSelect.addEventListener("change",load);
+    viewSelect.addEventListener("change",()=>{const port=KartGP.pilotPortrait(db,pilotSelect.value);viewSelect.value==="season"?drawSeason(port):drawRace(port,viewSelect.value);});
+    load();
+  }
+  const CHART_COMMON={responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:"#9A968C",boxWidth:12,font:{size:11}}}},scales:{x:{ticks:{color:"#9A968C"},grid:{color:"#2E2E31"}},y:{ticks:{color:"#9A968C"},grid:{color:"#2E2E31"},beginAtZero:true}}};
+  let champC,pilotC;
+  function rounds(){return db.races.slice().sort((a,b)=>a.round-b.round);}
+  function cum(pilotId){let c=0;return rounds().map(r=>{const res=db.results.find(x=>x.race_id===r.race_id&&x.pilot_id===pilotId);c+=res?KartGP.pointsForResult(db,res).total:0;return c;});}
+  function drawChampChart(st){const cv=document.getElementById("champChart");if(!cv)return;if(champC)champC.destroy();const labels=rounds().map(r=>"Et. "+r.round);const ds=st.slice(0,5).map((s,i)=>({label:two(s.pilot),data:cum(s.pilot_id),borderColor:PALETTE[i],backgroundColor:PALETTE[i],tension:.25,borderWidth:2,pointRadius:4}));champC=new Chart(cv,{type:"line",data:{labels,datasets:ds},options:CHART_COMMON});}
+  function drawPilotChart(pilotId){const cv=document.getElementById("pilotChart");if(!cv)return;if(pilotC)pilotC.destroy();const labels=rounds().map(r=>"Et. "+r.round);pilotC=new Chart(cv,{type:"line",data:{labels,datasets:[{label:"Pontos acumulados",data:cum(pilotId),borderColor:"#C9A227",backgroundColor:"#C9A227",tension:.25,borderWidth:2,pointRadius:4}]},options:CHART_COMMON});}
+  buildChrome("campeonato");setView("campeonato");
+})();
+</script></body></html
   --gold:#C9A227;
   --gold-hi:#E8C558;
   --gold-lo:#8A6E1E;
