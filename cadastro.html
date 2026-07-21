@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cadastro — Kart Altum Experience</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Saira+Condensed:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --black:#0B0B0C;--surface:#1A1A1C;--surface-2:#232326;--gold:#C9A227;--gold-hi:#E8C558;--gold-lo:#8A6E1E;
+  --white:#FFFFFF;--muted:#9A968C;--line:#2E2E31;--navy:#0A1628;
+  --font-display:"Saira Condensed","Oswald","Arial Narrow",sans-serif;--font-sans:Arial,Helvetica,sans-serif;--font-serif:Georgia,"Times New Roman",serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--black);color:var(--white);font-family:var(--font-sans);line-height:1.5;-webkit-font-smoothing:antialiased;min-height:100vh}
+.checker{height:10px;background:repeating-conic-gradient(var(--white) 0% 25%, transparent 0% 50%) 0/20px 20px,var(--gold);opacity:.9}
+header.top{background:linear-gradient(180deg,#111 0%,var(--black) 100%);border-bottom:1px solid var(--line);padding:18px 20px 14px}
+.brand-row{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;max-width:1200px;margin:0 auto}
+.brand h1{font-family:var(--font-display);font-style:italic;font-weight:700;letter-spacing:.5px;font-size:30px;line-height:1;text-transform:uppercase}
+.brand h1 .k{color:var(--gold)}
+main{max-width:1200px;margin:0 auto;padding:26px 20px 60px}
+.section-title{font-family:var(--font-display);font-style:italic;font-weight:700;text-transform:uppercase;font-size:22px;letter-spacing:.5px;margin:6px 0 14px;display:flex;align-items:center;gap:10px}
+.section-title::before{content:"";width:26px;height:12px;background:repeating-conic-gradient(var(--white) 0% 25%, transparent 0% 50%) 0/6px 6px}
+.sub{color:var(--muted);font-size:13px;margin-bottom:18px}
+.field{display:flex;flex-direction:column;gap:6px}
+.field label{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted)}
+select,input,textarea{background:var(--surface);color:var(--white);border:1px solid var(--line);border-radius:8px;padding:11px 12px;font-family:var(--font-sans);font-size:14px;min-width:220px}
+select:focus,input:focus,textarea:focus{outline:none;border-color:var(--gold)}
+.form-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+.form-grid .full{grid-column:1/-1}
+.form-grid .field{gap:7px}
+.hint{font-size:12px;color:var(--muted)}
+.btn{display:inline-flex;align-items:center;gap:10px;cursor:pointer;background:linear-gradient(180deg,var(--gold-hi),var(--gold) 55%,var(--gold-lo));color:var(--black);font-weight:700;letter-spacing:2px;text-transform:uppercase;font-size:14px;border:none;border-radius:8px;padding:14px 26px}
+.btn::before{content:"»»";font-weight:700}
+.notice{background:#141416;border:1px solid var(--line);border-left:3px solid var(--gold);border-radius:8px;padding:12px 14px;color:var(--muted);font-size:13px;margin:14px 0}
+footer{border-top:1px solid var(--line);margin-top:40px;padding:26px 20px;text-align:center}
+footer .altum{font-family:var(--font-serif);font-size:26px;letter-spacing:6px;color:var(--white)}
+footer .tagline{font-family:var(--font-serif);font-style:italic;color:var(--gold);font-size:14px;margin-top:2px}
+@media (max-width:560px){.brand h1{font-size:24px}main{padding:20px 14px 50px}}
+</style></head><body>
+<div class="checker"></div><header class="top"><div class="brand-row"><div class="brand"><h1><span class="k">KART</span> ALTUM EXPERIENCE</h1></div></div></header>
+<main><div id="app"></div></main>
+<footer><div class="altum">ALTUM</div><div class="tagline">Elevação que gera legado.</div></footer>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+window.KART_CONFIG = {
+  SUPABASE_URL: "https://rpmparqhbewwnjinuqrt.supabase.co",
+  SUPABASE_ANON_KEY: "sb_publishable_fHjNx5_-y6-jPEz5pqNWJQ_8uMND_Gz"
+};
+</script><script>
+(function () {
+  function el(html){const t=document.createElement("template");t.innerHTML=html.trim();return t.content.firstChild;}
+  const root=document.getElementById("app");
+  root.appendChild(el(`<div>
+    <h2 class="section-title">Cadastro de piloto</h2>
+    <div class="sub">Preencha uma vez. Contato é privado — só a organização ALTUM vê. No ranking aparece só nome/apelido e desempenho.</div>
+    <form id="pilotForm"><div class="form-grid">
+      <div class="field"><label>Nome completo *</label><input name="full_name" required placeholder="Como no documento"></div>
+      <div class="field"><label>Apelido de piloto</label><input name="nickname" placeholder="Como quer no ranking"></div>
+      <div class="field"><label>CPF *</label><input name="cpf" required inputmode="numeric" placeholder="Identidade única"></div>
+      <div class="field"><label>Data de nascimento *</label><input name="birth_date" type="date" required></div>
+      <div class="field"><label>Peso (kg) *</label><input name="weight_kg" type="number" min="30" max="200" required placeholder="No kart, peso é performance"></div>
+      <div class="field"><label>Cidade</label><input name="city" placeholder="Cidade / UF"></div>
+      <div class="field"><label>WhatsApp *</label><input name="phone" required inputmode="tel" placeholder="(61) 90000-0000"></div>
+      <div class="field"><label>E-mail</label><input name="email" type="email" placeholder="voce@empresa.com"></div>
+      <div class="field"><label>Contato de emergência</label><input name="emergency_contact" placeholder="Nome e telefone"></div>
+      <div class="field"><label>Vínculo com a ALTUM *</label><select name="bond_type" id="bondType" required>
+        <option value="">Selecione…</option><option value="member">Membro</option><option value="referred">Indicado</option><option value="guest">Convidado</option><option value="member_child">Filho de Membro</option></select></div>
+      <div class="field" id="sponsorField" style="display:none"><label>Quem te trouxe (membro ALTUM) *</label><input name="sponsor_member" id="sponsorMember" placeholder="Nome do membro padrinho"><span class="hint">Obrigatório p/ indicado, convidado e filho de membro.</span></div>
+      <div class="field full"><label style="display:flex;gap:10px;align-items:flex-start;text-transform:none;letter-spacing:0;font-size:13px;color:var(--white)"><input type="checkbox" name="consent_waiver" required style="min-width:auto;width:18px;height:18px;margin-top:2px">Estou ciente de que o kart envolve risco físico e assumo responsabilidade pela minha participação. *</label></div>
+      <div class="field full"><label style="display:flex;gap:10px;align-items:flex-start;text-transform:none;letter-spacing:0;font-size:13px;color:var(--white)"><input type="checkbox" name="consent_image" required style="min-width:auto;width:18px;height:18px;margin-top:2px">Autorizo o uso da minha imagem nos conteúdos do Kart Altum Experience. *</label></div>
+    </div>
+    <div class="notice" id="statusBox">Seus dados vão para um banco privado da organização. Nome/apelido e desempenho aparecem no ranking; contato não.</div>
+    <div style="margin-top:18px"><button type="submit" class="btn" id="submitBtn">Reservar minha vaga</button></div></form>
+  </div>`));
+  const form=document.getElementById("pilotForm"),bond=document.getElementById("bondType"),sf=document.getElementById("sponsorField"),sp=document.getElementById("sponsorMember"),statusBox=document.getElementById("statusBox"),btn=document.getElementById("submitBtn");
+  bond.addEventListener("change",()=>{const need=bond.value&&bond.value!=="member";sf.style.display=need?"flex":"none";sp.required=need;if(!need)sp.value="";});
+  const C=window.KART_CONFIG||{};const has=C.SUPABASE_URL&&C.SUPABASE_ANON_KEY;
+  const sb=has&&window.supabase?window.supabase.createClient(C.SUPABASE_URL,C.SUPABASE_ANON_KEY):null;
+  form.addEventListener("submit",async e=>{
+    e.preventDefault();if(!form.reportValidity())return;const f=new FormData(form);
+    const row={full_name:f.get("full_name"),nickname:f.get("nickname")||null,cpf:f.get("cpf")||null,birth_date:f.get("birth_date")||null,
+      weight_kg:f.get("weight_kg")?Number(f.get("weight_kg")):null,city:f.get("city")||null,phone:f.get("phone")||null,email:f.get("email")||null,
+      emergency_contact:f.get("emergency_contact")||null,bond_type:f.get("bond_type"),sponsor_member:f.get("sponsor_member")||null,
+      consent_waiver:!!f.get("consent_waiver"),consent_image:!!f.get("consent_image")};
+    if(!sb){statusBox.innerHTML="<strong>Banco não configurado.</strong>";return;}
+    btn.disabled=true;btn.textContent="Enviando…";
+    const{error}=await sb.from("pilots").insert(row);
+    if(error){statusBox.innerHTML="<strong>Não consegui enviar.</strong> "+error.message;btn.disabled=false;btn.textContent="Reservar minha vaga";}
+    else{form.querySelectorAll("input,select,button").forEach(x=>x.disabled=true);statusBox.innerHTML="<strong>Cadastro confirmado.</strong> Nos vemos na pista. 🏁";btn.textContent="Confirmado";}
+  });
+})();
+</script></body></html>
