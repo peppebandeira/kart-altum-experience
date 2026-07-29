@@ -41,8 +41,8 @@ footer .tagline{font-family:var(--font-serif);font-style:italic;color:var(--gold
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
 window.KART_CONFIG = {
-  SUPABASE_URL: "https://rpmparqhbewwnjinuqrt.supabase.co",
-  SUPABASE_ANON_KEY: "sb_publishable_fHjNx5_-y6-jPEz5pqNWJQ_8uMND_Gz"
+  SUPABASE_URL: "https://xgaqqxzvtafmzhwbvjlp.supabase.co",
+  SUPABASE_ANON_KEY: "sb_publishable_jQUcAcODzc8Woa3d6NXAGg_KBTK5Rrr"
 };
 </script><script>
 (function () {
@@ -82,7 +82,7 @@ window.KART_CONFIG = {
       consent_waiver:!!f.get("consent_waiver"),consent_image:!!f.get("consent_image")};
     if(!sb){statusBox.innerHTML="<strong>Banco não configurado.</strong>";return;}
     btn.disabled=true;btn.textContent="Enviando…";
-    const{error}=await sb.from("pilots").insert(row);
+    const{error}=await sb.from("kart_inscricoes").insert(row);
     if(error){statusBox.innerHTML="<strong>Não consegui enviar.</strong> "+error.message;btn.disabled=false;btn.textContent="Reservar minha vaga";}
     else{form.querySelectorAll("input,select,button").forEach(x=>x.disabled=true);statusBox.innerHTML="<strong>Cadastro confirmado.</strong> Nos vemos na pista. 🏁";btn.textContent="Confirmado";}
   });
