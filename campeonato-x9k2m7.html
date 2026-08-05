@@ -210,7 +210,7 @@ tr.podium-5 td:first-child{box-shadow:inset 3px 0 0 #6B6359}
   function esc(s){return String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));}
   function two(p){const t=(p.name||"").trim().split(/\s+/);return t.length>1?t[0]+" "+t[t.length-1]:t[0];}
   function bondBadge(p){const l=cfg.bond_labels[p.bond_type]||p.bond_type;return `<span class="badge bond">${esc(l)}</span>`;}
-  function waBtn(p){if(!p.whatsapp)return"";const num=String(p.whatsapp).replace(/\D/g,"");if(!num)return"";
+  function waBtn(p){if(!p.whatsapp)return"";let num=String(p.whatsapp).replace(/\D/g,"");if(!num)return"";if(num.length<=11)num="55"+num;
     return `<a class="wa" href="https://wa.me/${num}" target="_blank" rel="noopener" title="Falar no WhatsApp" aria-label="WhatsApp de ${esc(p.name)}"><svg viewBox="0 0 24 24"><path d="M17.5 14.4c-.3-.15-1.7-.85-2-.95-.26-.1-.45-.15-.65.15-.2.3-.75.94-.92 1.14-.17.2-.34.22-.63.07-.3-.15-1.25-.46-2.38-1.47-.88-.78-1.47-1.75-1.65-2.05-.17-.3-.02-.46.13-.6.13-.13.3-.34.44-.5.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.65-1.57-.9-2.15-.24-.56-.48-.48-.65-.49l-.56-.01c-.2 0-.5.07-.77.37-.26.3-1 .98-1 2.4 0 1.4 1.02 2.76 1.17 2.95.15.2 2.02 3.08 4.9 4.32.68.3 1.22.47 1.63.6.69.22 1.31.19 1.8.11.55-.08 1.7-.7 1.94-1.36.24-.67.24-1.24.17-1.36-.07-.12-.26-.2-.56-.34zM12 2C6.48 2 2 6.48 2 12c0 1.77.46 3.43 1.27 4.87L2 22l5.25-1.38A9.94 9.94 0 0 0 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2z"/></svg></a>`;}
 
   const _t=document.createElement("template");
@@ -228,7 +228,7 @@ tr.podium-5 td:first-child{box-shadow:inset 3px 0 0 #6B6359}
   const SB_KEY="sb_publishable_jQUcAcODzc8Woa3d6NXAGg_KBTK5Rrr";
   function _norm(s){return (s||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase();}
   function _tok(s){return _norm(s).split(/\s+/).filter(t=>t.length>2);}
-  async function markCadastrados(){try{if(!window.supabase||!window.supabase.createClient)return;const sb=window.supabase.createClient(SB_URL,SB_KEY);const {data,error}=await sb.rpc("kart_cadastrados");if(error||!data)return;const regs=data.map(r=>new Set(_tok(r.nome)));db.pilots.forEach(p=>{const t=_tok(p.name);if(!t.length)return;const f=t[0],l=t[t.length-1];if(regs.some(set=>set.has(f)&&set.has(l)))p.registered=true;});}catch(e){}}
+  async function markCadastrados(){try{if(!window.supabase||!window.supabase.createClient)return;const sb=window.supabase.createClient(SB_URL,SB_KEY);const {data,error}=await sb.rpc("kart_cadastrados");if(error||!data)return;db.pilots.forEach(p=>{const t=_tok(p.name);if(!t.length)return;const f=t[0],l=t[t.length-1];const hit=data.find(r=>{const s=new Set(_tok(r.nome));return s.has(f)&&s.has(l);});if(hit){p.registered=true;if(hit.vinculo)p.bond_type=hit.vinculo;if(hit.telefone)p.whatsapp=hit.telefone;if(hit.padrinho)p.sponsor=hit.padrinho;}});}catch(e){}}
   await markCadastrados();
   const st=KartGP.championship(db);
   const fk=[...st].sort((a,b)=>b.fastest_laps-a.fastest_laps)[0];
