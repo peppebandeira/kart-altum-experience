@@ -193,6 +193,12 @@ tr.podium-5 td:first-child{box-shadow:inset 3px 0 0 #6B6359}
 .back-link:hover{color:var(--gold)}
 .badge.reg{background:#12331e;color:#7fd99a;border:1px solid #2E7D32}
 .badge.pend{background:#2a2410;color:#E0A800;border:1px solid #8A6E1E}
+/* ---- botão WhatsApp ---- */
+.wa{display:inline-flex;align-items:center;justify-content:center;gap:4px;width:24px;height:24px;
+  margin-left:8px;border-radius:6px;background:#1e3a2a;border:1px solid #2E7D32;vertical-align:middle;
+  transition:.15s}
+.wa:hover{background:#25543b;border-color:#3fae63}
+.wa svg{width:14px;height:14px;fill:#7fd99a}
 </style></head><body><main><div id="app"></div></main>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script><script src="data.js"></script><script src="scoring.js"></script><script>
 /* ============ CAMPEONATO (restrito) — ranking completo + gráficos ============ */
@@ -204,6 +210,8 @@ tr.podium-5 td:first-child{box-shadow:inset 3px 0 0 #6B6359}
   function esc(s){return String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));}
   function two(p){const t=(p.name||"").trim().split(/\s+/);return t.length>1?t[0]+" "+t[t.length-1]:t[0];}
   function bondBadge(p){const l=cfg.bond_labels[p.bond_type]||p.bond_type;return `<span class="badge bond">${esc(l)}</span>`;}
+  function waBtn(p){if(!p.whatsapp)return"";const num=String(p.whatsapp).replace(/\D/g,"");if(!num)return"";
+    return `<a class="wa" href="https://wa.me/${num}" target="_blank" rel="noopener" title="Falar no WhatsApp" aria-label="WhatsApp de ${esc(p.name)}"><svg viewBox="0 0 24 24"><path d="M17.5 14.4c-.3-.15-1.7-.85-2-.95-.26-.1-.45-.15-.65.15-.2.3-.75.94-.92 1.14-.17.2-.34.22-.63.07-.3-.15-1.25-.46-2.38-1.47-.88-.78-1.47-1.75-1.65-2.05-.17-.3-.02-.46.13-.6.13-.13.3-.34.44-.5.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.65-1.57-.9-2.15-.24-.56-.48-.48-.65-.49l-.56-.01c-.2 0-.5.07-.77.37-.26.3-1 .98-1 2.4 0 1.4 1.02 2.76 1.17 2.95.15.2 2.02 3.08 4.9 4.32.68.3 1.22.47 1.63.6.69.22 1.31.19 1.8.11.55-.08 1.7-.7 1.94-1.36.24-.67.24-1.24.17-1.36-.07-.12-.26-.2-.56-.34zM12 2C6.48 2 2 6.48 2 12c0 1.77.46 3.43 1.27 4.87L2 22l5.25-1.38A9.94 9.94 0 0 0 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2z"/></svg></a>`;}
 
   const _t=document.createElement("template");
   _t.innerHTML=`<div class="kae-chrome"><div class="checker"></div>
@@ -222,16 +230,16 @@ tr.podium-5 td:first-child{box-shadow:inset 3px 0 0 #6B6359}
   add(root,`<div class="notice">Página restrita — visão de campeonato para você e os sócios. Liberada a todos os pilotos ao fim da temporada.</div>`);
   add(root,`<div class="mini-stats"><span>Etapas oficiais <b>${db.races.filter(r=>r.official!==false).length}</b></span>
     <span>Pilotos <b>${db.pilots.length}</b></span>
-    <span>Rei das poles <span class="g">${pk&&pk.poles?esc(two(pk.pilot)):"—"}</span></span>
-    <span>Rei da volta rápida <span class="g">${fk&&fk.fastest_laps?esc(two(fk.pilot)):"—"}</span></span></div>`);
+    <span>Rei das poles <span class="g">${pk&&pk.poles?esc(pk.pilot.name):"—"}</span></span>
+    <span>Rei da volta rápida <span class="g">${fk&&fk.fastest_laps?esc(fk.pilot.name):"—"}</span></span></div>`);
   add(root,`<h2 class="section-title">Pódio do campeonato</h2>`);
-  add(root,`<div class="podium5">${st.slice(0,5).map((s,i)=>`<div class="pcard p${i+1}"><div class="prank">${i+1}º lugar</div><div class="pname">${esc(two(s.pilot))}</div><div class="ppts">${s.total}<small> pts</small></div></div>`).join("")}</div>`);
+  add(root,`<div class="podium5">${st.slice(0,5).map((s,i)=>`<div class="pcard p${i+1}"><div class="prank">${i+1}º lugar</div><div class="pname">${esc(s.pilot.name)}</div><div class="ppts">${s.total}<small> pts</small></div></div>`).join("")}</div>`);
   if(window.Chart){add(root,`<div class="chart-box"><div class="chart-title">Evolução do campeonato — top 5</div><div class="chart-wrap"><canvas id="champChart" role="img" aria-label="Evolução de pontos do campeonato"></canvas></div></div>`);}
   add(root,`<h2 class="section-title">Classificação geral</h2>`);
   add(root,`<div class="sub">Descartamos as <strong>2 piores etapas</strong> dos pilotos que correrem todas as etapas, para equilibrar a competição. Semáforo pela posição no pelotão ou campeonato.</div>`);
   const rows=st.map(s=>{const sem=KartGP.semaphoreRank(s.rank,st.length);const pod=s.rank<=5?`podium-${s.rank}`:"";
     return `<tr class="${pod}"><td class="num"><span class="pos">${s.rank}</span></td>
-      <td class="pilot-name">${esc(s.pilot.name)} ${s.pilot.nickname?`<small>“${esc(s.pilot.nickname)}”</small>`:""}</td>
+      <td class="pilot-name">${esc(s.pilot.name)}${waBtn(s.pilot)} ${s.pilot.nickname?`<small>“${esc(s.pilot.nickname)}”</small>`:""}</td>
       <td>${bondBadge(s.pilot)} ${s.pilot.registered?'<span class="badge reg">✓ cadastrado</span>':'<span class="badge pend">pendente</span>'}</td><td class="num pts">${s.total}</td><td class="num">${s.played}</td>
       <td class="num">${s.wins||"—"}</td><td class="num">${s.poles||"—"}</td><td class="num">${s.fastest_laps||"—"}</td>
       <td class="num sem-cell ${sem}"><span class="dot ${sem}"></span></td></tr>`;}).join("");

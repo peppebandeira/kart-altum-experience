@@ -108,7 +108,8 @@ window.__DB__ = {
       "nickname": "Santorini",
       "bond_type": "guest",
       "registered": true,
-      "sponsor": "Giuseppe"
+      "sponsor": "Giuseppe",
+      "whatsapp": "5561996162930"
     },
     {
       "pilot_id": "P014",
@@ -121,7 +122,8 @@ window.__DB__ = {
       "name": "Giuseppe Bandeira",
       "nickname": null,
       "bond_type": "member",
-      "registered": true
+      "registered": true,
+      "whatsapp": "5561991933909"
     },
     {
       "pilot_id": "P016",
