@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Campeonato — Kart Altum Experience</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Saira+Condensed:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
 <style>
@@ -194,12 +193,8 @@ tr.podium-5 td:first-child{box-shadow:inset 3px 0 0 #6B6359}
 .back-link:hover{color:var(--gold)}
 .badge.reg{background:#12331e;color:#7fd99a;border:1px solid #2E7D32}
 .badge.pend{background:#2a2410;color:#E0A800;border:1px solid #8A6E1E}
-</style></head><body>
-<main><div id="app"></div></main>
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
-<script src="data.js"></script>
-<script src="scoring.js"></script>
-<script>
+</style></head><body><main><div id="app"></div></main>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script><script src="data.js"></script><script src="scoring.js"></script><script>
 /* ============ CAMPEONATO (restrito) — ranking completo + gráficos ============ */
 (function () {
   const db = window.__DB__;
@@ -225,7 +220,7 @@ tr.podium-5 td:first-child{box-shadow:inset 3px 0 0 #6B6359}
   const pk=[...st].sort((a,b)=>b.poles-a.poles)[0];
 
   add(root,`<div class="notice">Página restrita — visão de campeonato para você e os sócios. Liberada a todos os pilotos ao fim da temporada.</div>`);
-  add(root,`<div class="mini-stats"><span>Etapas rodadas <b>${db.races.length}</b></span>
+  add(root,`<div class="mini-stats"><span>Etapas oficiais <b>${db.races.filter(r=>r.official!==false).length}</b></span>
     <span>Pilotos <b>${db.pilots.length}</b></span>
     <span>Rei das poles <span class="g">${pk&&pk.poles?esc(two(pk.pilot)):"—"}</span></span>
     <span>Rei da volta rápida <span class="g">${fk&&fk.fastest_laps?esc(two(fk.pilot)):"—"}</span></span></div>`);

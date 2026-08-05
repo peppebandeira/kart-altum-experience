@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Kart Altum Experience</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Saira+Condensed:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
 <style>
@@ -194,12 +193,8 @@ tr.podium-5 td:first-child{box-shadow:inset 3px 0 0 #6B6359}
 .back-link:hover{color:var(--gold)}
 .badge.reg{background:#12331e;color:#7fd99a;border:1px solid #2E7D32}
 .badge.pend{background:#2a2410;color:#E0A800;border:1px solid #8A6E1E}
-</style></head><body>
-<main><div id="app"></div></main>
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
-<script src="data.js"></script>
-<script src="scoring.js"></script>
-<script>
+</style></head><body><main><div id="app"></div></main>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script><script src="data.js"></script><script src="scoring.js"></script><script>
 /* ============ DASHBOARD PÚBLICO — Corridas + Pilotos (sem ranking) ============ */
 (function () {
   const db = window.__DB__;
@@ -211,6 +206,7 @@ tr.podium-5 td:first-child{box-shadow:inset 3px 0 0 #6B6359}
   function add(root,html){const t=document.createElement("template");t.innerHTML=html.trim();root.appendChild(t.content);}
   function esc(s){return String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));}
   function surname(p){const t=(p.name||"").trim().split(/\s+/);return t[t.length-1];}
+  function hpLabel(h){return h?h+" HP":"HP a confirmar";}
   function bondBadge(p){const l=cfg.bond_labels[p.bond_type]||p.bond_type;return `<span class="badge bond">${esc(l)}</span>`;}
 
   function buildChrome(active){
@@ -244,15 +240,16 @@ tr.podium-5 td:first-child{box-shadow:inset 3px 0 0 #6B6359}
   function renderRace(root){
     add(root,`<h2 class="section-title">Resultado por etapa</h2>`);
     add(root,`<div class="sub">Escolha a corrida. Semáforo pela posição no grid do dia.</div>`);
-    add(root,`<div class="controls"><div class="field"><label>Etapa</label>
-      <select id="raceSelect">${db.races.slice().sort((a,b)=>b.round-a.round).map(r=>`<option value="${r.race_id}">Etapa ${r.round} · ${r.date.split("-").reverse().join("/")} · ${esc(r.venue)}</option>`).join("")}</select></div></div>`);
+    add(root,`<div class="controls"><div class="field"><label>Corrida</label>
+      <select id="raceSelect">${db.races.slice().sort((a,b)=>b.round-a.round).map(r=>`<option value="${r.race_id}">${r.official===false?"Especial":"Etapa "+r.round} · ${r.date.split("-").reverse().join("/")} · ${esc(r.venue)}</option>`).join("")}</select></div></div>`);
     add(root,`<div id="raceBody"></div>`);
     const body=root.querySelector("#raceBody");
     function draw(raceId){
       body.innerHTML="";const race=db.races.find(r=>r.race_id===raceId);const table=KartGP.raceTable(db,raceId);
       const fs=table.length;const flP=KartGP.fastestLapPilot(db,raceId);const flRow=table.find(r=>r.pilot_id===flP);const pole=table.find(r=>r.grid_pole);
-      add(body,`<div class="mini-stats"><span>${esc(race.venue)} · ${esc(race.track)}</span><span>Kart <b>${race.hp} HP</b></span>
-        <span>Pole <span class="g">${pole?esc(surname(pole.pilot)):"—"}</span></span>
+      if(race.official===false)add(body,`<div class="notice">Corrida especial (Dia dos Pais) — resultado registrado, mas <strong>não pontua</strong> no campeonato.</div>`);
+      add(body,`<div class="mini-stats"><span>${esc(race.venue)}${race.track?" · "+esc(race.track):""}</span><span>Kart <b>${hpLabel(race.hp)}</b></span>
+        ${race.official===false?"":`<span>Pole <span class="g">${pole?esc(surname(pole.pilot)):"—"}</span></span>`}
         <span>Volta mais rápida <span class="g">${flRow?esc(surname(flRow.pilot)):"—"}</span> ${flRow?KartGP.msToTime(flRow.best_lap_ms):""}</span></div>`);
       add(body,`<h2 class="section-title">Pódio da etapa</h2>`);
       add(body,podium5(table,r=>surname(r.pilot),r=>r.finish_pos!=null?r.finish_pos+"º":"DNF"));
@@ -298,7 +295,7 @@ tr.podium-5 td:first-child{box-shadow:inset 3px 0 0 #6B6359}
       const rows=port.rows.map(r=>{const sem=KartGP.semaphoreVsSelf(r.finish_pos,avg);const pl=r.finish_pos==null?`<span class="badge dnf">DNF</span>`:`<span class="pos">${r.finish_pos}º</span>`;
         return `<tr><td class="num">${r.race.round}</td><td>${r.race.date.split("-").reverse().join("/")} · ${esc(r.race.venue)}</td>
           <td class="num">${pl} ${r.points.is_pole?'<span class="badge pole">Pole</span>':""} ${r.points.is_fastest?'<span class="badge fl">V.R.</span>':""}</td>
-          <td class="num">${KartGP.msToTime(r.best_lap_ms)}</td><td class="num">${db.races.find(x=>x.race_id===r.race_id).hp} HP</td>
+          <td class="num">${KartGP.msToTime(r.best_lap_ms)}</td><td class="num">${hpLabel(db.races.find(x=>x.race_id===r.race_id).hp)}</td>
           <td class="num sem-cell ${sem}"><span class="dot ${sem}"></span></td></tr>`;}).join("");
       add(body,`<div class="table-wrap"><table><thead><tr><th class="num">Et.</th><th>Corrida</th><th class="num">Pos</th><th class="num">Melhor volta</th><th class="num">Kart</th><th class="num">vs média</th></tr></thead><tbody>${rows||`<tr><td colspan="6" class="empty">Sem resultados ainda.</td></tr>`}</tbody></table></div>`);
     }
@@ -306,7 +303,7 @@ tr.podium-5 td:first-child{box-shadow:inset 3px 0 0 #6B6359}
       body.innerHTML="";const r=port.rows.find(x=>x.race_id===raceId),p=port.pilot;
       if(!r){add(body,`<div class="empty">${esc(p.name)} não correu esta etapa.</div>`);return;}
       const full=KartGP.raceTable(db,raceId);const sem=KartGP.semaphoreRacePosition(r.finish_pos,full.length);
-      add(body,`<h2 class="section-title">${esc(p.name)} — Etapa ${r.race.round}</h2><div class="sub">${r.race.date.split("-").reverse().join("/")} · ${esc(r.race.venue)} · ${esc(r.race.track)} · ${r.race.hp} HP</div>`);
+      add(body,`<h2 class="section-title">${esc(p.name)} — ${r.race.official===false?"Especial":"Etapa "+r.race.round}</h2><div class="sub">${r.race.date.split("-").reverse().join("/")} · ${esc(r.race.venue)}${r.race.track?" · "+esc(r.race.track):""} · ${hpLabel(r.race.hp)}</div>`);
       add(body,`<div class="cards">
         <div class="card"><div class="label">Resultado</div><div class="value ${sem}">${r.finish_pos==null?"DNF":r.finish_pos+"º"}</div></div>
         <div class="card"><div class="label">Melhor volta</div><div class="value" style="font-size:22px">${KartGP.msToTime(r.best_lap_ms)}</div></div>

@@ -65,9 +65,12 @@ const KartGP = (function () {
   function championship(db) {
     const cfg = db.config;
     const keep = Math.max(1, cfg.total_rounds - cfg.discard_worst); // N que conta (=4)
+    // corridas avulsas (official:false) NÃO pontuam no campeonato
+    const officialIds = new Set(db.races.filter(r => r.official !== false).map(r => r.race_id));
 
     const byPilot = {};
     db.results.forEach(r => {
+      if (!officialIds.has(r.race_id)) return;
       const pts = pointsForResult(db, r).total;
       if (!byPilot[r.pilot_id]) byPilot[r.pilot_id] = [];
       byPilot[r.pilot_id].push({ race_id: r.race_id, points: pts, finish_pos: r.finish_pos });
@@ -84,8 +87,8 @@ const KartGP = (function () {
 
       const pilot = db.pilots.find(p => p.pilot_id === pid) || { name: pid };
       const wins = races.filter(x => x.finish_pos === 1).length;
-      const poles = db.results.filter(r => r.pilot_id === pid && r.grid_pole).length;
-      const fastest = db.races.filter(rc => fastestLapPilot(db, rc.race_id) === pid).length;
+      const poles = db.results.filter(r => r.pilot_id === pid && r.grid_pole && officialIds.has(r.race_id)).length;
+      const fastest = db.races.filter(rc => rc.official !== false && fastestLapPilot(db, rc.race_id) === pid).length;
 
       return {
         pilot_id: pid, pilot, played, total, grossTotal,
