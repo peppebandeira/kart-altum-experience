@@ -200,9 +200,9 @@ tr.podium-5 td:first-child{box-shadow:inset 3px 0 0 #6B6359}
 .wa:hover{background:#25543b;border-color:#3fae63}
 .wa svg{width:14px;height:14px;fill:#7fd99a}
 </style></head><body><main><div id="app"></div></main>
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script><script src="data.js"></script><script src="scoring.js"></script><script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="data.js"></script><script src="scoring.js"></script><script>
 /* ============ CAMPEONATO (restrito) — ranking completo + gráficos ============ */
-(function () {
+(async function () {
   const db = window.__DB__;
   const cfg = db.config;
   const PALETTE = ["#C9A227","#C0C0C0","#CD7F32","#8A6E1E","#6B6359"];
@@ -223,6 +223,13 @@ tr.podium-5 td:first-child{box-shadow:inset 3px 0 0 #6B6359}
   add(document.body,`<footer class="kae-foot"><div class="altum">ALTUM</div><div class="tagline">${esc(cfg.tagline)}</div><div class="meta">${esc(cfg.championship)} · Temporada ${cfg.season} · Área restrita aos sócios</div></footer>`);
 
   const root=document.getElementById("app");
+  /* ---- cadastro ao vivo: marca "cadastrado" lendo o Supabase a cada refresh (só nomes, sem PII) ---- */
+  const SB_URL="https://xgaqqxzvtafmzhwbvjlp.supabase.co";
+  const SB_KEY="sb_publishable_jQUcAcODzc8Woa3d6NXAGg_KBTK5Rrr";
+  function _norm(s){return (s||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase();}
+  function _tok(s){return _norm(s).split(/\s+/).filter(t=>t.length>2);}
+  async function markCadastrados(){try{if(!window.supabase||!window.supabase.createClient)return;const sb=window.supabase.createClient(SB_URL,SB_KEY);const {data,error}=await sb.rpc("kart_cadastrados");if(error||!data)return;const regs=data.map(r=>new Set(_tok(r.nome)));db.pilots.forEach(p=>{const t=_tok(p.name);if(!t.length)return;const f=t[0],l=t[t.length-1];if(regs.some(set=>set.has(f)&&set.has(l)))p.registered=true;});}catch(e){}}
+  await markCadastrados();
   const st=KartGP.championship(db);
   const fk=[...st].sort((a,b)=>b.fastest_laps-a.fastest_laps)[0];
   const pk=[...st].sort((a,b)=>b.poles-a.poles)[0];
@@ -250,10 +257,10 @@ tr.podium-5 td:first-child{box-shadow:inset 3px 0 0 #6B6359}
 
   if(window.Chart){
     const CHART_COMMON={responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:"#9A968C",boxWidth:12,font:{size:11}}}},scales:{x:{ticks:{color:"#9A968C"},grid:{color:"#2E2E31"}},y:{ticks:{color:"#9A968C"},grid:{color:"#2E2E31"},beginAtZero:true}}};
-    const rounds=db.races.slice().sort((a,b)=>a.round-b.round);
-    const labels=rounds.map(r=>"Et. "+r.round);
-    function cum(pid){let c=0;return rounds.map(r=>{const res=db.results.find(x=>x.race_id===r.race_id&&x.pilot_id===pid);c+=res?KartGP.pointsForResult(db,res).total:0;return c;});}
-    const ds=st.slice(0,5).map((s,i)=>({label:two(s.pilot),data:cum(s.pilot_id),borderColor:PALETTE[i],backgroundColor:PALETTE[i],tension:.25,borderWidth:2,pointRadius:4}));
+    const rounds=db.races.filter(r=>r.official!==false).slice().sort((a,b)=>a.round-b.round);
+    const labels=["Início",...rounds.map(r=>"Et. "+r.round)];
+    function cum(pid){let c=0;return [0,...rounds.map(r=>{const res=db.results.find(x=>x.race_id===r.race_id&&x.pilot_id===pid);c+=res?KartGP.pointsForResult(db,res).total:0;return c;})];}
+    const ds=st.slice(0,5).map((s,i)=>({label:two(s.pilot),data:cum(s.pilot_id),borderColor:PALETTE[i],backgroundColor:PALETTE[i],tension:.45,cubicInterpolationMode:"monotone",borderWidth:2,pointRadius:3,pointHoverRadius:5}));
     new Chart(document.getElementById("champChart"),{type:"line",data:{labels,datasets:ds},options:CHART_COMMON});
   }
 })();

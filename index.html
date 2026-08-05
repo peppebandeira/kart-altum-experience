@@ -332,9 +332,9 @@ tr.podium-5 td:first-child{box-shadow:inset 3px 0 0 #6B6359}
   function rounds(){return db.races.slice().sort((a,b)=>a.round-b.round);}
   function drawPilotChart(pilotId){
     const cv=document.getElementById("pilotChart");if(!cv)return;if(pilotC)pilotC.destroy();
-    const rs=rounds();const labels=rs.map(r=>"Et. "+r.round);
+    const rs=rounds();const labels=rs.map(r=>r.official===false?"Especial":"Et. "+r.round);
     const data=rs.map(r=>{const res=db.results.find(x=>x.race_id===r.race_id&&x.pilot_id===pilotId);return res&&res.finish_pos!=null?res.finish_pos:null;});
-    pilotC=new Chart(cv,{type:"line",data:{labels,datasets:[{label:"Posição",data,borderColor:"#C9A227",backgroundColor:"#C9A227",tension:.25,borderWidth:2,pointRadius:5,spanGaps:true}]},options:CHART_COMMON});
+    pilotC=new Chart(cv,{type:"line",data:{labels,datasets:[{label:"Posição",data,borderColor:"#C9A227",backgroundColor:"#C9A227",tension:.4,cubicInterpolationMode:"monotone",borderWidth:2,pointRadius:5,pointHoverRadius:6,spanGaps:true}]},options:CHART_COMMON});
   }
 
   buildChrome("corrida");setView("corrida");
