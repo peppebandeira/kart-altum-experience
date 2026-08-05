@@ -152,6 +152,13 @@ select:focus,input:focus,textarea:focus{outline:none;border-color:var(--gold)}
 .btn::before{content:"»»";font-weight:700}
 .notice{background:#141416;border:1px solid var(--line);border-left:3px solid var(--gold);
   border-radius:8px;padding:12px 14px;color:var(--muted);font-size:13px;margin:14px 0}
+/* ---- cabeçalho da etapa em linha única ---- */
+.race-head{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin:6px 0 4px}
+.race-head .section-title{margin:0}
+.race-head select{min-width:250px}
+.race-info{color:var(--muted);font-size:13px;border-left:3px solid var(--gold);
+  background:#141416;border-radius:6px;padding:8px 12px}
+.race-info:empty{display:none}
 
 /* ---- rodapé com assinatura ALTUM ---- */
 footer{border-top:1px solid var(--line);margin-top:40px;padding:26px 20px;text-align:center}
@@ -238,16 +245,17 @@ tr.podium-5 td:first-child{box-shadow:inset 3px 0 0 #6B6359}
 
   /* -------- CORRIDA -------- */
   function renderRace(root){
-    add(root,`<h2 class="section-title">Resultado por etapa</h2>`);
+    add(root,`<div class="race-head"><h2 class="section-title">Resultado por etapa</h2>
+      <select id="raceSelect" aria-label="Corrida">${db.races.slice().sort((a,b)=>b.round-a.round).map(r=>`<option value="${r.race_id}">${r.official===false?"Especial":"Etapa "+r.round} · ${r.date.split("-").reverse().join("/")} · ${esc(r.venue)}</option>`).join("")}</select>
+      <span id="raceInfo" class="race-info"></span></div>`);
     add(root,`<div class="sub">Escolha a corrida. Semáforo pela posição no grid do dia.</div>`);
-    add(root,`<div class="controls"><div class="field"><label>Corrida</label>
-      <select id="raceSelect">${db.races.slice().sort((a,b)=>b.round-a.round).map(r=>`<option value="${r.race_id}">${r.official===false?"Especial":"Etapa "+r.round} · ${r.date.split("-").reverse().join("/")} · ${esc(r.venue)}</option>`).join("")}</select></div></div>`);
     add(root,`<div id="raceBody"></div>`);
     const body=root.querySelector("#raceBody");
+    const raceInfo=root.querySelector("#raceInfo");
     function draw(raceId){
       body.innerHTML="";const race=db.races.find(r=>r.race_id===raceId);const table=KartGP.raceTable(db,raceId);
       const fs=table.length;const flP=KartGP.fastestLapPilot(db,raceId);const flRow=table.find(r=>r.pilot_id===flP);const pole=table.find(r=>r.grid_pole);
-      if(race.official===false)add(body,`<div class="notice">Corrida especial — comemoração ao <strong>Dia dos Pais</strong>.</div>`);
+      raceInfo.innerHTML=race.official===false?`Corrida especial — comemoração ao <strong>Dia dos Pais</strong>`:"";
       add(body,`<div class="mini-stats"><span>${esc(race.venue)}${race.track?" · "+esc(race.track):""}</span><span>Kart <b>${hpLabel(race.hp)}</b></span>
         ${race.official===false?"":`<span>Pole <span class="g">${pole?esc(surname(pole.pilot)):"—"}</span></span>`}
         <span>Volta mais rápida <span class="g">${flRow?esc(surname(flRow.pilot)):"—"}</span> ${flRow?KartGP.msToTime(flRow.best_lap_ms):""}</span></div>`);
