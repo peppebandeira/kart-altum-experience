@@ -84,7 +84,7 @@ window.KART_CONFIG = {
     btn.disabled=true;btn.textContent="Enviando…";
     const{error}=await sb.from("kart_inscricoes").insert(row);
     if(error){statusBox.innerHTML="<strong>Não consegui enviar.</strong> "+error.message;btn.disabled=false;btn.textContent="Reservar minha vaga";}
-    else{form.querySelectorAll("input,select,button").forEach(x=>x.disabled=true);statusBox.innerHTML="<strong>Cadastro confirmado.</strong> Nos vemos na pista. 🏁";btn.textContent="Confirmado";}
+    else{form.querySelectorAll("input,select,button").forEach(x=>x.disabled=true);statusBox.innerHTML="<strong>Cadastro confirmado.</strong> Redirecionando para as corridas… 🏁";btn.textContent="Confirmado";setTimeout(function(){window.location.href="index.html";},1600);}
   });
 })();
 </script></body></html>
