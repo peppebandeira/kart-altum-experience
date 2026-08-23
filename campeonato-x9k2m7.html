@@ -224,8 +224,8 @@ tr.podium-5 td:first-child{box-shadow:inset 3px 0 0 #6B6359}
 
   const root=document.getElementById("app");
   /* ---- cadastro ao vivo: marca "cadastrado" lendo o Supabase a cada refresh (só nomes, sem PII) ---- */
-  const SB_URL="https://xgaqqxzvtafmzhwbvjlp.supabase.co";
-  const SB_KEY="sb_publishable_jQUcAcODzc8Woa3d6NXAGg_KBTK5Rrr";
+  const SB_URL="https://uzghezeaxysdsgzpmejp.supabase.co";
+  const SB_KEY="sb_publishable_SLv9hMsbMxAs7643nF6NJA_d8PNBBlV";
   function _norm(s){return (s||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase();}
   function _tok(s){return _norm(s).split(/\s+/).filter(t=>t.length>2);}
   async function markCadastrados(){try{if(!window.supabase||!window.supabase.createClient)return;const sb=window.supabase.createClient(SB_URL,SB_KEY);const {data,error}=await sb.rpc("kart_cadastrados");if(error||!data)return;db.pilots.forEach(p=>{const t=_tok(p.name);if(!t.length)return;const f=t[0],l=t[t.length-1];const hit=data.find(r=>{const s=new Set(_tok(r.nome));return s.has(f)&&s.has(l);});if(hit){p.registered=true;if(hit.vinculo)p.bond_type=hit.vinculo;if(hit.telefone)p.whatsapp=hit.telefone;if(hit.padrinho)p.sponsor=hit.padrinho;}});}catch(e){}}
