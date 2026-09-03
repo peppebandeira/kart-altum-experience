@@ -4,50 +4,39 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Reserve sua vaga — Kart Experience · 3ª Edição</title>
-<meta name="description" content="Kart Experience 3ª Edição — 22/09, Kart Point, Arena Mané Garrincha, 19h. Negócios, velocidade e competição. Reserve sua vaga no grid.">
+<meta name="description" content="Kart Experience 3ª Edição — 22/09, Kart Point, Arena Mané Garrincha, 19h. Negócios, velocidade e competição.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,500;0,600;0,700;0,800;1,600;1,700;1,800&family=Barlow:wght@400;500;600;700&family=Syncopate:wght@400;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --black:#0A0A0B; --bg2:#0F0F11;
-    --surface:#141416; --surface-2:#1C1C1F; --line:#2C2C30;
+    --black:#0A0A0B; --surface:#141416; --surface-2:#1C1C1F; --line:#2C2C30;
     --gold:#C9A227; --gold-hi:#EBCB63; --gold-lo:#8A6E1E;
     --pink:#EC1E79; --pink-hi:#FF63AC; --pink-lo:#9E0E52;
-    --white:#FFFFFF; --soft:#DEDBD4; --muted:#9B9890;
-    --good:#37A34A; --warn:#E0A800;
-    --f-disp:"Barlow Condensed",sans-serif;
-    --f-ui:"Barlow",sans-serif;
-    --f-wide:"Syncopate",sans-serif;
-    --sp-1:8px; --sp-2:16px; --sp-3:24px; --sp-4:40px; --sp-5:64px; --sp-6:96px;
+    --white:#FFFFFF; --soft:#DEDBD4; --muted:#9B9890; --warn:#E0A800; --good:#37A34A;
+    --f-disp:"Barlow Condensed",sans-serif; --f-ui:"Barlow",sans-serif; --f-wide:"Syncopate",sans-serif;
     --ring:0 0 0 3px rgba(201,162,42,.55);
   }
   *{box-sizing:border-box;margin:0;padding:0}
   html{scroll-behavior:smooth}
   body{background:var(--black);color:var(--white);font-family:var(--f-ui);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
-  .wrap{max-width:1080px;margin:0 auto;padding:0 22px}
-  .narrow{max-width:760px;margin:0 auto}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 22px}
   a{color:inherit;text-decoration:none}
   :focus-visible{outline:none;box-shadow:var(--ring);border-radius:4px}
   .ico{display:inline-flex;vertical-align:middle}
-  .ico svg{width:22px;height:22px;stroke:currentColor;stroke-width:1.8;fill:none;stroke-linecap:round;stroke-linejoin:round}
+  .ico svg{width:20px;height:20px;stroke:currentColor;stroke-width:1.9;fill:none;stroke-linecap:round;stroke-linejoin:round}
+  .logoimg{display:block;height:auto}
 
-  /* chrome */
   .checker{height:6px;width:100%}
   .checker.gold{background:repeating-linear-gradient(45deg,var(--gold) 0 12px,#0a0a0b 12px 24px)}
   .checker.pink{background:repeating-linear-gradient(45deg,var(--pink) 0 12px,#0a0a0b 12px 24px);opacity:.92}
-  header.top{position:sticky;top:0;z-index:40;border-bottom:1px solid var(--line);background:rgba(10,10,11,.8);backdrop-filter:blur(8px)}
+  header.top{position:sticky;top:0;z-index:40;border-bottom:1px solid var(--line);background:rgba(10,10,11,.82);backdrop-filter:blur(8px)}
   header.top .row{display:flex;align-items:center;justify-content:space-between;height:58px}
-  .mark{font-family:var(--f-disp);font-style:italic;font-weight:800;letter-spacing:.01em;font-size:22px;text-transform:uppercase;line-height:1}
-  .mark .k{background:linear-gradient(180deg,var(--gold-hi),var(--gold));-webkit-background-clip:text;background-clip:text;color:transparent}
-  .mark .x{background:linear-gradient(180deg,#fff,#9a9a9a);-webkit-background-clip:text;background-clip:text;color:transparent}
-  .mark sup{font-size:.5em;color:var(--pink-hi);-webkit-text-fill-color:var(--pink-hi);font-weight:800}
-  .cta-mini{display:inline-flex;align-items:center;min-height:44px;font-family:var(--f-disp);font-style:italic;font-weight:700;letter-spacing:.05em;font-size:16px;text-transform:uppercase;color:#160f00;background:linear-gradient(180deg,var(--gold-hi),var(--gold));padding:0 18px;border-radius:4px;transition:filter .18s}
+  header .logoimg{width:150px}
+  .cta-mini{display:inline-flex;align-items:center;min-height:42px;font-family:var(--f-disp);font-style:italic;font-weight:700;letter-spacing:.05em;font-size:16px;text-transform:uppercase;color:#160f00;background:linear-gradient(180deg,var(--gold-hi),var(--gold));padding:0 18px;border-radius:4px;transition:filter .18s}
   .cta-mini:hover{filter:brightness(1.08)}
 
-  .btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:52px;border:none;cursor:pointer;
-    font-family:var(--f-disp);font-style:italic;font-weight:800;text-transform:uppercase;letter-spacing:.04em;font-size:20px;
-    padding:0 32px;border-radius:6px;transition:transform .07s,filter .18s,box-shadow .18s;width:100%}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:52px;border:none;cursor:pointer;font-family:var(--f-disp);font-style:italic;font-weight:800;text-transform:uppercase;letter-spacing:.04em;font-size:20px;padding:0 30px;border-radius:6px;transition:transform .07s,filter .18s;width:100%}
   .btn:active{transform:translateY(1px)}
   .btn-gold{background:linear-gradient(180deg,var(--gold-hi),var(--gold));color:#160f00;box-shadow:0 8px 30px rgba(201,162,42,.22)}
   .btn-gold:hover{filter:brightness(1.07)}
@@ -57,116 +46,85 @@
   .btn-ghost:hover{border-color:var(--gold);color:var(--gold-hi)}
   .btn .ico svg{width:20px;height:20px;stroke-width:2.4}
 
-  /* HERO */
-  .hero{position:relative;overflow:hidden;padding:var(--sp-5) 0 var(--sp-4);isolation:isolate}
-  .hero .glow{position:absolute;inset:-10% -20%;z-index:-2;pointer-events:none;
-    background:radial-gradient(42% 38% at 18% 12%,rgba(201,162,42,.20),transparent 70%),
-              radial-gradient(46% 40% at 86% 20%,rgba(236,30,121,.20),transparent 70%),
-              radial-gradient(60% 50% at 50% 120%,rgba(201,162,42,.10),transparent 70%)}
-  .speedlines{position:absolute;inset:0;z-index:-1;pointer-events:none;opacity:.5;
-    background-image:repeating-linear-gradient(115deg,rgba(255,255,255,.05) 0 2px,transparent 2px 46px);
-    -webkit-mask-image:linear-gradient(90deg,transparent,#000 30%,#000 70%,transparent);
-    mask-image:linear-gradient(90deg,transparent,#000 30%,#000 70%,transparent);
-    animation:slide 8s linear infinite}
-  @keyframes slide{to{background-position:900px 0}}
-  .checker-corner{position:absolute;top:0;right:0;width:180px;height:180px;z-index:-1;opacity:.5;
-    background:repeating-conic-gradient(#1a1a1c 0 25%,transparent 0 50%) 0 0/28px 28px;
-    -webkit-mask-image:linear-gradient(215deg,#000,transparent 62%);mask-image:linear-gradient(215deg,#000,transparent 62%)}
-  .eyebrow{font-family:var(--f-wide);font-weight:700;letter-spacing:.34em;font-size:11px;text-transform:uppercase;color:var(--soft)}
-  .eyebrow b{color:var(--gold-hi)}
-  .hero h1{font-family:var(--f-disp);font-style:italic;font-weight:800;text-transform:uppercase;line-height:.86;letter-spacing:0;
-    font-size:clamp(58px,13vw,132px);margin:18px 0 6px}
-  .hero h1 .k{background:linear-gradient(180deg,var(--gold-hi),var(--gold) 70%,var(--gold-lo));-webkit-background-clip:text;background-clip:text;color:transparent}
-  .hero h1 sup{font-size:.34em;color:var(--pink-hi);-webkit-text-fill-color:var(--pink-hi);vertical-align:super}
-  .hero h1 .x{display:block;font-size:.44em;letter-spacing:.02em;background:linear-gradient(180deg,#fff,#9a9a9a);-webkit-background-clip:text;background-clip:text;color:transparent}
-  .tagline{font-family:var(--f-disp);font-style:italic;font-weight:700;text-transform:uppercase;letter-spacing:.04em;font-size:clamp(20px,4.6vw,30px);margin-top:8px}
-  .tagline .g{color:var(--gold-hi)} .tagline .p{color:var(--pink-hi)}
-  .hero-sub{max-width:560px;color:var(--soft);font-size:17px;margin:14px 0 26px}
+  /* HERO — curta, estilo Red Bull */
+  .hero{position:relative;overflow:hidden;padding:38px 0 30px;min-height:auto}
+  .hero .hbg{position:absolute;inset:0;z-index:-2;background:#0A0A0B url("ke-hero.jpg") no-repeat;background-size:cover;background-position:82% center}
+  .hero .hscrim{position:absolute;inset:0;z-index:-1;background:
+     linear-gradient(90deg,#0A0A0B 0%,rgba(10,10,11,.95) 32%,rgba(10,10,11,.6) 60%,rgba(10,10,11,.3) 100%),
+     linear-gradient(180deg,rgba(10,10,11,.45),rgba(10,10,11,.15) 42%,rgba(10,10,11,.92))}
+  .hero-top{display:flex;flex-wrap:wrap;align-items:center;gap:24px 52px}
+  .hero-logo{flex:0 0 auto}
+  .hero-logo .logoimg{width:min(380px,74vw)}
+  .hero-actions{flex:1 1 300px;display:flex;flex-direction:column;gap:14px;max-width:440px}
+  .countdown{display:flex;gap:8px}
+  .cd-u{flex:1;min-width:0;background:rgba(20,20,22,.72);border:1px solid var(--line);border-radius:8px;padding:10px 4px;text-align:center;backdrop-filter:blur(3px)}
+  .cd-u .num{font-family:var(--f-disp);font-weight:800;font-size:34px;line-height:.9;color:#fff;font-variant-numeric:tabular-nums}
+  .cd-u .lab{font-family:var(--f-wide);font-weight:400;font-size:8.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-top:5px}
+  .hero-tag{font-family:var(--f-disp);font-style:italic;font-weight:700;text-transform:uppercase;letter-spacing:.04em;font-size:clamp(19px,4vw,26px);margin-top:22px}
+  .hero-tag .g{color:var(--gold-hi)} .hero-tag .p{color:var(--pink-hi)}
 
-  /* countdown */
-  .countdown{display:flex;gap:10px;margin:0 0 26px;flex-wrap:wrap}
-  .cd-u{min-width:74px;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:12px 8px;text-align:center}
-  .cd-u .num{font-family:var(--f-disp);font-weight:800;font-size:40px;line-height:.9;color:#fff;font-variant-numeric:tabular-nums}
-  .cd-u .lab{font-family:var(--f-wide);font-weight:400;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-top:6px}
-  .cd-sep{align-self:center;font-family:var(--f-disp);font-weight:700;font-size:30px;color:var(--gold-lo)}
-
-  .quickfacts{display:flex;flex-wrap:wrap;gap:18px 26px;margin-top:8px}
-  .qf{display:flex;align-items:center;gap:9px;font-family:var(--f-disp);font-weight:600;font-size:19px;text-transform:uppercase;letter-spacing:.02em;color:#EFECE4}
-  .qf .ico{color:var(--gold-hi)}
-  .hero .cta-wrap{max-width:440px;margin-top:28px}
+  .facts-strip{display:flex;flex-wrap:wrap;gap:10px 26px;margin-top:16px;align-items:center}
+  .fs{display:flex;align-items:center;gap:8px;font-family:var(--f-disp);font-weight:600;font-size:18px;text-transform:uppercase;letter-spacing:.02em;color:#F1EEE7}
+  .fs .ico{color:var(--gold-hi)}
+  .fs.price{font-weight:700} .fs.price b{color:#fff} .fs.price small{font-family:var(--f-ui);font-weight:500;font-size:12px;text-transform:none;letter-spacing:0;color:var(--muted);margin-left:6px}
+  .brief-line{display:flex;gap:9px;align-items:center;margin-top:12px;font-size:14px;color:var(--soft)}
+  .brief-line .ico{color:var(--gold-hi);flex-shrink:0} .brief-line b{color:var(--gold-hi)}
 
   /* section scaffolding */
-  section.block{padding:var(--sp-5) 0 var(--sp-2)}
+  section.block{padding:56px 0 8px}
   .kicker{display:inline-flex;align-items:center;gap:10px;font-family:var(--f-wide);font-weight:700;letter-spacing:.24em;font-size:11px;text-transform:uppercase;color:var(--muted);margin-bottom:14px}
   .kicker::before{content:"";width:26px;height:1px;background:var(--gold)}
-  .sec-title{font-family:var(--f-disp);font-style:italic;font-weight:800;text-transform:uppercase;letter-spacing:0;font-size:clamp(30px,6.5vw,50px);line-height:.95}
+  .sec-title{font-family:var(--f-disp);font-style:italic;font-weight:800;text-transform:uppercase;font-size:clamp(30px,6.5vw,52px);line-height:.95}
   .sec-title .g{color:var(--gold-hi)} .sec-title .p{color:var(--pink-hi)}
-  .lead{font-size:18px;color:var(--soft);max-width:640px;margin-top:14px}
+  .lead{font-size:18px;color:var(--soft);max-width:760px;margin-top:14px}
   .lead strong{color:#fff}
 
-  /* facts card */
-  .facts{margin-top:var(--sp-4);background:var(--surface);border:1px solid var(--line);border-radius:12px;overflow:hidden}
-  .facts .grid{display:grid;grid-template-columns:repeat(4,1fr)}
-  .facts .cell{padding:22px 20px;border-right:1px solid var(--line);display:flex;gap:13px;align-items:flex-start}
-  .facts .cell:last-child{border-right:none}
-  .facts .cell .ico{color:var(--gold-hi);margin-top:2px}
-  .facts .k{font-family:var(--f-wide);font-weight:400;letter-spacing:.16em;font-size:9.5px;color:var(--muted);text-transform:uppercase;margin-bottom:5px}
-  .facts .v{font-family:var(--f-disp);font-weight:700;font-size:23px;line-height:1;text-transform:uppercase}
-  .facts .v small{display:block;font-family:var(--f-ui);font-weight:400;font-size:12.5px;color:var(--muted);letter-spacing:0;text-transform:none;margin-top:5px;line-height:1.3}
-  .brief{display:flex;gap:13px;align-items:center;padding:16px 20px;border-top:1px solid var(--line);background:linear-gradient(90deg,rgba(201,162,42,.13),transparent);font-size:14.5px;color:var(--soft)}
-  .brief .ico{color:var(--gold-hi);flex-shrink:0} .brief b{color:var(--gold-hi)}
-  .price-row{display:flex;flex-wrap:wrap;gap:12px;align-items:center;padding:18px 20px;border-top:1px solid var(--line)}
-  .chip{font-family:var(--f-ui);font-weight:600;font-size:14px;color:#EDEAE3;background:var(--surface-2);border:1px solid var(--line);padding:9px 14px;border-radius:5px}
-  .chip b{color:var(--gold-hi)}
-  .total{margin-left:auto;font-family:var(--f-disp);font-weight:800;font-size:34px;line-height:.9;color:#fff}
-  .total small{font-family:var(--f-wide);font-size:9px;color:var(--muted);letter-spacing:.16em;display:block;text-transform:uppercase;font-weight:400;margin-top:3px}
-  .price-note{color:var(--muted);font-size:13px;margin-top:12px}
+  /* social proof */
+  .proof{position:relative;border-radius:14px;overflow:hidden;border:1px solid var(--line);min-height:500px;display:flex;align-items:flex-end}
+  .proof .bg{position:absolute;inset:0;background-size:cover;background-position:center 42%;z-index:0;transform:scale(1.05);will-change:transform}
+  .proof::after{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(10,10,11,.9) 0%,rgba(10,10,11,.55) 13%,rgba(10,10,11,.16) 36%,rgba(10,10,11,.5) 68%,rgba(10,10,11,.97) 100%)}
+  .proof .content{position:relative;z-index:2;padding:32px 28px}
+  .proof h3{font-family:var(--f-disp);font-style:italic;font-weight:800;text-transform:uppercase;font-size:clamp(26px,5vw,44px);line-height:.95;max-width:680px}
+  .proof p{color:var(--soft);font-size:16px;margin-top:10px;max-width:540px}
 
-  /* social proof band */
-  .proof{position:relative;margin-top:var(--sp-4);border-radius:14px;overflow:hidden;border:1px solid var(--line);min-height:420px;display:flex;align-items:flex-end}
-  .proof .bg{position:absolute;inset:0;background-size:cover;background-position:center 38%;z-index:0;transform:scale(1.06);will-change:transform}
-  .proof::after{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(10,10,11,.62) 0%,rgba(10,10,11,.30) 34%,rgba(10,10,11,.55) 66%,rgba(10,10,11,.96) 100%)}
-  .proof .content{position:relative;z-index:2;padding:30px 26px 30px;width:100%}
-  .proof .slot-note{position:absolute;top:14px;left:14px;z-index:3;font-family:var(--f-wide);font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:#cbb978;background:rgba(10,10,11,.7);border:1px dashed var(--gold-lo);padding:6px 9px;border-radius:4px}
-  .proof h3{font-family:var(--f-disp);font-style:italic;font-weight:800;text-transform:uppercase;font-size:clamp(26px,5.5vw,44px);line-height:.95;max-width:640px}
-  .proof p{color:var(--soft);font-size:16px;margin-top:10px;max-width:520px}
-
-  /* principles */
-  .principles{list-style:none;margin-top:var(--sp-3);display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden}
-  .principles li{background:var(--surface);padding:20px;display:flex;gap:15px;align-items:flex-start}
+  /* principles — largura cheia */
+  .principles{list-style:none;margin-top:26px;display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+  .principles li{background:var(--surface);padding:22px;display:flex;gap:16px;align-items:flex-start}
   .principles .n{font-family:var(--f-disp);font-weight:800;font-style:italic;color:var(--gold);font-size:30px;line-height:.8;min-width:30px}
   .principles li:nth-child(even) .n{color:var(--pink-hi)}
-  .principles .t{font-size:15.5px;color:#E7E4DD} .principles .t b{color:#fff;font-weight:700}
+  .principles .t{font-size:16px;color:#E7E4DD} .principles .t b{color:#fff;font-weight:700}
 
-  /* bateria feminina */
-  .fem{margin-top:var(--sp-2);background:linear-gradient(155deg,rgba(236,30,121,.14),rgba(18,18,20,.5));border:1px solid var(--pink-lo);border-radius:16px;overflow:hidden;display:grid;grid-template-columns:1fr}
-  .fem .art{position:relative;border-bottom:1px solid var(--pink-lo);aspect-ratio:941/1672;max-height:520px;overflow:hidden}
-  .fem .art img{width:100%;height:100%;object-fit:cover;object-position:center 18%;display:block}
-  .fem .txt{padding:30px 26px 34px}
+  /* bateria feminina — arte quadrada (feed) */
+  .fem{background:linear-gradient(150deg,rgba(236,30,121,.14),rgba(18,18,20,.5));border:1px solid var(--pink-lo);border-radius:16px;overflow:hidden;display:grid;grid-template-columns:1fr}
+  .fem .feed{position:relative;aspect-ratio:1/1;overflow:hidden;border-bottom:1px solid var(--pink-lo)}
+  .fem .feed img{width:100%;height:100%;object-fit:cover;display:block}
+  .fem .txt{padding:32px 28px 36px;display:flex;flex-direction:column;justify-content:center}
   .fem .kick{display:inline-flex;align-items:center;gap:8px;font-family:var(--f-wide);font-weight:700;letter-spacing:.24em;font-size:11px;text-transform:uppercase;color:var(--pink-hi);margin-bottom:12px}
   .fem .kick .ico{color:var(--pink-hi)}
-  .fem h3{font-family:var(--f-disp);font-style:italic;font-weight:800;text-transform:uppercase;font-size:clamp(30px,7vw,50px);line-height:.9;margin-bottom:14px}
+  .fem h3{font-family:var(--f-disp);font-style:italic;font-weight:800;text-transform:uppercase;font-size:clamp(30px,6vw,48px);line-height:.9;margin-bottom:14px}
   .fem p{color:var(--soft);font-size:16.5px;margin-bottom:22px;max-width:560px}
-  @media(min-width:760px){ .fem{grid-template-columns:.8fr 1.2fr} .fem .art{border-bottom:none;border-right:1px solid var(--pink-lo);max-height:none;aspect-ratio:auto} }
+  @media(min-width:760px){ .fem{grid-template-columns:.9fr 1.1fr} .fem .feed{border-bottom:none;border-right:1px solid var(--pink-lo)} }
 
-  /* registration */
-  .card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:26px 24px;margin-bottom:var(--sp-2)}
+  /* garanta sua vaga */
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:26px 24px}
   .card.gold{border-color:var(--gold-lo);box-shadow:inset 0 0 0 1px rgba(201,162,42,.1)}
-  .card h3{font-family:var(--f-disp);font-style:italic;font-weight:800;text-transform:uppercase;letter-spacing:.01em;font-size:28px;margin-bottom:5px}
+  .card + .card{margin-top:0}
+  .card h3{font-family:var(--f-disp);font-style:italic;font-weight:800;text-transform:uppercase;font-size:26px;line-height:1;margin-bottom:5px}
   .card h3 .g{color:var(--gold-hi)} .card h3 .p{color:var(--pink-hi)}
   .card p.desc{color:var(--muted);font-size:14.5px;margin-bottom:20px}
-  label{display:block;font-family:var(--f-disp);font-weight:700;letter-spacing:.02em;font-size:14px;text-transform:uppercase;color:#D6D2C9;margin:0 0 8px}
+  .reg-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px;align-items:start}
+  .reg-bateria{margin-top:26px}
+
+  label{display:block;font-family:var(--f-disp);font-weight:700;font-size:14px;text-transform:uppercase;color:#D6D2C9;margin:0 0 8px}
   label .req{color:var(--pink-hi)}
-  select,input[type=text],input[type=date],input[type=number],input[type=email]{
-    width:100%;min-height:50px;background:var(--black);border:1px solid var(--line);color:#fff;
-    font-family:var(--f-ui);font-size:16px;padding:0 15px;border-radius:7px;outline:none;transition:border-color .15s,box-shadow .15s}
-  textarea:focus,select:focus,input:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(201,162,42,.18)}
+  select,input[type=text],input[type=date],input[type=number],input[type=email]{width:100%;min-height:50px;background:var(--black);border:1px solid var(--line);color:#fff;font-family:var(--f-ui);font-size:16px;padding:0 15px;border-radius:7px;outline:none;transition:border-color .15s,box-shadow .15s}
+  select:focus,input:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(201,162,42,.18)}
   select{appearance:none;padding-right:40px;background-image:linear-gradient(45deg,transparent 50%,var(--gold) 50%),linear-gradient(135deg,var(--gold) 50%,transparent 50%);background-position:calc(100% - 20px) 55%,calc(100% - 15px) 55%;background-size:6px 6px,6px 6px;background-repeat:no-repeat}
   .field{margin-bottom:18px}
   .two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
   .hint{color:var(--muted);font-size:12.5px;margin-top:6px}
   .seg{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-  .seg .opt{cursor:pointer;min-height:52px;display:flex;align-items:center;justify-content:center;gap:8px;border:1px solid var(--line);border-radius:8px;padding:0 12px;text-align:center;font-family:var(--f-disp);font-style:italic;font-weight:700;text-transform:uppercase;letter-spacing:.02em;font-size:17px;color:var(--soft);transition:.15s}
+  .seg .opt{cursor:pointer;min-height:52px;display:flex;align-items:center;justify-content:center;gap:8px;border:1px solid var(--line);border-radius:8px;padding:0 12px;font-family:var(--f-disp);font-style:italic;font-weight:700;text-transform:uppercase;font-size:17px;color:var(--soft);transition:.15s}
   .seg .opt input{position:absolute;opacity:0;pointer-events:none}
   .seg .opt .ico svg{width:19px;height:19px}
   .seg .opt.geral.sel{border-color:var(--gold);color:var(--gold-hi);background:rgba(201,162,42,.09);box-shadow:0 0 0 1px var(--gold-lo)}
@@ -174,38 +132,28 @@
   .selectedInfo{margin-top:14px;font-size:14px;color:var(--muted);min-height:20px}
   .selectedInfo b{color:#fff}
   .badge{display:inline-block;font-family:var(--f-disp);font-weight:700;font-size:12px;letter-spacing:.04em;text-transform:uppercase;padding:3px 9px;border-radius:4px;border:1px solid var(--line);color:var(--muted)}
-  .badge.pend{color:var(--warn);border-color:var(--warn)}
-  .badge.ok{color:var(--good);border-color:var(--good)}
+  .badge.pend{color:var(--warn);border-color:var(--warn)} .badge.ok{color:var(--good);border-color:var(--good)}
   .checkline{display:flex;gap:11px;align-items:flex-start;margin-bottom:14px;font-size:14px;color:#CFCBC2;line-height:1.45}
   .checkline input{width:20px;height:20px;margin-top:1px;accent-color:var(--pink);flex-shrink:0}
   .hidden{display:none}
   .toast{margin-top:16px;padding:16px 18px;border-radius:8px;border:1px solid var(--good);background:rgba(55,163,74,.13);color:#CFE9D0;font-size:15px;display:flex;gap:12px;align-items:flex-start}
   .toast .ico{color:#8fe0a0} .toast b{color:#fff}
-  .confirmados{margin-top:24px}
-  .confirmados .list{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+  .confirmados{margin-top:24px} .confirmados .list{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
   .pill{font-family:var(--f-ui);font-weight:600;font-size:14px;padding:8px 13px;border-radius:20px;border:1px solid var(--gold-lo);background:var(--surface-2);color:var(--gold-hi)}
   .pill.fem{border-color:var(--pink-lo);color:var(--pink-hi)}
 
-  footer.foot{margin-top:var(--sp-6);border-top:1px solid var(--line);padding:var(--sp-4) 0;text-align:center}
-  footer .mark{font-size:38px;display:inline-block}
-  footer .ftag{font-family:var(--f-wide);font-weight:400;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);font-size:11px;margin-top:14px}
-  footer .meta{color:var(--muted);font-size:12.5px;margin-top:16px}
+  footer.foot{margin-top:90px;border-top:1px solid var(--line);padding:40px 0;text-align:center}
+  footer .logoimg{width:190px;margin:0 auto}
+  footer .ftag{font-family:var(--f-wide);font-weight:400;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);font-size:11px;margin-top:16px}
+  footer .meta{color:var(--muted);font-size:12.5px;margin-top:14px}
 
-  @media(max-width:720px){
-    .facts .grid{grid-template-columns:1fr 1fr}
-    .facts .cell:nth-child(2){border-right:none}
-  }
-  @media(max-width:560px){
-    .two{grid-template-columns:1fr}
-    .facts .grid{grid-template-columns:1fr}
-    .facts .cell{border-right:none;border-bottom:1px solid var(--line)}
-    .principles{grid-template-columns:1fr}
+  @media(max-width:640px){
+    .two,.reg-grid,.principles{grid-template-columns:1fr}
+    .hero-logo .logoimg{width:78vw}
   }
   @media (prefers-reduced-motion: reduce){
     *{animation:none!important;transition:none!important}
-    .speedlines{display:none}
-    html{scroll-behavior:auto}
-    .proof .bg{transform:none}
+    html{scroll-behavior:auto} .proof .bg{transform:none}
   }
 </style>
 </head>
@@ -214,7 +162,7 @@
   <div class="checker pink"></div>
   <header class="top">
     <div class="wrap row">
-      <div class="mark"><span class="k">KART</span><sup>3</sup> <span class="x">EXPERIENCE</span></div>
+      <img class="logoimg" src="ke-logo.png" alt="Kart Experience">
       <a href="#inscricao" class="cta-mini">Reservar vaga</a>
     </div>
   </header>
@@ -222,55 +170,36 @@
   <main>
     <!-- HERO -->
     <section class="hero">
-      <div class="glow"></div><div class="speedlines"></div><div class="checker-corner"></div>
+      <div class="hbg"></div><div class="hscrim"></div>
       <div class="wrap">
-        <div class="eyebrow reveal">3ª <b>EDIÇÃO</b> &nbsp;·&nbsp; 22 DE SETEMBRO</div>
-        <h1 class="reveal"><span class="k">KART</span><sup>3</sup> <span class="x">EXPERIENCE</span></h1>
-        <div class="tagline reveal"><span class="g">Negócios.</span> Velocidade. <span class="p">Competição.</span></div>
-        <p class="hero-sub reveal">Uma noite, um grid, o mesmo instinto que você usa pra fechar negócio — agora a 60 por hora numa curva fechada. As vagas são limitadas pela pista.</p>
-
-        <div class="countdown reveal" id="countdown" aria-label="Contagem regressiva para a largada">
-          <div class="cd-u"><div class="num" id="cdD">--</div><div class="lab">dias</div></div>
-          <div class="cd-sep">:</div>
-          <div class="cd-u"><div class="num" id="cdH">--</div><div class="lab">horas</div></div>
-          <div class="cd-sep">:</div>
-          <div class="cd-u"><div class="num" id="cdM">--</div><div class="lab">min</div></div>
-          <div class="cd-sep">:</div>
-          <div class="cd-u"><div class="num" id="cdS">--</div><div class="lab">seg</div></div>
-        </div>
-
-        <div class="quickfacts reveal">
-          <span class="qf"><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></span><span id="qfData">22/09</span></span>
-          <span class="qf"><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg></span><span id="qfLocal">Kart Point · Mané Garrincha</span></span>
-          <span class="qf"><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 14"/></svg></span><span id="qfHora">19h</span></span>
-        </div>
-
-        <div class="cta-wrap reveal"><a href="#inscricao" class="btn btn-gold">Reserve sua vaga
-          <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></span></a></div>
-
-        <!-- FACTS -->
-        <div class="facts reveal">
-          <div class="grid">
-            <div class="cell"><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></span><div><div class="k">Data</div><div class="v" id="fData">22/09<small id="fDataSub">Terça à noite</small></div></div></div>
-            <div class="cell"><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 14"/></svg></span><div><div class="k">Largada</div><div class="v" id="fHora">19h<small>Grid fecha no horário</small></div></div></div>
-            <div class="cell"><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg></span><div><div class="k">Local</div><div class="v" id="fLocal" style="font-size:20px">Kart Point<small id="fLocalSub">Arena Mané Garrincha</small></div></div></div>
-            <div class="cell"><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg></span><div><div class="k">Baterias</div><div class="v" style="font-size:20px">Geral + Fem<small>Grid próprio pra elas</small></div></div></div>
-          </div>
-          <div class="brief"><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span><div><b>Chegue antes das 19h.</b> O briefing abre a noite — regras, bandeiras e ordem de largada. Quem atrasa, larga em desvantagem.</div></div>
-          <div class="price-row">
-            <span class="chip">Bateria <b id="cBateria">R$120</b></span>
-            <span class="chip">Kit luva + balaclava <b id="cKit">R$15</b></span>
-            <span class="total" id="cTotal">R$135<small>por piloto</small></span>
+        <div class="hero-top">
+          <div class="hero-logo reveal"><img class="logoimg" src="ke-logo.png" alt="Kart Experience — 3ª Edição"></div>
+          <div class="hero-actions reveal">
+            <div class="countdown" id="countdown" aria-label="Contagem regressiva para a largada">
+              <div class="cd-u"><div class="num" id="cdD">--</div><div class="lab">dias</div></div>
+              <div class="cd-u"><div class="num" id="cdH">--</div><div class="lab">horas</div></div>
+              <div class="cd-u"><div class="num" id="cdM">--</div><div class="lab">min</div></div>
+              <div class="cd-u"><div class="num" id="cdS">--</div><div class="lab">seg</div></div>
+            </div>
+            <a href="#inscricao" class="btn btn-gold">Reserve sua vaga
+              <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></span></a>
           </div>
         </div>
-        <p class="price-note reveal">A página só reserva sua vaga no grid. O acerto dos R$135 é feito direto com a organização.</p>
+        <div class="hero-tag reveal"><span class="g">Negócios.</span> Velocidade. <span class="p">Competição.</span></div>
+        <div class="facts-strip reveal">
+          <span class="fs"><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></span><span id="fData">22/09</span></span>
+          <span class="fs"><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg></span><span id="fLocal">Kart Point – Arena Mané Garrincha</span></span>
+          <span class="fs"><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 14"/></svg></span><span id="fHora">19h</span></span>
+          <span class="fs price"><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 9V5a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v4a2 2 0 0 0 0 6v4a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-4a2 2 0 0 0 0-6z"/></svg></span><b id="cTotal">R$135</b><small>bateria R$120 + kit R$15</small></span>
+        </div>
+        <div class="brief-line reveal"><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span><div><b>Chegue antes das 19h</b> — o briefing abre a noite e define largada. Quem atrasa, larga em desvantagem.</div></div>
       </div>
     </section>
 
     <!-- SOCIAL PROOF -->
     <section class="block"><div class="wrap">
       <div class="proof reveal">
-        <div class="bg" id="proofBg" style="background-image:url('kart-experience-foto.jpg')"></div>
+        <div class="bg" style="background-image:url('ke-foto.jpg')"></div>
         <div class="content">
           <h3>Todo ano o grid <span style="color:var(--gold-hi)">lota</span>. Não fique de fora do que todo mundo vai comentar depois.</h3>
           <p>Empresários, sócios e convidados no mesmo asfalto. Da largada à cerveja pós-corrida.</p>
@@ -278,8 +207,8 @@
       </div>
     </div></section>
 
-    <!-- PITCH -->
-    <section class="block"><div class="wrap narrow">
+    <!-- PITCH (largura cheia) -->
+    <section class="block"><div class="wrap">
       <div class="kicker reveal">Por que entrar no grid</div>
       <h2 class="sec-title reveal">A pista não <span class="g">mente.</span></h2>
       <p class="lead reveal">Aqui ninguém corre pelo cargo nem pelo faturamento — corre pela volta mais limpa. A disciplina que separa quem promete de quem entrega no escritório é a mesma que decide quem cruza a linha na frente. Capacete na cabeça, todo mundo é igual.</p>
@@ -291,11 +220,11 @@
       </ul>
     </div></section>
 
-    <!-- BATERIA FEMININA -->
+    <!-- BATERIA FEMININA (feed quadrado) -->
     <section class="block"><div class="wrap">
       <div class="kicker reveal">Novidade da 3ª edição</div>
       <div class="fem reveal">
-        <div class="art"><img src="kart-experience-fem.jpg" alt="Bateria feminina do Kart Experience" loading="lazy" decoding="async" width="941" height="1672"></div>
+        <div class="feed"><img src="ke-feed.jpg" alt="Kart Experience 3ª Edição — bateria feminina" loading="lazy" decoding="async"></div>
         <div class="txt">
           <div class="kick"><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="5"/><line x1="12" y1="13" x2="12" y2="22"/><line x1="9" y1="19" x2="15" y2="19"/></svg></span>Bateria Feminina</div>
           <h3>Elas também<br>largam na frente.</h3>
@@ -305,12 +234,12 @@
       </div>
     </div></section>
 
-    <!-- INSCRIÇÃO -->
-    <section class="block" id="inscricao"><div class="wrap narrow">
+    <!-- GARANTA SUA VAGA -->
+    <section class="block" id="inscricao"><div class="wrap">
       <div class="kicker reveal">Reserva</div>
       <h2 class="sec-title reveal">Garanta sua <span class="g">vaga.</span></h2>
 
-      <div class="card reveal" style="margin-top:26px">
+      <div class="card reg-bateria reveal">
         <label>Em qual bateria você vai correr? <span class="req">*</span></label>
         <div class="seg" id="seg">
           <label class="opt geral sel"><input type="radio" name="bateria" value="Bateria Geral" checked><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg></span>Geral</label>
@@ -318,49 +247,57 @@
         </div>
       </div>
 
-      <div class="card gold reveal">
-        <h3>Já sou <span class="g">piloto</span></h3>
-        <p class="desc">Ache seu nome, confirme a vaga e pronto. É assim que a gente fecha quem falta no grid.</p>
-        <div class="field">
-          <label for="pilotoSelect">Selecione seu nome <span class="req">*</span></label>
-          <select id="pilotoSelect"><option value="">Carregando pilotos…</option></select>
-          <div class="selectedInfo" id="selectedInfo"></div>
+      <div class="reg-grid">
+        <div class="card gold reveal">
+          <h3>Já sou piloto <span class="g">Kart Experience</span></h3>
+          <p class="desc">Ache seu nome, confirme a vaga e pronto. É assim que a gente fecha quem falta no grid.</p>
+          <div class="field">
+            <label for="pilotoSelect">Selecione seu nome <span class="req">*</span></label>
+            <select id="pilotoSelect"><option value="">Carregando pilotos…</option></select>
+            <div class="selectedInfo" id="selectedInfo"></div>
+          </div>
+          <button class="btn btn-gold" id="btnConfirmar">Confirmar minha vaga</button>
+          <div id="confirmToast"></div>
         </div>
-        <button class="btn btn-gold" id="btnConfirmar">Confirmar minha vaga</button>
-        <div id="confirmToast"></div>
+
+        <div class="card reveal">
+          <h3>Primeira <span class="p">vez?</span></h3>
+          <p class="desc">Não está na lista? Faça seu cadastro de piloto — leva menos de dois minutos.</p>
+          <button class="btn btn-ghost" id="btnNovo">Sou piloto novo</button>
+        </div>
       </div>
 
-      <div class="card reveal">
-        <h3>Primeira <span class="p">vez?</span></h3>
-        <p class="desc">Não está na lista? Faça seu cadastro de piloto — leva menos de dois minutos.</p>
-        <button class="btn btn-ghost" id="btnNovo">Sou piloto novo</button>
-        <form id="formNovo" class="hidden" style="margin-top:22px" autocomplete="off">
+      <form id="formNovo" class="card hidden" style="margin-top:16px" autocomplete="off">
+        <h3 style="font-family:var(--f-disp);font-style:italic;font-weight:800;text-transform:uppercase;font-size:24px;margin-bottom:18px">Cadastro de <span class="p">piloto</span></h3>
+        <div class="two">
           <div class="field"><label>Nome completo <span class="req">*</span></label><input type="text" name="full_name" placeholder="Como no documento" required></div>
           <div class="field"><label>Apelido de piloto</label><input type="text" name="nickname" placeholder="Como quer aparecer no grid"></div>
-          <div class="two">
-            <div class="field"><label>CPF <span class="req">*</span></label><input type="text" name="cpf" placeholder="Identidade única" required></div>
-            <div class="field"><label>Nascimento <span class="req">*</span></label><input type="date" name="birth_date" required></div>
-          </div>
-          <div class="two">
-            <div class="field"><label>Peso (kg) <span class="req">*</span></label><input type="number" name="weight_kg" placeholder="Peso é performance" required></div>
-            <div class="field"><label>Cidade</label><input type="text" name="city" placeholder="Cidade / UF"></div>
-          </div>
-          <div class="two">
-            <div class="field"><label>WhatsApp <span class="req">*</span></label><input type="text" name="phone" placeholder="(61) 90000-0000" required></div>
-            <div class="field"><label>E-mail</label><input type="email" name="email" placeholder="voce@empresa.com"></div>
-          </div>
+        </div>
+        <div class="two">
+          <div class="field"><label>CPF <span class="req">*</span></label><input type="text" name="cpf" placeholder="Identidade única" required></div>
+          <div class="field"><label>Nascimento <span class="req">*</span></label><input type="date" name="birth_date" required></div>
+        </div>
+        <div class="two">
+          <div class="field"><label>Peso (kg) <span class="req">*</span></label><input type="number" name="weight_kg" placeholder="Peso é performance" required></div>
+          <div class="field"><label>Cidade</label><input type="text" name="city" placeholder="Cidade / UF"></div>
+        </div>
+        <div class="two">
+          <div class="field"><label>WhatsApp <span class="req">*</span></label><input type="text" name="phone" placeholder="(61) 90000-0000" required></div>
+          <div class="field"><label>E-mail</label><input type="email" name="email" placeholder="voce@empresa.com"></div>
+        </div>
+        <div class="two">
           <div class="field"><label>Contato de emergência</label><input type="text" name="emergency_contact" placeholder="Nome e telefone"></div>
           <div class="field"><label>Como você chega ao evento? <span class="req">*</span></label>
             <select name="bond_type" id="bondType" required><option value="">Selecione…</option><option>Membro</option><option>Convidado</option><option>Filho de Membro</option></select>
           </div>
-          <div class="field hidden" id="sponsorField"><label>Quem te trouxe <span class="req">*</span></label><input type="text" name="sponsor_member" placeholder="Nome de quem te convidou"></div>
-          <div class="checkline"><input type="checkbox" name="consent_waiver" required><span>Estou ciente de que o kart envolve risco físico e assumo responsabilidade pela minha participação. <span class="req">*</span></span></div>
-          <div class="checkline"><input type="checkbox" name="consent_image" required><span>Autorizo o uso da minha imagem nos conteúdos do Kart Experience. <span class="req">*</span></span></div>
-          <p class="hint" style="margin:4px 0 18px">Seus dados vão para um banco privado da organização. Contato nunca é exposto publicamente.</p>
-          <button type="submit" class="btn btn-gold">Reservar minha vaga</button>
-          <div id="novoToast"></div>
-        </form>
-      </div>
+        </div>
+        <div class="field hidden" id="sponsorField"><label>Quem te trouxe <span class="req">*</span></label><input type="text" name="sponsor_member" placeholder="Nome de quem te convidou"></div>
+        <div class="checkline"><input type="checkbox" name="consent_waiver" required><span>Estou ciente de que o kart envolve risco físico e assumo responsabilidade pela minha participação. <span class="req">*</span></span></div>
+        <div class="checkline"><input type="checkbox" name="consent_image" required><span>Autorizo o uso da minha imagem nos conteúdos do Kart Experience. <span class="req">*</span></span></div>
+        <p class="hint" style="margin:4px 0 18px">Seus dados vão para um banco privado da organização. Contato nunca é exposto publicamente.</p>
+        <button type="submit" class="btn btn-gold">Reservar minha vaga</button>
+        <div id="novoToast"></div>
+      </form>
 
       <div class="confirmados hidden" id="confirmadosBox">
         <div class="kicker" style="margin-bottom:0">No grid</div>
@@ -370,22 +307,14 @@
   </main>
 
   <footer class="foot"><div class="wrap">
-    <div class="mark"><span class="k">KART</span><sup>3</sup> <span class="x">EXPERIENCE</span></div>
+    <img class="logoimg" src="ke-logo.png" alt="Kart Experience">
     <div class="ftag">Negócios · Velocidade · Competição</div>
     <div class="meta" id="footMeta">3ª Edição · 22/09 · Kart Point – Arena Mané Garrincha · 19h</div>
   </div></footer>
 
 <script>
-/* ===== CONFIG — troque só isto a cada edição ===== */
-const EVENTO = {
-  edicao:"3ª", data:"22/09", dataSub:"Terça à noite",
-  hora:"19h", local:"Kart Point", localSub:"Arena Mané Garrincha",
-  dataISO:"2026-09-22T19:00:00-03:00",
-  valorBateria:120, valorKit:15
-};
-/* ===== SUPABASE (PARTE 2) — vazio = protótipo em memória ===== */
+const EVENTO={edicao:"3ª",data:"22/09",hora:"19h",local:"Kart Point – Arena Mané Garrincha",dataISO:"2026-09-22T19:00:00-03:00",valorBateria:120,valorKit:15};
 const SUPABASE={url:"",anonKey:"",table:""};
-/* ===== BASE (SEED) — só p/ protótipo; some na Parte 2 ===== */
 const SEED_PILOTOS=[
  {nome:"Handerson Argenta",vinculo:"Convidado",status:"cadastrado"},{nome:"Rodrigo Alves",vinculo:"—",status:"pendente"},
  {nome:"Igor Pinheiro",vinculo:"Convidado",status:"cadastrado"},{nome:"Victor Hugo Gouveia De Lucena",vinculo:"—",status:"pendente"},
@@ -397,93 +326,52 @@ const SEED_PILOTOS=[
  {nome:"Victor Silvério",vinculo:"—",status:"pendente"},{nome:"Cefora Bezerra Souza",vinculo:"—",status:"pendente"},
  {nome:"Franck Rodrigues",vinculo:"Convidado",status:"cadastrado"}
 ];
-
 const $=s=>document.querySelector(s);
 const brl=n=>"R$"+n.toLocaleString("pt-BR");
-$("#fData").childNodes[0].textContent=EVENTO.data;$("#fDataSub").textContent=EVENTO.dataSub;
-$("#fHora").childNodes[0].textContent=EVENTO.hora;$("#fLocal").childNodes[0].textContent=EVENTO.local;$("#fLocalSub").textContent=EVENTO.localSub;
-$("#qfData").textContent=EVENTO.data;$("#qfLocal").textContent=EVENTO.local+" · "+EVENTO.localSub;$("#qfHora").textContent=EVENTO.hora;
-$("#cBateria").textContent=brl(EVENTO.valorBateria);$("#cKit").textContent=brl(EVENTO.valorKit);
-$("#cTotal").childNodes[0].textContent=brl(EVENTO.valorBateria+EVENTO.valorKit);
-$("#footMeta").textContent=EVENTO.edicao+" Edição · "+EVENTO.data+" · "+EVENTO.local+" – "+EVENTO.localSub+" · "+EVENTO.hora;
+$("#fData").textContent=EVENTO.data;$("#fLocal").textContent=EVENTO.local;$("#fHora").textContent=EVENTO.hora;
+$("#cTotal").textContent=brl(EVENTO.valorBateria+EVENTO.valorKit);
+$("#footMeta").textContent=EVENTO.edicao+" Edição · "+EVENTO.data+" · "+EVENTO.local+" · "+EVENTO.hora;
 
-/* countdown */
-(function(){
-  const t=new Date(EVENTO.dataISO).getTime();
-  const pad=n=>String(n).padStart(2,"0");
-  function tick(){
-    const d=t-Date.now();
-    if(d<=0){$("#countdown").innerHTML='<div class="cd-u" style="min-width:auto;padding:12px 18px"><div class="num" style="font-size:26px">É HOJE. Acelera.</div></div>';return;}
-    const dd=Math.floor(d/864e5),hh=Math.floor(d%864e5/36e5),mm=Math.floor(d%36e5/6e4),ss=Math.floor(d%6e4/1e3);
-    $("#cdD").textContent=pad(dd);$("#cdH").textContent=pad(hh);$("#cdM").textContent=pad(mm);$("#cdS").textContent=pad(ss);
-    setTimeout(tick,1000);
-  }
-  tick();
-})();
+(function(){const t=new Date(EVENTO.dataISO).getTime(),pad=n=>String(n).padStart(2,"0");
+ function tick(){const d=t-Date.now();if(d<=0){$("#countdown").innerHTML='<div class="cd-u" style="padding:12px 18px"><div class="num" style="font-size:24px">É HOJE</div></div>';return;}
+ $("#cdD").textContent=pad(Math.floor(d/864e5));$("#cdH").textContent=pad(Math.floor(d%864e5/36e5));$("#cdM").textContent=pad(Math.floor(d%36e5/6e4));$("#cdS").textContent=pad(Math.floor(d%6e4/1e3));setTimeout(tick,1000);}
+ tick();})();
 
-/* bateria segmented */
-document.querySelectorAll('#seg input').forEach(r=>r.addEventListener('change',e=>{
-  document.querySelectorAll('#seg .opt').forEach(o=>o.classList.remove('sel'));
-  e.target.closest('.opt').classList.add('sel');
-}));
+document.querySelectorAll('#seg input').forEach(r=>r.addEventListener('change',e=>{document.querySelectorAll('#seg .opt').forEach(o=>o.classList.remove('sel'));e.target.closest('.opt').classList.add('sel');}));
 function bateriaAtual(){return document.querySelector('#seg input:checked').value;}
 function preSelFem(){const f=document.querySelector('#seg input[value="Bateria Feminina"]');f.checked=true;f.dispatchEvent(new Event('change'));}
 
-/* dropdown */
 let PILOTOS=[];
-function carregarPilotos(){
-  PILOTOS=[...SEED_PILOTOS].sort((a,b)=>a.nome.localeCompare(b.nome,"pt-BR"));
-  const sel=$("#pilotoSelect");sel.innerHTML='<option value="">— selecione seu nome —</option>';
-  PILOTOS.forEach((p,i)=>{const o=document.createElement("option");o.value=i;o.textContent=p.nome;sel.appendChild(o);});
-  const nf=document.createElement("option");nf.value="__nf";nf.textContent="Não encontrei meu nome…";sel.appendChild(nf);
-}
+function carregarPilotos(){PILOTOS=[...SEED_PILOTOS].sort((a,b)=>a.nome.localeCompare(b.nome,"pt-BR"));
+ const sel=$("#pilotoSelect");sel.innerHTML='<option value="">— selecione seu nome —</option>';
+ PILOTOS.forEach((p,i)=>{const o=document.createElement("option");o.value=i;o.textContent=p.nome;sel.appendChild(o);});
+ const nf=document.createElement("option");nf.value="__nf";nf.textContent="Não encontrei meu nome…";sel.appendChild(nf);}
 carregarPilotos();
-$("#pilotoSelect").addEventListener("change",e=>{
-  const v=e.target.value,info=$("#selectedInfo");
-  if(v==="__nf"){info.innerHTML='Sem estresse — use o <b>“Sou piloto novo”</b> logo abaixo.';return;}
-  if(v===""){info.innerHTML="";return;}
-  const p=PILOTOS[v],b=p.status==="pendente"?'<span class="badge pend">Vaga pendente</span>':'<span class="badge ok">Já cadastrado</span>';
-  info.innerHTML=(p.vinculo&&p.vinculo!=="—"?("Vínculo: <b>"+p.vinculo+"</b> &nbsp; "):"")+b;
-});
+$("#pilotoSelect").addEventListener("change",e=>{const v=e.target.value,info=$("#selectedInfo");
+ if(v==="__nf"){info.innerHTML='Sem estresse — use o <b>“Sou piloto novo”</b> ao lado.';return;}
+ if(v===""){info.innerHTML="";return;}
+ const p=PILOTOS[v],b=p.status==="pendente"?'<span class="badge pend">Vaga pendente</span>':'<span class="badge ok">Já cadastrado</span>';
+ info.innerHTML=(p.vinculo&&p.vinculo!=="—"?("Vínculo: <b>"+p.vinculo+"</b> &nbsp; "):"")+b;});
 const confirmados=[];
-$("#btnConfirmar").addEventListener("click",()=>{
-  const sel=$("#pilotoSelect"),v=sel.value,toast=$("#confirmToast");
-  if(v===""||v==="__nf"){toast.innerHTML='<div class="toast" style="border-color:var(--warn);background:rgba(224,168,0,.12);color:#F0E0AE">Selecione seu nome na lista primeiro.</div>';return;}
-  const p=PILOTOS[v],bat=bateriaAtual();
-  confirmados.push({nome:p.nome,fem:bat==="Bateria Feminina"});
-  toast.innerHTML='<div class="toast"><span class="ico"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="20 6 9 17 4 12"/></svg></span><div><b>'+p.nome+'</b>, vaga confirmada na <b>'+bat+'</b>. Te vejo no briefing, <b>19h em ponto</b>.</div></div>';
-  sel.value="";$("#selectedInfo").innerHTML="";renderConfirmados();
-});
+$("#btnConfirmar").addEventListener("click",()=>{const sel=$("#pilotoSelect"),v=sel.value,toast=$("#confirmToast");
+ if(v===""||v==="__nf"){toast.innerHTML='<div class="toast" style="border-color:var(--warn);background:rgba(224,168,0,.12);color:#F0E0AE">Selecione seu nome na lista primeiro.</div>';return;}
+ const p=PILOTOS[v],bat=bateriaAtual();confirmados.push({nome:p.nome,fem:bat==="Bateria Feminina"});
+ toast.innerHTML='<div class="toast"><span class="ico"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="20 6 9 17 4 12"/></svg></span><div><b>'+p.nome+'</b>, vaga confirmada na <b>'+bat+'</b>. Te vejo no briefing, <b>19h em ponto</b>.</div></div>';
+ sel.value="";$("#selectedInfo").innerHTML="";renderConfirmados();});
 $("#btnNovo").addEventListener("click",()=>{$("#formNovo").classList.remove("hidden");$("#btnNovo").classList.add("hidden");$("#formNovo").scrollIntoView({behavior:"smooth",block:"center"});});
 $("#bondType").addEventListener("change",e=>{const f=$("#sponsorField"),inp=f.querySelector("input");if(e.target.value==="Convidado"||e.target.value==="Filho de Membro"){f.classList.remove("hidden");inp.required=true;}else{f.classList.add("hidden");inp.required=false;}});
-$("#formNovo").addEventListener("submit",e=>{
-  e.preventDefault();
-  const data=Object.fromEntries(new FormData(e.target).entries()),bat=bateriaAtual();
-  const nome=(data.nickname&&data.nickname.trim())||(data.full_name&&data.full_name.trim())||"Piloto";
-  confirmados.push({nome:nome,fem:bat==="Bateria Feminina"});
-  $("#novoToast").innerHTML='<div class="toast"><span class="ico"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="20 6 9 17 4 12"/></svg></span><div><b>Vaga reservada, '+nome+'.</b> Você está no grid da <b>'+bat+'</b>. Chegue antes das 19h pro briefing.</div></div>';
-  e.target.reset();$("#sponsorField").classList.add("hidden");renderConfirmados();$("#novoToast").scrollIntoView({behavior:"smooth",block:"center"});
-});
-function renderConfirmados(){
-  if(!confirmados.length)return;$("#confirmadosBox").classList.remove("hidden");
-  $("#confirmadosList").innerHTML=confirmados.map(c=>'<span class="pill'+(c.fem?' fem':'')+'">'+c.nome+'</span>').join("");
-}
+$("#formNovo").addEventListener("submit",e=>{e.preventDefault();const data=Object.fromEntries(new FormData(e.target).entries()),bat=bateriaAtual();
+ const nome=(data.nickname&&data.nickname.trim())||(data.full_name&&data.full_name.trim())||"Piloto";confirmados.push({nome:nome,fem:bat==="Bateria Feminina"});
+ $("#novoToast").innerHTML='<div class="toast"><span class="ico"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="20 6 9 17 4 12"/></svg></span><div><b>Vaga reservada, '+nome+'.</b> Você está no grid da <b>'+bat+'</b>. Chegue antes das 19h pro briefing.</div></div>';
+ e.target.reset();$("#sponsorField").classList.add("hidden");renderConfirmados();$("#novoToast").scrollIntoView({behavior:"smooth",block:"center"});});
+function renderConfirmados(){if(!confirmados.length)return;$("#confirmadosBox").classList.remove("hidden");$("#confirmadosList").innerHTML=confirmados.map(c=>'<span class="pill'+(c.fem?' fem':'')+'">'+c.nome+'</span>').join("");}
 
-/* GSAP — progressive enhancement, reduced-motion safe */
-window.addEventListener('load',function(){
-  if(!window.gsap||!window.ScrollTrigger)return;
-  gsap.registerPlugin(ScrollTrigger);
-  const mm=gsap.matchMedia();
-  mm.add('(prefers-reduced-motion: no-preference)',()=>{
-    gsap.from('.hero .reveal',{opacity:0,y:16,duration:.55,ease:'power2.out',stagger:.08});
-    gsap.utils.toArray('.block .reveal').forEach(el=>{
-      gsap.from(el,{opacity:0,y:14,duration:.4,ease:'power1.out',
-        scrollTrigger:{trigger:el,start:'top 88%',toggleActions:'play none none reverse'}});
-    });
-    const bg=document.querySelector('#proofBg');
-    if(bg)gsap.to(bg,{yPercent:8,ease:'none',scrollTrigger:{trigger:bg.parentElement,scrub:.5}});
-  });
-});
+window.addEventListener('load',function(){if(!window.gsap||!window.ScrollTrigger)return;gsap.registerPlugin(ScrollTrigger);
+ const mm=gsap.matchMedia();mm.add('(prefers-reduced-motion: no-preference)',()=>{
+  gsap.from('.hero .reveal',{opacity:0,y:16,duration:.5,ease:'power2.out',stagger:.08});
+  gsap.utils.toArray('.block .reveal').forEach(el=>{gsap.from(el,{opacity:0,y:14,duration:.4,ease:'power1.out',scrollTrigger:{trigger:el,start:'top 88%',toggleActions:'play none none reverse'}});});
+  const bg=document.querySelector('.proof .bg');if(bg)gsap.to(bg,{yPercent:8,ease:'none',scrollTrigger:{trigger:bg.parentElement,scrub:.5}});
+ });});
 </script>
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
