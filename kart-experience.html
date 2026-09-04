@@ -112,7 +112,7 @@
   .card h3{font-family:var(--f-disp);font-style:italic;font-weight:800;text-transform:uppercase;font-size:26px;line-height:1;margin-bottom:5px}
   .card h3 .g{color:var(--gold-hi)} .card h3 .p{color:var(--pink-hi)}
   .card p.desc{color:var(--muted);font-size:14.5px;margin-bottom:20px}
-  .reg-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px;align-items:stretch}
+  .reg-grid{display:grid;grid-template-columns:1fr;gap:16px;margin-top:16px;align-items:stretch}
   .reg-bateria{margin-top:26px}
 
   label{display:block;font-family:var(--f-disp);font-weight:700;font-size:14px;text-transform:uppercase;color:#D6D2C9;margin:0 0 8px}
@@ -167,7 +167,7 @@
   <header class="top">
     <div class="wrap row">
       <img class="logoimg" src="ke-logo.png" alt="Kart Experience">
-      <a href="#inscricao" class="cta-mini">Reservar vaga</a>
+      <a href="cadastro.html" class="cta-mini">Reservar vaga</a>
     </div>
   </header>
 
@@ -185,7 +185,7 @@
               <div class="cd-u"><div class="num" id="cdM">--</div><div class="lab">min</div></div>
               <div class="cd-u"><div class="num" id="cdS">--</div><div class="lab">seg</div></div>
             </div>
-            <a href="#inscricao" class="btn btn-gold">Reserve sua vaga
+            <a href="cadastro.html" class="btn btn-gold">Reserve sua vaga
               <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></span></a>
           </div>
         </div>
@@ -233,7 +233,7 @@
           <div class="kick"><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="5"/><line x1="12" y1="13" x2="12" y2="22"/><line x1="9" y1="19" x2="15" y2="19"/></svg></span>Grid exclusivo</div>
           <h3>Bateria Feminina.</h3><p class="femsub">Elas também largam na frente.</p>
           <p>Nesta edição tem grid só delas. Mesma pista, mesma adrenalina, uma bateria exclusiva pra mulheres que decidem — e que não correm pra ficar em segundo. Chama as sócias, as parceiras de negócio, as concorrentes.</p>
-          <div style="max-width:360px;align-self:center;width:100%"><a href="#inscricao" class="btn btn-pink" onclick="preSelFem()">Quero na bateria feminina</a></div>
+          <div style="max-width:360px;align-self:center;width:100%"><a href="cadastro.html" class="btn btn-pink">Quero na bateria feminina</a></div>
         </div>
       </div>
     </div></section>
@@ -243,7 +243,7 @@
       
       <h2 class="sec-title reveal">Garanta sua <span class="g">vaga.</span></h2>
 
-      <div class="card reg-bateria reveal">
+      <div class="card reg-bateria reveal" style="display:none">
         <label>Em qual bateria você vai correr? <span class="req">*</span></label>
         <div class="seg" id="seg">
           <label class="opt geral sel"><input type="radio" name="bateria" value="Bateria Geral" checked><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg></span>Geral</label>
@@ -252,7 +252,7 @@
       </div>
 
       <div class="reg-grid">
-        <div class="card gold reveal">
+        <div class="card gold reveal" style="display:none">
           <h3>Já sou piloto <span class="g">Kart Experience</span></h3>
           <p class="desc">Ache seu nome, confirme a vaga e pronto. É assim que a gente fecha quem falta no grid.</p>
           <div class="field">
@@ -362,7 +362,7 @@ $("#btnConfirmar").addEventListener("click",()=>{const sel=$("#pilotoSelect"),v=
  const p=PILOTOS[v],bat=bateriaAtual();confirmados.push({nome:p.nome,fem:bat==="Bateria Feminina"});
  toast.innerHTML='<div class="toast"><span class="ico"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="20 6 9 17 4 12"/></svg></span><div><b>'+p.nome+'</b>, vaga confirmada na <b>'+bat+'</b>. Te vejo no briefing, <b>19h em ponto</b>.</div></div>';
  sel.value="";$("#selectedInfo").innerHTML="";renderConfirmados();});
-$("#btnNovo").addEventListener("click",()=>{$("#formNovo").classList.remove("hidden");$("#btnNovo").classList.add("hidden");$("#formNovo").scrollIntoView({behavior:"smooth",block:"center"});});
+$("#btnNovo").addEventListener("click",()=>{window.location.href="cadastro.html";});
 $("#bondType").addEventListener("change",e=>{const f=$("#sponsorField"),inp=f.querySelector("input");if(e.target.value==="Convidado"||e.target.value==="Filho de Membro"){f.classList.remove("hidden");inp.required=true;}else{f.classList.add("hidden");inp.required=false;}});
 $("#formNovo").addEventListener("submit",e=>{e.preventDefault();const data=Object.fromEntries(new FormData(e.target).entries()),bat=bateriaAtual();
  const nome=(data.nickname&&data.nickname.trim())||(data.full_name&&data.full_name.trim())||"Piloto";confirmados.push({nome:nome,fem:bat==="Bateria Feminina"});
