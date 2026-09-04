@@ -148,8 +148,7 @@ window.KART_CONFIG = {
      window.scrollTo(0,0);
    }catch(e){ console.error(e); }
  };
- function calc(){ var q=(bat==='feminina')?1:qtd; var kit=document.getElementById('kitChk').checked; var v=q*120+(kit?15:0); document.getElementById('rValor').textContent='R</html>
-+v; return {q:q,kit:kit,v:v}; }
+ function calc(){ var q=(bat==='feminina')?1:qtd; var kit=document.getElementById('kitChk').checked; var v=q*120+(kit?15:0); document.getElementById('rValor').textContent='R$'+v; return {q:q,kit:kit,v:v}; }
  document.addEventListener('click',function(e){
    var ob=e.target.closest&&e.target.closest('#segBat .opt');
    if(ob){ document.querySelectorAll('#segBat .opt').forEach(function(x){x.classList.remove('sel')}); ob.classList.add('sel'); bat=ob.getAttribute('data-bat'); document.getElementById('qtdWrap').style.display=(bat==='feminina')?'none':''; calc(); return; }
