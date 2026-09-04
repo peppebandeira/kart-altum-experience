@@ -39,18 +39,18 @@ h1{font-family:Georgia,serif;font-style:italic;font-size:30px;margin:0 0 4px;col
   function waLink(phone,nome){ var d=String(phone||"").replace(/\D/g,""); if(d.length>0&&d.charAt(0)!=="5")d="55"+d; var msg="Fala, "+(nome||"")+"! Sua vaga no Kart Experience 3a Edicao esta CONFIRMADA. Dia 22/09 (ter), 19h, no Kart Point - Arena Mane Garrincha. Chegue antes das 19h pro briefing. Qualquer coisa e so chamar aqui. Bora aceleraaar!"; return "https://wa.me/"+d+"?text="+encodeURIComponent(msg); }
   function verComp(rv){ if(!rv.comprovante_path){ alert("Sem comprovante."); return; } C.storage.from("comprovantes").createSignedUrl(rv.comprovante_path,3600).then(function(r){ if(r.data&&r.data.signedUrl){ window.open(r.data.signedUrl,"_blank"); } else { alert("Erro ao abrir comprovante."); } }); }
   function confirmar(rv){ window.open(waLink(rv.whatsapp,rv.nome),"_blank"); C.from("kart_reservas").update({status:"confirmado"}).eq("id",rv.id).then(function(r){ if(r.error){ alert("Erro ao confirmar: "+r.error.message); return; } if(rv.comprovante_path){ C.storage.from("comprovantes").remove([rv.comprovante_path]); } loadAll(); }); }
-  function pesoTxt(nome){ var w=wmap[nome]; return (w==null||w==="")?"-":(w+" kg"); }
+  function pesoTxt(nome){ var w=wmap[(nome||"").trim()]; return (w==null||w==="")?"-":(w+" kg"); }
   function cardAg(rv){ var d=el("div","card"); var t=el("div","top"); t.appendChild(el("div","nm",rv.nome||"(sem nome)")); t.appendChild(el("div","val","R$"+(rv.valor_total||0))); d.appendChild(t); d.appendChild(el("div","meta",(rv.bateria==="feminina"?"Feminina":"Geral")+" - "+(rv.qtd_baterias||1)+" bateria(s) - Peso: "+pesoTxt(rv.nome)+" - WhatsApp: "+(rv.whatsapp||"-"))); var row=el("div","row"); var bv=el("button","bv","Ver comprovante"); bv.onclick=function(){verComp(rv);}; var bc=el("button","bc","Confirmar no WhatsApp"); bc.onclick=function(){ if(confirm("Confirmar a vaga de "+(rv.nome||"")+"? Avisa no WhatsApp e apaga o comprovante.")){ confirmar(rv); } }; row.appendChild(bv); row.appendChild(bc); d.appendChild(row); return d; }
   function cardConf(rv){ var d=el("div","card"); var t=el("div","top"); t.appendChild(el("div","nm",rv.nome||"(sem nome)")); t.appendChild(el("div","val",pesoTxt(rv.nome))); d.appendChild(t); d.appendChild(el("div","meta",(rv.bateria==="feminina"?"Feminina":"Geral")+" - "+(rv.qtd_baterias||1)+" bateria(s) - R$"+(rv.valor_total||0)+" - WhatsApp: "+(rv.whatsapp||"-"))); return d; }
   function loadAll(){
     C.from("kart_pilotos_pub").select("full_name,weight_kg").then(function(pr){
-      wmap={}; (pr.data||[]).forEach(function(p){ wmap[p.full_name]=p.weight_kg; });
+      wmap={}; (pr.data||[]).forEach(function(p){ wmap[(p.full_name||"").trim()]=p.weight_kg; });
       C.from("kart_reservas").select("*").order("created_at",{ascending:true}).then(function(r){
         if(r.error){ aBox.textContent="Erro: "+r.error.message; return; }
         var all=r.data||[];
         var ag=all.filter(function(x){return x.status==="aguardando";});
         var cf=all.filter(function(x){return x.status==="confirmado";});
-        cf.sort(function(a,b){ var wa=wmap[a.nome], wb=wmap[b.nome]; if(wa==null&&wb==null)return 0; if(wa==null)return 1; if(wb==null)return -1; return wa-wb; });
+        cf.sort(function(a,b){ var wa=wmap[(a.nome||"").trim()], wb=wmap[(b.nome||"").trim()]; if(wa==null&&wb==null)return 0; if(wa==null)return 1; if(wb==null)return -1; return wa-wb; });
         aBox.innerHTML=""; aCount.textContent=ag.length+" aguardando";
         if(!ag.length){ aBox.innerHTML="<p class=\"empty\">Nenhuma aguardando confirmacao.</p>"; } else { ag.forEach(function(rv){ aBox.appendChild(cardAg(rv)); }); }
         cBox.innerHTML=""; cCount.textContent=cf.length+" confirmado(s)";
