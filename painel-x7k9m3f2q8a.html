@@ -8,7 +8,7 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
 body{margin:0;background:#0A0A0B;color:#F5F0E8;font-family:Arial,Helvetica,sans-serif}
-.wrap{max-width:1000px;margin:0 auto;padding:34px 20px}
+.wrap{max-width:1360px;margin:0 auto;padding:34px 20px}
 h1{font-family:Georgia,serif;font-style:italic;font-size:30px;margin:0 0 4px;color:#fff}
 .sub{color:#B8922A;font-size:14px;margin-bottom:22px}
 .card{background:#141416;border:1px solid #2C2C30;border-radius:12px;padding:16px 18px;margin-bottom:12px}
@@ -27,38 +27,34 @@ h1{font-family:Georgia,serif;font-style:italic;font-size:30px;margin:0 0 4px;col
 <h1>Inscrições — Confirmação</h1>
 <div class="sub" id="count">carregando...</div>
 <div id="list">Carregando...</div>
-<h1 style="margin-top:44px">Confirmados <span style="color:#B8922A;font-size:15px;font-style:normal">(por peso — pra montar as baterias)</span></h1>
+<h1 style="margin-top:44px">Grid das baterias <span style="color:#B8922A;font-size:15px;font-style:normal">(por peso — pra montar as baterias)</span></h1>
 <div class="sub" id="countC"></div>
-<div id="listC"></div>
+<div id="board"></div>
 </div>
 <script>window.__CFG={url:"https://uzghezeaxysdsgzpmejp.supabase.co",key:"sb_publishable_SLv9hMsbMxAs7643nF6NJA_d8PNBBlV"};</script>
 <script>
 (function(){
-  var C=null, aBox, cBox, aCount, cCount, wmap={};
+  var C=null, aBox, aCount, cCount, boardEl, pmap={};
+  var OVR="kegrid_ovr";
+  var cols=[{id:"g1",label:"Geral 1",ac:"#E8B923"},{id:"g2",label:"Geral 2",ac:"#E8B923"},{id:"g3",label:"Geral 3",ac:"#E8B923"},{id:"fem",label:"Feminina",ac:"#FF4FA3"}];
   function el(t,c,x){ var e=document.createElement(t); if(c)e.className=c; if(x!=null)e.textContent=x; return e; }
+  function getOvr(){ try{ return JSON.parse(localStorage.getItem(OVR)||"{}"); }catch(e){ return {}; } }
+  function saveOvr(o){ try{ localStorage.setItem(OVR,JSON.stringify(o)); }catch(e){} }
+  function pinfo(nome){ return pmap[(nome||"").trim()]||{}; }
+  function isW(rv){ return pinfo(rv.nome).sexo==="F"; }
+  function pesoOf(rv){ var w=pinfo(rv.nome).w; return (w==null||w==="")?null:w; }
+  function pesoTxt(rv){ var w=pesoOf(rv); return w==null?"-":(w+" kg"); }
   function waLink(phone,nome){ var d=String(phone||"").replace(/\D/g,""); if(d.length>0&&d.charAt(0)!=="5")d="55"+d; var msg="Fala, "+(nome||"")+"! Sua vaga no Kart Experience 3a Edicao esta CONFIRMADA. Dia 22/09 (ter), 19h, no Kart Point - Arena Mane Garrincha. Chegue antes das 19h pro briefing. Qualquer coisa e so chamar aqui. Bora aceleraaar!"; return "https://wa.me/"+d+"?text="+encodeURIComponent(msg); }
   function verComp(rv){ if(!rv.comprovante_path){ alert("Sem comprovante."); return; } C.storage.from("comprovantes").createSignedUrl(rv.comprovante_path,3600).then(function(r){ if(r.data&&r.data.signedUrl){ window.open(r.data.signedUrl,"_blank"); } else { alert("Erro ao abrir comprovante."); } }); }
-  function confirmar(rv){ window.open(waLink(rv.whatsapp,rv.nome),"_blank"); C.from("kart_reservas").update({status:"confirmado"}).eq("id",rv.id).then(function(r){ if(r.error){ alert("Erro ao confirmar: "+r.error.message); return; } if(rv.comprovante_path){ C.storage.from("comprovantes").remove([rv.comprovante_path]); } loadAll(); }); }
-  function pesoTxt(nome){ var w=wmap[(nome||"").trim()]; return (w==null||w==="")?"-":(w+" kg"); }
-  function cardAg(rv){ var d=el("div","card"); var t=el("div","top"); t.appendChild(el("div","nm",rv.nome||"(sem nome)")); t.appendChild(el("div","val","R$"+(rv.valor_total||0))); d.appendChild(t); d.appendChild(el("div","meta",(rv.bateria==="feminina"?"Feminina":"Geral")+" - "+(rv.qtd_baterias||1)+" bateria(s) - Peso: "+pesoTxt(rv.nome)+" - WhatsApp: "+(rv.whatsapp||"-"))); var row=el("div","row"); var bv=el("button","bv","Ver comprovante"); bv.onclick=function(){verComp(rv);}; var bc=el("button","bc","Confirmar no WhatsApp"); bc.onclick=function(){ if(confirm("Confirmar a vaga de "+(rv.nome||"")+"? Avisa no WhatsApp e apaga o comprovante.")){ confirmar(rv); } }; row.appendChild(bv); row.appendChild(bc); d.appendChild(row); return d; }
-  function cardConf(rv){ var d=el("div","card"); var t=el("div","top"); t.appendChild(el("div","nm",rv.nome||"(sem nome)")); t.appendChild(el("div","val",pesoTxt(rv.nome))); d.appendChild(t); d.appendChild(el("div","meta",(rv.bateria==="feminina"?"Feminina":"Geral")+" - "+(rv.qtd_baterias||1)+" bateria(s) - R$"+(rv.valor_total||0)+" - WhatsApp: "+(rv.whatsapp||"-"))); return d; }
-  function loadAll(){
-    C.from("kart_pilotos_pub").select("full_name,weight_kg").then(function(pr){
-      wmap={}; (pr.data||[]).forEach(function(p){ wmap[(p.full_name||"").trim()]=p.weight_kg; });
-      C.from("kart_reservas").select("*").order("created_at",{ascending:true}).then(function(r){
-        if(r.error){ aBox.textContent="Erro: "+r.error.message; return; }
-        var all=r.data||[];
-        var ag=all.filter(function(x){return x.status==="aguardando";});
-        var cf=all.filter(function(x){return x.status==="confirmado";});
-        cf.sort(function(a,b){ var wa=wmap[(a.nome||"").trim()], wb=wmap[(b.nome||"").trim()]; if(wa==null&&wb==null)return 0; if(wa==null)return 1; if(wb==null)return -1; return wa-wb; });
-        aBox.innerHTML=""; aCount.textContent=ag.length+" aguardando";
-        if(!ag.length){ aBox.innerHTML="<p class=\"empty\">Nenhuma aguardando confirmacao.</p>"; } else { ag.forEach(function(rv){ aBox.appendChild(cardAg(rv)); }); }
-        cBox.innerHTML=""; cCount.textContent=cf.length+" confirmado(s)";
-        if(!cf.length){ cBox.innerHTML="<p class=\"empty\">Ninguem confirmado ainda.</p>"; } else { cf.forEach(function(rv){ cBox.appendChild(cardConf(rv)); }); }
-      });
-    });
-  }
-  function start(){ if(!window.supabase||!window.supabase.createClient){ setTimeout(start,100); return; } C=window.supabase.createClient(window.__CFG.url,window.__CFG.key); aBox=document.getElementById("list"); cBox=document.getElementById("listC"); aCount=document.getElementById("count"); cCount=document.getElementById("countC"); loadAll(); }
+  function confirmar(rv){ window.open(waLink(rv.whatsapp,rv.nome),"_blank"); C.from("kart_reservas").update({status:"confirmado"}).eq("id",rv.id).then(function(r){ if(r.error){ alert("Erro: "+r.error.message); return; } if(rv.comprovante_path){ C.storage.from("comprovantes").remove([rv.comprovante_path]); } loadAll(); }); }
+  function cardAg(rv){ var d=el("div","card"); var t=el("div","top"); t.appendChild(el("div","nm",rv.nome||"(sem nome)")); t.appendChild(el("div","val","R$"+(rv.valor_total||0))); d.appendChild(t); d.appendChild(el("div","meta",(isW(rv)?"Mulher":"Geral")+" - "+(rv.qtd_baterias||1)+" prova(s) - Peso: "+pesoTxt(rv)+" - WhatsApp: "+(rv.whatsapp||"-"))); var row=el("div","row"); var bv=el("button","bv","Ver comprovante"); bv.onclick=function(){verComp(rv);}; var bc=el("button","bc","Confirmar no WhatsApp"); bc.onclick=function(){ if(confirm("Confirmar a vaga de "+(rv.nome||"")+"? Avisa no WhatsApp e apaga o comprovante.")){ confirmar(rv); } }; row.appendChild(bv); row.appendChild(bc); d.appendChild(row); return d; }
+  function cardColor(w,q){ if(w){ if(q>=3)return{bg:"#E03B3B",fg:"#fff"}; if(q===2)return{bg:"#8B5CF6",fg:"#fff"}; return{bg:"#FF4FA3",fg:"#fff"}; } if(q>=3)return{bg:"#2D7DD2",fg:"#fff"}; if(q===2)return{bg:"#2FA84F",fg:"#fff"}; return{bg:"#E8B923",fg:"#1a1a1a"}; }
+  function defCols(rv){ var n=rv.qtd_baterias||1; var out=[]; if(isW(rv)){ out.push("fem"); for(var i=1;i<n&&out.length<4;i++){ out.push("g"+i); } } else { for(var j=1;j<=n&&j<=3;j++){ out.push("g"+j); } } return out; }
+  function buildInstances(cf){ var ovr=getOvr(); var inst=[]; cf.forEach(function(rv){ defCols(rv).forEach(function(dc,i){ var id=rv.id+"@"+i; inst.push({id:id,rv:rv,col:ovr[id]||dc,w:pesoOf(rv),q:rv.qtd_baterias||1,woman:isW(rv)}); }); }); return inst; }
+  function gridCard(it){ var col=cardColor(it.woman,it.q); var d=el("div"); d.setAttribute("draggable","true"); d.setAttribute("data-id",it.id); d.setAttribute("style","background:"+col.bg+";color:"+col.fg+";border-radius:8px;padding:8px 10px;margin-bottom:8px;cursor:grab;box-shadow:0 1px 3px rgba(0,0,0,.4)"); var row=el("div"); row.setAttribute("style","display:flex;justify-content:space-between;align-items:center;gap:8px"); var nm=el("div",null,it.rv.nome||"?"); nm.setAttribute("style","font-weight:800;font-size:13px;line-height:1.15"); var wv=el("div"); wv.setAttribute("style","font-weight:900;font-size:21px;white-space:nowrap"); wv.innerHTML=(it.w!=null?it.w:"-")+"<span style=\"font-size:11px;font-weight:700\">kg</span>"; row.appendChild(nm); row.appendChild(wv); d.appendChild(row); d.addEventListener("dragstart",function(e){ e.dataTransfer.setData("text/plain",it.id); e.dataTransfer.effectAllowed="move"; d.style.opacity=".4"; }); d.addEventListener("dragend",function(){ d.style.opacity="1"; }); return d; }
+  function renderBoard(cf){ if(cCount) cCount.textContent=cf.length+" confirmado(s)"; boardEl.innerHTML=""; boardEl.setAttribute("style","display:flex;gap:12px;align-items:flex-start;margin-top:8px"); var inst=buildInstances(cf); var wrap={}; cols.forEach(function(c){ var cd=el("div"); cd.setAttribute("style","flex:1;min-width:0;background:#101012;border:1px solid #26262b;border-top:3px solid "+c.ac+";border-radius:10px;padding:10px"); var h=el("div",null,c.label); h.setAttribute("style","font-family:Georgia,serif;font-weight:700;font-size:15px;color:"+c.ac+""); var cnt=el("div"); cnt.setAttribute("style","color:#8a867d;font-size:12px;margin:2px 0 10px"); var bd=el("div"); bd.setAttribute("data-col",c.id); bd.setAttribute("style","min-height:130px"); bd.addEventListener("dragover",function(e){ e.preventDefault(); e.dataTransfer.dropEffect="move"; cd.style.background="#16161a"; }); bd.addEventListener("dragleave",function(){ cd.style.background="#101012"; }); bd.addEventListener("drop",function(e){ e.preventDefault(); cd.style.background="#101012"; var id=e.dataTransfer.getData("text/plain"); if(!id)return; var o=getOvr(); o[id]=c.id; saveOvr(o); renderBoard(cf); }); cd.appendChild(h); cd.appendChild(cnt); cd.appendChild(bd); boardEl.appendChild(cd); wrap[c.id]={bd:bd,cnt:cnt}; }); cols.forEach(function(c){ var items=inst.filter(function(it){return it.col===c.id;}); items.sort(function(a,b){ if(a.w==null&&b.w==null)return 0; if(a.w==null)return 1; if(b.w==null)return -1; return b.w-a.w; }); wrap[c.id].cnt.textContent=items.length+" piloto(s)"; items.forEach(function(it){ wrap[c.id].bd.appendChild(gridCard(it)); }); }); }
+  function loadAll(){ C.from("kart_pilotos_pub").select("full_name,weight_kg,sexo").then(function(pr){ pmap={}; (pr.data||[]).forEach(function(p){ pmap[(p.full_name||"").trim()]={w:p.weight_kg,sexo:p.sexo}; }); C.from("kart_reservas").select("*").order("created_at",{ascending:true}).then(function(r){ if(r.error){ aBox.textContent="Erro: "+r.error.message; return; } var all=r.data||[]; var ag=all.filter(function(x){return x.status==="aguardando";}); var cf=all.filter(function(x){return x.status==="confirmado";}); aBox.innerHTML=""; aCount.textContent=ag.length+" aguardando"; if(!ag.length){ aBox.innerHTML="<p class=\"empty\">Nenhuma aguardando confirmacao.</p>"; } else { ag.forEach(function(rv){ aBox.appendChild(cardAg(rv)); }); } renderBoard(cf); }); }); }
+  function start(){ if(!window.supabase||!window.supabase.createClient){ setTimeout(start,100); return; } C=window.supabase.createClient(window.__CFG.url,window.__CFG.key); aBox=document.getElementById("list"); aCount=document.getElementById("count"); cCount=document.getElementById("countC"); boardEl=document.getElementById("board"); loadAll(); }
   start();
 })();
 </script>
