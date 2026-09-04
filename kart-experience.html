@@ -19,7 +19,7 @@
   }
   *{box-sizing:border-box;margin:0;padding:0}
   html{scroll-behavior:smooth}
-  body{background:var(--black);color:var(--white);font-family:var(--f-ui);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  body{background:var(--black);background-image:repeating-linear-gradient(45deg,rgba(255,255,255,.016) 0 1px,transparent 1px 6px),repeating-linear-gradient(-45deg,rgba(255,255,255,.016) 0 1px,transparent 1px 6px);color:var(--white);font-family:var(--f-ui);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
   .wrap{max-width:1120px;margin:0 auto;padding:0 22px}
   a{color:inherit;text-decoration:none}
   :focus-visible{outline:none;box-shadow:var(--ring);border-radius:4px}
@@ -48,7 +48,7 @@
 
   /* HERO — curta, estilo Red Bull */
   .hero{position:relative;overflow:hidden;padding:38px 0 30px;min-height:auto}
-  .hero .hbg{position:absolute;inset:0;z-index:-2;background:#0A0A0B url("ke-hero.jpg") no-repeat;background-size:cover;background-position:82% center}
+  .hero .hbg{position:absolute;inset:0;z-index:-2;background:radial-gradient(55% 75% at 82% 22%,rgba(236,30,121,.18),transparent 62%),radial-gradient(48% 68% at 15% 10%,rgba(201,162,42,.14),transparent 60%)}
   .hero .hscrim{position:absolute;inset:0;z-index:-1;background:
      linear-gradient(90deg,#0A0A0B 0%,rgba(10,10,11,.95) 32%,rgba(10,10,11,.6) 60%,rgba(10,10,11,.3) 100%),
      linear-gradient(180deg,rgba(10,10,11,.45),rgba(10,10,11,.15) 42%,rgba(10,10,11,.92))}
@@ -80,9 +80,9 @@
   .lead strong{color:#fff}
 
   /* social proof */
-  .proof{position:relative;border-radius:14px;overflow:hidden;border:1px solid var(--line);min-height:500px;display:flex;align-items:flex-end}
-  .proof .bg{position:absolute;inset:0;background-size:cover;background-position:center 42%;z-index:0}
-  .proof::after{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(10,10,11,.9) 0%,rgba(10,10,11,.55) 13%,rgba(10,10,11,.16) 36%,rgba(10,10,11,.5) 68%,rgba(10,10,11,.97) 100%)}
+  .proof{position:relative;border-radius:14px;overflow:hidden;border:1px solid var(--line);min-height:700px;display:flex;align-items:flex-end}
+  .proof .bg{position:absolute;inset:0;background-size:cover;background-position:center 28%;z-index:0}
+  .proof::after{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(10,10,11,.6) 0%,rgba(10,10,11,.38) 13%,rgba(10,10,11,.16) 36%,rgba(10,10,11,.5) 68%,rgba(10,10,11,.97) 100%)}
   .proof .content{position:relative;z-index:2;padding:32px 28px}
   .proof h3{font-family:var(--f-disp);font-style:italic;font-weight:800;text-transform:uppercase;font-size:clamp(26px,5vw,44px);line-height:.95;max-width:680px}
   .proof p{color:var(--soft);font-size:15px;margin-top:10px;max-width:none}
