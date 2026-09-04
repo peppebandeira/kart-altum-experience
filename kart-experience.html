@@ -167,7 +167,7 @@
   <header class="top">
     <div class="wrap row">
       <img class="logoimg" src="ke-logo.png" alt="Kart Experience">
-      <a href="cadastro.html" class="cta-mini">Reservar vaga</a>
+      <a href="#inscricao" class="cta-mini">Reservar vaga</a>
     </div>
   </header>
 
@@ -185,7 +185,7 @@
               <div class="cd-u"><div class="num" id="cdM">--</div><div class="lab">min</div></div>
               <div class="cd-u"><div class="num" id="cdS">--</div><div class="lab">seg</div></div>
             </div>
-            <a href="cadastro.html" class="btn btn-gold">Reserve sua vaga
+            <a href="#inscricao" class="btn btn-gold">Reserve sua vaga
               <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></span></a>
           </div>
         </div>
@@ -233,7 +233,7 @@
           <div class="kick"><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="5"/><line x1="12" y1="13" x2="12" y2="22"/><line x1="9" y1="19" x2="15" y2="19"/></svg></span>Grid exclusivo</div>
           <h3>Bateria Feminina.</h3><p class="femsub">Elas também largam na frente.</p>
           <p>Nesta edição tem grid só delas. Mesma pista, mesma adrenalina, uma bateria exclusiva pra mulheres que decidem — e que não correm pra ficar em segundo. Chama as sócias, as parceiras de negócio, as concorrentes.</p>
-          <div style="max-width:360px;align-self:center;width:100%"><a href="cadastro.html" class="btn btn-pink">Quero na bateria feminina</a></div>
+          <div style="max-width:360px;align-self:center;width:100%"><a href="#inscricao" class="btn btn-pink">Quero na bateria feminina</a></div>
         </div>
       </div>
     </div></section>
@@ -362,7 +362,7 @@ $("#btnConfirmar").addEventListener("click",()=>{const sel=$("#pilotoSelect"),v=
  const p=PILOTOS[v],bat=bateriaAtual();confirmados.push({nome:p.nome,fem:bat==="Bateria Feminina"});
  toast.innerHTML='<div class="toast"><span class="ico"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="20 6 9 17 4 12"/></svg></span><div><b>'+p.nome+'</b>, vaga confirmada na <b>'+bat+'</b>. Te vejo no briefing, <b>19h em ponto</b>.</div></div>';
  sel.value="";$("#selectedInfo").innerHTML="";renderConfirmados();});
-$("#btnNovo").addEventListener("click",()=>{window.location.href="cadastro.html";});
+$("#btnNovo").addEventListener("click",()=>{window.location.href="#inscricao";});
 $("#bondType").addEventListener("change",e=>{const f=$("#sponsorField"),inp=f.querySelector("input");if(e.target.value==="Convidado"||e.target.value==="Filho de Membro"){f.classList.remove("hidden");inp.required=true;}else{f.classList.add("hidden");inp.required=false;}});
 $("#formNovo").addEventListener("submit",e=>{e.preventDefault();const data=Object.fromEntries(new FormData(e.target).entries()),bat=bateriaAtual();
  const nome=(data.nickname&&data.nickname.trim())||(data.full_name&&data.full_name.trim())||"Piloto";confirmados.push({nome:nome,fem:bat==="Bateria Feminina"});
@@ -381,18 +381,35 @@ document.addEventListener('DOMContentLoaded',function(){return;if(!window.gsap||
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script>
 (function(){
+  function mkRow(hg,hf){
+    var w=document.createElement("div");
+    w.style.display="flex"; w.style.gap="10px"; w.style.flexWrap="wrap"; w.style.marginTop="6px";
+    var g=document.createElement("a"); g.href=hg; g.textContent="Geral"; g.className="btn btn-gold";
+    g.style.flex="1"; g.style.minWidth="130px"; g.style.textAlign="center"; g.style.textDecoration="none";
+    var f=document.createElement("a"); f.href=hf; f.textContent="Feminina"; f.className="btn btn-pink";
+    f.style.flex="1"; f.style.minWidth="130px"; f.style.textAlign="center"; f.style.textDecoration="none";
+    w.appendChild(g); w.appendChild(f); return w;
+  }
   function fix(){
     var sel=document.getElementById("pilotoSelect");
-    var card=sel?sel.closest(".card"):null;
-    if(card && card.style.display==="none"){ card.style.display=""; }
-    var btn=document.getElementById("btnConfirmar");
-    if(btn && btn.tagName==="BUTTON"){
-      var a=document.createElement("a");
-      a.href="cadastro.html?ja=1"; a.className=btn.className; a.textContent="Escolher meu nome e reservar";
-      a.style.display="inline-block"; a.style.textDecoration="none";
-      btn.parentNode.replaceChild(a,btn);
+    var jaCard=sel?sel.closest(".card"):null;
+    if(jaCard){
+      if(jaCard.style.display==="none") jaCard.style.display="";
+      if(!jaCard.getAttribute("data-fx")){
+        jaCard.setAttribute("data-fx","1");
+        var fld=sel.closest(".field"); if(fld) fld.remove();
+        var ob=document.getElementById("btnConfirmar"); if(ob) ob.remove();
+        var ct=document.getElementById("confirmToast"); if(ct) ct.remove();
+        jaCard.appendChild(mkRow("cadastro.html?ja=1&bat=geral","cadastro.html?ja=1&bat=fem"));
+      }
     }
-    if(sel){ var f=sel.closest(".field"); if(f) f.style.display="none"; }
+    var nb=document.getElementById("btnNovo");
+    var novoCard=nb?nb.closest(".card"):null;
+    if(novoCard && !novoCard.getAttribute("data-fx")){
+      novoCard.setAttribute("data-fx","1");
+      nb.remove();
+      novoCard.appendChild(mkRow("cadastro.html?bat=geral","cadastro.html?bat=fem"));
+    }
   }
   if(document.readyState==="loading"){ document.addEventListener("DOMContentLoaded",fix); } else { fix(); }
   setTimeout(fix,600);
