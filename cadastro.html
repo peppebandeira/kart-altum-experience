@@ -223,7 +223,7 @@ window.__jaCad=function(row){
     return window.supabase.createClient(url,key);
   }
   function start(){
-    var c=extractClient(); if(!c){ return; }
+    if(!window.supabase||!window.supabase.createClient){ if((window.__jaTries=(window.__jaTries||0)+1)<40){setTimeout(start,120);} return; } var c=extractClient(); if(!c){ if((window.__jaTries=(window.__jaTries||0)+1)<40){setTimeout(start,120);} return; }
     window.sb=c;
     var form=document.querySelector("form"); if(form) form.style.display="none";
     var st=document.getElementById("jaStep"); if(!st) return;
@@ -246,5 +246,5 @@ window.__jaCad=function(row){
   }
   if(document.readyState==="loading"){ document.addEventListener("DOMContentLoaded",start); } else { start(); }
 })();
-<\/script>
+</script>
 </body></html>
