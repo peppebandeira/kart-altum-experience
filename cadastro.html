@@ -82,6 +82,14 @@ footer .tagline{font-family:var(--font-serif);font-style:italic;color:var(--gold
 <div class="rmsg" id="rMsg"></div>
 </section>
 <div id="reservaOk"><div class="card"><h3>Recebido!</h3><p>Assim que sua vaga for confirmada, você vai receber o aviso no WhatsApp. 🏁</p><a class="okb" href="https://chat.whatsapp.com/CFgKenVLes2IYKrWndUuJx?s=cl&amp;p=i&amp;mlu=4&amp;ilr=4" target="_blank" rel="noopener" style="display:inline-block;text-decoration:none">Entrar no grupo do Kart</a></div></div>
+<section id="jaStep" style="display:none;max-width:1200px;margin:0 auto;padding:24px 22px 50px">
+<div style="font-family:var(--font-display),sans-serif;font-style:italic;font-weight:800;text-transform:uppercase;font-size:clamp(26px,6vw,42px);color:#fff;margin:8px 0 4px">Já sou piloto</div>
+<p style="color:var(--gold-hi,#E8C558);font-size:16px;margin-bottom:24px">Escolha seu nome e vá direto pra reserva.</p>
+<div style="margin-bottom:18px"><span style="display:block;font-family:var(--font-display),sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.05em;font-size:13px;color:#D6D2C9;margin-bottom:9px">Selecione seu nome</span>
+<select id="jaSelect" style="width:100%;max-width:400px;min-height:50px;background:var(--black,#0A0A0B);border:1px solid var(--line,#2C2C30);color:#fff;font-size:16px;padding:0 12px;border-radius:8px"><option value="">— carregando… —</option></select></div>
+<button type="button" id="jaContinuar" style="cursor:pointer;border:none;background:linear-gradient(180deg,var(--gold-hi,#E8C558),var(--gold,#C9A227));color:#160f00;font-family:var(--font-display),sans-serif;font-style:italic;font-weight:800;text-transform:uppercase;letter-spacing:.05em;font-size:20px;padding:15px 36px;border-radius:8px">Continuar pra reserva</button>
+<div id="jaMsg" style="margin-top:14px;font-size:14px;color:#F0C0C0"></div>
+</section>
 </main>
 <footer><div class="altum">KART EXPERIENCE</div><div class="tagline">Negócios · Velocidade · Competição</div></footer>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -199,4 +207,44 @@ window.__jaCad=function(row){
   var b=document.getElementById("jaCadReservar"); if(b){ b.onclick=function(){ el.style.display="none"; window.abrirReserva(row); }; }
 };
 </script>
+<script>
+(function(){
+  var params=new URLSearchParams(location.search);
+  if(params.get("ja")!=="1") return;
+  function extractClient(){
+    var src=Array.from(document.scripts).filter(function(s){return !s.src}).map(function(s){return s.textContent||""}).join("\n");
+    var lits=src.match(/["\x27`]([^"\x27`\n]{8,})["\x27`]/g)||[];
+    var url=null,key=null;
+    lits.forEach(function(s){ var v=s.slice(1,-1);
+      if(!url && /\.supabase\.co/.test(v)) url=v;
+      if(!key && (/^eyJ/.test(v)||/^sb_/.test(v)||(v.length>60 && /^[A-Za-z0-9_\-\.]+$/.test(v)))) key=v;
+    });
+    if(!url||!key||!window.supabase) return null;
+    return window.supabase.createClient(url,key);
+  }
+  function start(){
+    var c=extractClient(); if(!c){ return; }
+    window.sb=c;
+    var form=document.querySelector("form"); if(form) form.style.display="none";
+    var st=document.getElementById("jaStep"); if(!st) return;
+    st.style.display="block";
+    c.from("kart_pilotos_pub").select("full_name,nickname,sexo").then(function(r){
+      var sel=document.getElementById("jaSelect"); if(!sel) return;
+      if(r.error||!r.data){ sel.innerHTML="<option value=\"\">— erro ao carregar —</option>"; return; }
+      var data=r.data.slice().sort(function(a,b){return (a.full_name||"").localeCompare(b.full_name||"")});
+      window.__jaData=data;
+      sel.innerHTML="<option value=\"\">— selecione seu nome —</option>";
+      data.forEach(function(p,i){ var o=document.createElement("option"); o.value=String(i); o.textContent=(p.full_name||p.nickname||"?"); sel.appendChild(o); });
+    });
+    var btn=document.getElementById("jaContinuar");
+    if(btn) btn.onclick=function(){
+      var sel=document.getElementById("jaSelect"); var i=parseInt(sel.value);
+      if(isNaN(i)||!window.__jaData||!window.__jaData[i]){ document.getElementById("jaMsg").textContent="Selecione seu nome."; return; }
+      var p=window.__jaData[i]; st.style.display="none";
+      window.abrirReserva({full_name:p.full_name, nickname:p.nickname, sexo:p.sexo, cpf:null});
+    };
+  }
+  if(document.readyState==="loading"){ document.addEventListener("DOMContentLoaded",start); } else { start(); }
+})();
+<\/script>
 </body></html>
