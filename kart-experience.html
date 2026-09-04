@@ -366,10 +366,10 @@ $("#formNovo").addEventListener("submit",e=>{e.preventDefault();const data=Objec
  e.target.reset();$("#sponsorField").classList.add("hidden");renderConfirmados();$("#novoToast").scrollIntoView({behavior:"smooth",block:"center"});});
 function renderConfirmados(){if(!confirmados.length)return;$("#confirmadosBox").classList.remove("hidden");$("#confirmadosList").innerHTML=confirmados.map(c=>'<span class="pill'+(c.fem?' fem':'')+'">'+c.nome+'</span>').join("");}
 
-window.addEventListener('load',function(){if(!window.gsap||!window.ScrollTrigger)return;gsap.registerPlugin(ScrollTrigger);
+document.addEventListener('DOMContentLoaded',function(){if(!window.gsap||!window.ScrollTrigger)return;gsap.registerPlugin(ScrollTrigger);
  const mm=gsap.matchMedia();mm.add('(prefers-reduced-motion: no-preference)',()=>{
   gsap.from('.hero .reveal',{opacity:0,y:16,duration:.5,ease:'power2.out',stagger:.08});
-  gsap.utils.toArray('.block .reveal').forEach(el=>{gsap.from(el,{opacity:0,y:14,duration:.4,ease:'power1.out',scrollTrigger:{trigger:el,start:'top 88%',toggleActions:'play none none reverse'}});});
+  gsap.utils.toArray('.block .reveal').forEach(el=>{gsap.from(el,{opacity:0,y:14,duration:.4,ease:'power1.out',scrollTrigger:{trigger:el,start:'top 88%',toggleActions:'play none none none'}});});
   const bg=document.querySelector('.proof .bg');if(bg)gsap.to(bg,{yPercent:8,ease:'none',scrollTrigger:{trigger:bg.parentElement,scrub:.5}});
  });});
 </script>
