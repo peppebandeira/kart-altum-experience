@@ -36,7 +36,53 @@ footer .tagline{font-family:var(--font-serif);font-style:italic;color:var(--gold
 @media (max-width:560px){.brand h1{font-size:24px}main{padding:20px 14px 50px}}
 </style></head><body>
 <div class="checker"></div><header class="top"><div class="brand-row"><div class="brand"><h1><span class="k">KART</span> EXPERIENCE</h1></div></div></header>
-<main><div id="app"></div></main>
+<main><div id="app"></div>
+<section id="reservaStep" class="rhide">
+<style>
+#reservaStep{max-width:1200px;margin:0 auto;padding:0 22px 70px}
+#reservaStep .rhead{font-family:var(--font-display,'Barlow Condensed'),sans-serif;font-style:italic;font-weight:800;text-transform:uppercase;font-size:clamp(26px,6vw,42px);color:#fff;margin:8px 0 4px}
+#reservaStep .rhi{color:var(--gold-hi,#E8C558);font-size:16px;margin-bottom:26px}
+#reservaStep .rf{margin-bottom:20px}
+#reservaStep .rl{display:block;font-family:var(--font-display,'Barlow Condensed'),sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.05em;font-size:13px;color:#D6D2C9;margin-bottom:9px}
+#reservaStep .seg{display:flex;gap:10px;flex-wrap:wrap}
+#reservaStep .opt,#reservaStep .optq{cursor:pointer;border:1px solid var(--line,#2C2C30);background:transparent;color:var(--soft,#DEDBD4);font-family:var(--font-display,'Barlow Condensed'),sans-serif;font-style:italic;font-weight:700;text-transform:uppercase;font-size:17px;padding:12px 22px;border-radius:8px}
+#reservaStep .optq{min-width:58px;text-align:center}
+#reservaStep .opt.sel,#reservaStep .optq.sel{border-color:var(--gold,#C9A227);color:var(--gold-hi,#E8C558);background:rgba(201,162,42,.1)}
+#reservaStep .kit{display:inline-flex;gap:11px;align-items:center;color:#D6D2C9;font-size:15px;margin:4px 0 22px;cursor:pointer}
+#reservaStep .kit input{width:20px;height:20px;accent-color:var(--gold,#C9A227)}
+#reservaStep .rwpp{width:100%;max-width:360px;min-height:50px;background:var(--black,#0A0A0B);border:1px solid var(--line,#2C2C30);color:#fff;font-size:16px;padding:0 15px;border-radius:8px}
+#reservaStep .valor{font-family:var(--font-display,'Barlow Condensed'),sans-serif;font-weight:800;font-size:32px;color:#fff;margin:16px 0}
+#reservaStep .valor b{color:var(--gold-hi,#E8C558)}
+#reservaStep .pix{background:rgba(201,162,42,.08);border:1px solid var(--gold-lo,#8A6E1E);border-radius:10px;padding:16px 18px;max-width:470px;margin-bottom:22px}
+#reservaStep .pix .pl{font-family:var(--font-display,'Barlow Condensed'),sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--gold-hi,#E8C558);font-size:14px;margin-bottom:9px}
+#reservaStep .pix .pk{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+#reservaStep .pix .pk code{font-family:monospace;font-size:18px;color:#fff;background:var(--black,#0A0A0B);padding:9px 12px;border-radius:6px;border:1px solid var(--line,#2C2C30)}
+#reservaStep .pix .pk button{cursor:pointer;background:linear-gradient(180deg,var(--gold-hi,#E8C558),var(--gold,#C9A227));color:#160f00;border:none;font-weight:700;padding:10px 15px;border-radius:6px;font-family:var(--font-display,'Barlow Condensed'),sans-serif;text-transform:uppercase;font-size:13px}
+#reservaStep .pix .pm{color:var(--muted,#9B9890);font-size:13px;margin-top:9px}
+#reservaStep input[type=file]{color:#D6D2C9;font-size:14px;max-width:360px}
+#reservaStep .send{margin-top:8px;cursor:pointer;border:none;background:linear-gradient(180deg,var(--gold-hi,#E8C558),var(--gold,#C9A227));color:#160f00;font-family:var(--font-display,'Barlow Condensed'),sans-serif;font-style:italic;font-weight:800;text-transform:uppercase;letter-spacing:.05em;font-size:20px;padding:15px 36px;border-radius:8px}
+#reservaStep .rmsg{margin-top:14px;font-size:14px;color:#F0C0C0}
+#reservaStep.rhide{display:none}
+#reservaOk{position:fixed;inset:0;z-index:99999;background:rgba(0,0,0,.84);display:none;align-items:center;justify-content:center;padding:20px}
+#reservaOk .card{max-width:440px;background:#141416;border:1px solid var(--gold-lo,#8A6E1E);border-radius:14px;padding:36px 28px;text-align:center}
+#reservaOk h3{font-family:var(--font-display,'Barlow Condensed'),sans-serif;font-style:italic;font-weight:800;text-transform:uppercase;font-size:32px;color:var(--gold-hi,#E8C558);margin-bottom:12px}
+#reservaOk p{color:#DEDBD4;font-size:16px;line-height:1.55}
+#reservaOk .okb{margin-top:24px;cursor:pointer;border:none;background:linear-gradient(180deg,var(--gold-hi,#E8C558),var(--gold,#C9A227));color:#160f00;font-family:var(--font-display,'Barlow Condensed'),sans-serif;font-weight:800;text-transform:uppercase;padding:12px 30px;border-radius:8px}
+</style>
+<div class="rhead">Garanta sua vaga</div>
+<p class="rhi" id="rHi">Cadastro feito! Falta só reservar sua bateria.</p>
+<div class="rf"><span class="rl">Qual bateria?</span><div class="seg" id="segBat"><button type="button" class="opt sel" data-bat="geral">Geral</button><button type="button" class="opt" data-bat="feminina">Feminina</button></div></div>
+<div class="rf" id="qtdWrap"><span class="rl">Quantas baterias?</span><div class="seg" id="segQtd"><button type="button" class="optq sel" data-qtd="1">1</button><button type="button" class="optq" data-qtd="2">2</button><button type="button" class="optq" data-qtd="3">3</button></div></div>
+<label class="kit"><input type="checkbox" id="kitChk"> Quero o kit (luva + balaclava) — R$15</label>
+<div class="rf"><span class="rl">WhatsApp pra receber a confirmação</span><input class="rwpp" id="rWpp" type="text" placeholder="(61) 90000-0000"></div>
+<div class="valor">Total: <b id="rValor">R$120</b></div>
+<div class="pix"><div class="pl">Pague no PIX</div><div class="pk"><code id="pixKey">55359750000146</code><button type="button" id="copyPix">Copiar chave</button></div><div class="pm">GB Intermediações LTDA · Nubank · use o valor acima</div></div>
+<div class="rf"><span class="rl">Anexe o comprovante do PIX</span><input type="file" id="rComp" accept="image/*,application/pdf"></div>
+<button type="button" class="send" id="rSend">Enviar inscrição</button>
+<div class="rmsg" id="rMsg"></div>
+</section>
+<div id="reservaOk"><div class="card"><h3>Recebido!</h3><p>Assim que sua vaga for confirmada, você vai receber o aviso no WhatsApp. 🏁</p><button class="okb" onclick="document.getElementById('reservaOk').style.display='none';location.href='index.html'">Ok</button></div></div>
+</main>
 <footer><div class="altum">KART EXPERIENCE</div><div class="tagline">Negócios · Velocidade · Competição</div></footer>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
@@ -83,9 +129,54 @@ window.KART_CONFIG = {
       consent_waiver:!!f.get("consent_waiver"),consent_image:!!f.get("consent_image")};
     if(!sb){statusBox.innerHTML="<strong>Banco não configurado.</strong>";return;}
     btn.disabled=true;btn.textContent="Enviando…";
-    const{error}=await sb.from("kart_inscricoes").insert(row);
+    const{error}=await (window.sb=sb).from("kart_inscricoes").insert(row);
     if(error){statusBox.innerHTML="<strong>Não consegui enviar.</strong> "+error.message;btn.disabled=false;btn.textContent="Reservar minha vaga";}
-    else{form.querySelectorAll("input,select,button").forEach(x=>x.disabled=true);statusBox.innerHTML="<strong>Cadastro confirmado.</strong> Redirecionando para as corridas… 🏁";btn.textContent="Confirmado";setTimeout(function(){window.location.href="index.html";},1600);}
+    else{form.querySelectorAll("input,select,button").forEach(x=>x.disabled=true);statusBox.innerHTML="<strong>Cadastro confirmado.</strong> Redirecionando para as corridas… 🏁";btn.textContent="Confirmado";setTimeout(function(){window.window.abrirReserva(row);},1600);}
   });
 })();
-</script></body></html>
+</script>
+<script>
+(function(){
+ let bat='geral', qtd=1;
+ window.abrirReserva=function(row){
+   try{
+     var f=document.querySelector('form'); if(f) f.style.display='none';
+     var s=document.getElementById('reservaStep'); s.classList.remove('rhide');
+     window.__pil={nome:row.full_name,apelido:row.nickname,cpf:row.cpf,sexo:row.sexo};
+     var hi=document.getElementById('rHi'); hi.textContent='Cadastro feito, '+(row.nickname||row.full_name||'piloto')+'! Falta só reservar sua bateria.';
+     if(row.sexo!=='F'){ var fb=document.querySelector('#segBat [data-bat="feminina"]'); if(fb) fb.style.display='none'; }
+     window.scrollTo(0,0);
+   }catch(e){ console.error(e); }
+ };
+ function calc(){ var q=(bat==='feminina')?1:qtd; var kit=document.getElementById('kitChk').checked; var v=q*120+(kit?15:0); document.getElementById('rValor').textContent='R</html>
++v; return {q:q,kit:kit,v:v}; }
+ document.addEventListener('click',function(e){
+   var ob=e.target.closest&&e.target.closest('#segBat .opt');
+   if(ob){ document.querySelectorAll('#segBat .opt').forEach(function(x){x.classList.remove('sel')}); ob.classList.add('sel'); bat=ob.getAttribute('data-bat'); document.getElementById('qtdWrap').style.display=(bat==='feminina')?'none':''; calc(); return; }
+   var oq=e.target.closest&&e.target.closest('#segQtd .optq');
+   if(oq){ document.querySelectorAll('#segQtd .optq').forEach(function(x){x.classList.remove('sel')}); oq.classList.add('sel'); qtd=parseInt(oq.getAttribute('data-qtd')); calc(); return; }
+   if(e.target.id==='copyPix'){ navigator.clipboard.writeText('55359750000146').then(function(){ e.target.textContent='Copiado!'; setTimeout(function(){e.target.textContent='Copiar chave'},1600); }); return; }
+ });
+ document.addEventListener('change',function(e){ if(e.target.id==='kitChk') calc(); });
+ document.addEventListener('click',async function(e){
+   if(e.target.id!=='rSend') return;
+   var btn=e.target, msg=document.getElementById('rMsg');
+   var wpp=document.getElementById('rWpp').value.trim();
+   var file=document.getElementById('rComp').files[0];
+   if(!wpp){ msg.textContent='Informe seu WhatsApp.'; return; }
+   if(!file){ msg.textContent='Anexe o comprovante do PIX.'; return; }
+   var r=calc();
+   btn.disabled=true; btn.textContent='Enviando…'; msg.textContent='';
+   try{
+     var ext=(file.name.split('.').pop()||'jpg').toLowerCase();
+     var path='c_'+Date.now()+'_'+Math.random().toString(36).slice(2,7)+'.'+ext;
+     var up=await window.sb.storage.from('comprovantes').upload(path,file,{upsert:false});
+     if(up.error) throw up.error;
+     var ins=await window.sb.from('kart_reservas').insert({nome:window.__pil.nome,whatsapp:wpp,cpf:window.__pil.cpf,bateria:bat,qtd_baterias:r.q,kit:r.kit,valor_total:r.v,comprovante_path:path,status:'aguardando'});
+     if(ins.error) throw ins.error;
+     document.getElementById('reservaOk').style.display='flex';
+   }catch(err){ btn.disabled=false; btn.textContent='Enviar inscrição'; msg.textContent='Erro ao enviar: '+((err&&err.message)||err); }
+ });
+})();
+</script>
+</body></html>
