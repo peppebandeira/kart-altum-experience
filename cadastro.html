@@ -231,7 +231,7 @@ window.__jaCad=function(row){
     c.from("kart_pilotos_pub").select("full_name,nickname,sexo").then(function(r){
       var sel=document.getElementById("jaSelect"); if(!sel) return;
       if(r.error||!r.data){ sel.innerHTML="<option value=\"\">— erro ao carregar —</option>"; return; }
-      var data=r.data.slice().sort(function(a,b){return (a.full_name||"").localeCompare(b.full_name||"")});
+      var data=r.data.slice().filter(function(p){return (new URLSearchParams(location.search).get("bat"))!=="fem"||p.sexo==="F";}).sort(function(a,b){return (a.full_name||"").localeCompare(b.full_name||"")});
       window.__jaData=data;
       sel.innerHTML="<option value=\"\">— selecione seu nome —</option>";
       data.forEach(function(p,i){ var o=document.createElement("option"); o.value=String(i); o.textContent=(p.full_name||p.nickname||"?"); sel.appendChild(o); });
@@ -245,6 +245,17 @@ window.__jaCad=function(row){
     };
   }
   if(document.readyState==="loading"){ document.addEventListener("DOMContentLoaded",start); } else { start(); }
+})();
+</script>
+<script>
+(function(){
+  var bat=new URLSearchParams(location.search).get("bat");
+  if(!bat) return;
+  function presetSexo(){ if(bat==="fem"){ var s=document.querySelector("[name=\"sexo\"]"); if(s){ s.value="F"; } } }
+  function preBat(){ var t=bat==="fem"?"feminina":"geral"; var el=document.querySelector("#segBat [data-bat=\""+t+"\"]"); if(el){ el.click(); } }
+  var iv=setInterval(function(){ if(typeof window.abrirReserva==="function" && !window.__batW){ window.__batW=1; clearInterval(iv); var o=window.abrirReserva; window.abrirReserva=function(row){ o(row); setTimeout(preBat,80); }; } },80);
+  setTimeout(function(){ clearInterval(iv); },8000);
+  if(document.readyState==="loading"){ document.addEventListener("DOMContentLoaded",presetSexo); } else { presetSexo(); }
 })();
 </script>
 </body></html>
