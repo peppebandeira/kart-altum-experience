@@ -379,5 +379,24 @@ document.addEventListener('DOMContentLoaded',function(){return;if(!window.gsap||
 </script>
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script>
+(function(){
+  function fix(){
+    var sel=document.getElementById("pilotoSelect");
+    var card=sel?sel.closest(".card"):null;
+    if(card && card.style.display==="none"){ card.style.display=""; }
+    var btn=document.getElementById("btnConfirmar");
+    if(btn && btn.tagName==="BUTTON"){
+      var a=document.createElement("a");
+      a.href="cadastro.html?ja=1"; a.className=btn.className; a.textContent="Escolher meu nome e reservar";
+      a.style.display="inline-block"; a.style.textDecoration="none";
+      btn.parentNode.replaceChild(a,btn);
+    }
+    if(sel){ var f=sel.closest(".field"); if(f) f.style.display="none"; }
+  }
+  if(document.readyState==="loading"){ document.addEventListener("DOMContentLoaded",fix); } else { fix(); }
+  setTimeout(fix,600);
+})();
+<\/script>
 </body>
 </html>
