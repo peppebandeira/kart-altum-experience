@@ -1,9 +1,9 @@
 <!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Kart Altum Experience</title>
+<title>Kart Experience</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Saira+Condensed:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
 <style>
 /* ================================================================
-   KART ALTUM EXPERIENCE — tema do sub-brand (racing / dark)
+   KART EXPERIENCE — tema (racing / dark)
    Preto + ouro metálico + branco. Ver marca-kartos.md
    ================================================================ */
 :root{
@@ -160,7 +160,7 @@ select:focus,input:focus,textarea:focus{outline:none;border-color:var(--gold)}
   background:#141416;border-radius:6px;padding:8px 12px}
 .race-info:empty{display:none}
 
-/* ---- rodapé com assinatura ALTUM ---- */
+/* ---- rodapé com assinatura ---- */
 footer{border-top:1px solid var(--line);margin-top:40px;padding:26px 20px;text-align:center}
 footer .altum{font-family:var(--font-serif);font-size:26px;letter-spacing:6px;color:var(--white)}
 footer .tagline{font-family:var(--font-serif);font-style:italic;color:var(--gold);font-size:14px;margin-top:2px}
@@ -221,14 +221,14 @@ tr.podium-5 td:first-child{box-shadow:inset 3px 0 0 #6B6359}
     const _t=document.createElement("template");
     _t.innerHTML=`<div class="kae-chrome"><div class="checker"></div>
       <header class="top"><div class="brand-row">
-        <div class="brand"><h1><span class="k">KART</span> ALTUM EXPERIENCE</h1></div>
+        <div class="brand"><h1><span class="k">KART</span> EXPERIENCE</h1></div>
         <nav class="tabs">${VIEWS.map(v=>`<a href="#" data-view="${v.key}" class="${v.key===active?"active":""}">${v.label}</a>`).join("")}</nav>
       </div></header></div>`.trim();
     document.body.prepend(_t.content.firstChild);
     document.querySelector(".kae-chrome").querySelectorAll("a[data-view]").forEach(a=>a.addEventListener("click",e=>{e.preventDefault();setView(a.getAttribute("data-view"));}));
     if(!document.querySelector(".kae-foot"))
-      add(document.body,`<footer class="kae-foot"><div class="altum">ALTUM</div><div class="tagline">${esc(cfg.tagline)}</div>
-        <div class="meta">${esc(cfg.championship)} · Temporada ${cfg.season}</div></footer>`);
+      add(document.body,`<footer class="kae-foot"><div class="altum"><span style="color:var(--gold)">KART</span> EXPERIENCE</div><div class="tagline">${esc(cfg.tagline)}</div>
+        <div class="meta">Kart Experience · Temporada ${cfg.season}</div></footer>`);
   }
   function setView(view){
     buildChrome(view);const root=document.getElementById("app");root.innerHTML="";
