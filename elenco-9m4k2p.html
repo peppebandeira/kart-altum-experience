@@ -1,0 +1,210 @@
+<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Elenco — Kart Experience</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Saira+Condensed:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --black:#0B0B0C;--surface:#1A1A1C;--surface-2:#232326;--gold:#C9A227;--gold-hi:#E8C558;--gold-lo:#8A6E1E;
+  --white:#FFFFFF;--muted:#9A968C;--line:#2E2E31;
+  --sem-good:#2E7D32;--sem-mid:#E0A800;--sem-bad:#C0392B;
+  --font-display:"Saira Condensed","Oswald","Arial Narrow",sans-serif;--font-sans:Arial,Helvetica,sans-serif;--font-serif:Georgia,"Times New Roman",serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--black);color:var(--white);font-family:var(--font-sans);line-height:1.5;-webkit-font-smoothing:antialiased;min-height:100vh}
+a{color:inherit;text-decoration:none}
+.checker{height:10px;background:repeating-conic-gradient(var(--white) 0% 25%, transparent 0% 50%) 0/20px 20px,var(--gold);opacity:.9}
+header.top{background:linear-gradient(180deg,#111 0%,var(--black) 100%);border-bottom:1px solid var(--line);padding:18px 20px 14px}
+.brand-row{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;max-width:1200px;margin:0 auto}
+.brand h1{font-family:var(--font-display);font-style:italic;font-weight:700;letter-spacing:.5px;font-size:30px;line-height:1;text-transform:uppercase}
+.brand h1 .k{color:var(--gold)}
+main{max-width:1200px;margin:0 auto;padding:26px 20px 60px}
+.section-title{font-family:var(--font-display);font-style:italic;font-weight:700;text-transform:uppercase;font-size:22px;letter-spacing:.5px;margin:6px 0 6px;display:flex;align-items:center;gap:10px}
+.section-title::before{content:"";width:26px;height:12px;background:repeating-conic-gradient(var(--white) 0% 25%, transparent 0% 50%) 0/6px 6px}
+.sub{color:var(--muted);font-size:13px;margin-bottom:16px}
+.notice{background:#141416;border:1px solid var(--line);border-left:3px solid var(--gold);border-radius:8px;padding:12px 14px;color:var(--muted);font-size:13px;margin:14px 0}
+.mini-stats{display:flex;gap:20px;flex-wrap:wrap;margin:14px 0 10px;color:var(--muted);font-size:13px}
+.mini-stats b{color:var(--white);font-weight:700}.mini-stats .g{color:var(--gold);font-weight:700}.mini-stats .r{color:#E0A800;font-weight:700}
+.toolbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:8px 0 18px}
+.toolbar input[type=search]{background:var(--surface);color:var(--white);border:1px solid var(--line);border-radius:8px;padding:10px 12px;font-size:14px;min-width:220px}
+.filters{display:flex;gap:8px;flex-wrap:wrap}
+.filters button{font-family:var(--font-sans);font-weight:700;font-size:12px;letter-spacing:.5px;text-transform:uppercase;padding:9px 12px;border:1px solid var(--line);border-radius:6px;color:var(--muted);background:var(--surface);cursor:pointer;transition:.15s}
+.filters button:hover{color:var(--white);border-color:var(--gold-lo)}
+.filters button.active{color:var(--black);background:var(--gold);border-color:var(--gold)}
+.table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:10px}
+table{width:100%;border-collapse:collapse;font-size:14px;min-width:720px}
+thead th{background:var(--surface-2);color:var(--muted);text-transform:uppercase;letter-spacing:1px;font-size:11px;text-align:left;padding:11px 12px;border-bottom:1px solid var(--line);white-space:nowrap}
+thead th.sortable{cursor:pointer;user-select:none}
+thead th.sortable:hover{color:var(--white)}
+thead th .arrow{color:var(--gold);font-size:10px;margin-left:4px}
+tbody td{padding:11px 12px;border-bottom:1px solid var(--line);vertical-align:middle}
+tbody tr:last-child td{border-bottom:none}
+tbody tr:hover{background:#141416}
+td.num,th.num{text-align:center;font-variant-numeric:tabular-nums}
+.pilot-name{font-weight:700;color:var(--gold-hi);cursor:pointer}
+.pilot-name:hover{text-decoration:underline}
+.badge{display:inline-block;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:3px 7px;border-radius:4px;vertical-align:middle}
+.badge.bond{background:var(--surface-2);color:var(--muted);border:1px solid var(--line)}
+.badge.raced{background:#12331e;color:#7fd99a;border:1px solid #2E7D32}
+.badge.pending{background:#2a2410;color:#E0A800;border:1px solid #8A6E1E}
+.wa{display:inline-flex;align-items:center;gap:6px;color:#7fd99a}
+.wa svg{width:15px;height:15px;fill:#7fd99a}
+.wa:hover{color:#3fae63}
+.muted{color:var(--muted)}
+.empty{color:var(--muted);padding:22px;text-align:center}
+/* modal detalhe */
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.7);display:none;align-items:center;justify-content:center;padding:20px;z-index:50}
+.overlay.on{display:flex}
+.modal{background:var(--surface);border:1px solid var(--line);border-top:4px solid var(--gold);border-radius:12px;max-width:520px;width:100%;max-height:88vh;overflow:auto;padding:22px}
+.modal h3{font-family:var(--font-display);font-style:italic;font-weight:700;text-transform:uppercase;font-size:22px;color:var(--white);margin-bottom:2px}
+.modal .msub{color:var(--muted);font-size:12px;margin-bottom:16px}
+.dl{display:grid;grid-template-columns:150px 1fr;gap:8px 14px;font-size:14px}
+.dl dt{color:var(--muted);text-transform:uppercase;font-size:11px;letter-spacing:1px;align-self:center}
+.dl dd{color:var(--white)}
+.modal .close{float:right;color:var(--muted);cursor:pointer;font-size:22px;line-height:1;border:none;background:none}
+.modal .close:hover{color:var(--white)}
+footer{border-top:1px solid var(--line);margin-top:40px;padding:26px 20px;text-align:center}
+footer .mark{font-family:var(--font-display);font-style:italic;font-size:22px;letter-spacing:2px;color:var(--white);text-transform:uppercase}
+footer .mark .k{color:var(--gold)}
+footer .meta{color:var(--muted);font-size:11px;margin-top:8px;letter-spacing:1px}
+@media (max-width:560px){.brand h1{font-size:24px}main{padding:20px 14px 50px}.dl{grid-template-columns:120px 1fr}}
+</style></head>
+<body>
+<div class="checker"></div>
+<header class="top"><div class="brand-row">
+  <div class="brand"><h1><span class="k">KART</span> EXPERIENCE</h1></div>
+  <span class="badge" style="background:#3a1e1e;color:#e88;font-size:11px;padding:6px 10px">🔒 Elenco · restrito</span>
+</div></header>
+<main>
+  <h2 class="section-title">Elenco — todos os inscritos</h2>
+  <div class="sub">Base viva de quem se cadastrou, tenha corrido ou não. Atualiza sozinha a cada novo cadastro. Clique no nome para ver o cadastro completo.</div>
+  <div id="app"><div class="empty">Carregando inscritos…</div></div>
+</main>
+<div class="overlay" id="ov"><div class="modal" id="modal"></div></div>
+<footer><div class="mark"><span class="k">KART</span> EXPERIENCE</div><div class="meta" id="foot">Área restrita</div></footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="data.js"></script>
+<script>
+(async function(){
+  const SB_URL="https://uzghezeaxysdsgzpmejp.supabase.co";
+  const SB_KEY="sb_publishable_SLv9hMsbMxAs7643nF6NJA_d8PNBBlV";
+  const db=window.__DB__||{pilots:[],results:[],config:{}};
+  const cfg=db.config||{};
+  const BOND={member:"Membro",guest:"Convidado",member_child:"Filho de Membro",referred:"Indicado",unconfirmed:"A confirmar"};
+  function esc(s){return String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));}
+  function _norm(s){return (s||"").normalize("NFD").replace(/[̀-ͯ]/g,"").toLowerCase();}
+  function _tok(s){return _norm(s).split(/\s+/).filter(t=>t.length>2);}
+  function bondLabel(v){return BOND[v]||v||"—";}
+  function waLink(phone){if(!phone)return null;let n=String(phone).replace(/\D/g,"");if(!n)return null;if(n.length<=11)n="55"+n;return "https://wa.me/"+n;}
+  function fmtDate(d){if(!d)return"—";const p=String(d).slice(0,10).split("-");return p.length===3?`${p[2]}/${p[1]}/${p[0]}`:d;}
+  function fmtPeso(w){return (w==null||w==="")?"—":(String(w).replace(".",",")+" kg");}
+  const WA_SVG='<svg viewBox="0 0 24 24"><path d="M17.5 14.4c-.3-.15-1.7-.85-2-.95-.26-.1-.45-.15-.65.15-.2.3-.75.94-.92 1.14-.17.2-.34.22-.63.07-.3-.15-1.25-.46-2.38-1.47-.88-.78-1.47-1.75-1.65-2.05-.17-.3-.02-.46.13-.6.13-.13.3-.34.44-.5.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.65-1.57-.9-2.15-.24-.56-.48-.48-.65-.49l-.56-.01c-.2 0-.5.07-.77.37-.26.3-1 .98-1 2.4 0 1.4 1.02 2.76 1.17 2.95.15.2 2.02 3.08 4.9 4.32.68.3 1.22.47 1.63.6.69.22 1.31.19 1.8.11.55-.08 1.7-.7 1.94-1.36.24-.67.24-1.24.17-1.36-.07-.12-.26-.2-.56-.34zM12 2C6.48 2 2 6.48 2 12c0 1.77.46 3.43 1.27 4.87L2 22l5.25-1.38A9.94 9.94 0 0 0 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2z"/></svg>';
+
+  // quem já correu: pilotos do data.js com >=1 resultado
+  const racedIds=new Set((db.results||[]).map(r=>r.pilot_id));
+  const racedKeys=(db.pilots||[]).filter(p=>racedIds.has(p.pilot_id)).map(p=>{const t=_tok(p.name);return t.length?[t[0],t[t.length-1]]:null;}).filter(Boolean);
+  function hasRaced(nome){const t=_tok(nome);if(!t.length)return false;const S=new Set(t);return racedKeys.some(([f,l])=>S.has(f)&&S.has(l));}
+
+  const app=document.getElementById("app");
+  let rows=[];
+  try{
+    if(!window.supabase||!window.supabase.createClient) throw new Error("lib");
+    const sb=window.supabase.createClient(SB_URL,SB_KEY);
+    const {data,error}=await sb.rpc("kart_elenco");
+    if(error) throw error;
+    rows=(data||[]).map(r=>({...r, raced:hasRaced(r.nome), pesoNum:(r.peso==null?-1:Number(r.peso))}));
+  }catch(e){
+    app.innerHTML=`<div class="notice">Não consegui carregar a base agora. Recarregue a página em instantes.</div>`;
+    return;
+  }
+
+  const total=rows.length, correu=rows.filter(r=>r.raced).length, falta=total-correu;
+  document.getElementById("foot").textContent=`Kart Experience · ${total} inscritos · Área restrita`;
+
+  // vínculos presentes (para filtro dinâmico)
+  const vincs=[...new Set(rows.map(r=>r.vinculo).filter(Boolean))];
+
+  let state={sit:"todos", vinc:"todos", q:"", sortBy:"nome", dir:1};
+  const ov=document.getElementById("ov"), modal=document.getElementById("modal");
+  function openDetail(r){
+    modal.innerHTML=`<button class="close" aria-label="Fechar">×</button>
+      <h3>${esc(r.nome)}</h3>
+      <div class="msub">${r.apelido?('“'+esc(r.apelido)+'” · '):''}${esc(bondLabel(r.vinculo))}${r.raced?' · já correu':' · ainda não correu'}</div>
+      <dl class="dl">
+        <dt>Telefone</dt><dd>${waLink(r.telefone)?`<a class="wa" href="${waLink(r.telefone)}" target="_blank" rel="noopener">${WA_SVG}${esc(r.telefone)}</a>`:'—'}</dd>
+        <dt>Vínculo</dt><dd>${esc(bondLabel(r.vinculo))}</dd>
+        <dt>Convidado por</dt><dd>${r.padrinho?esc(r.padrinho):'—'}</dd>
+        <dt>Sexo</dt><dd>${r.sexo?esc(r.sexo):'—'}</dd>
+        <dt>Peso</dt><dd>${fmtPeso(r.peso)}</dd>
+        <dt>Cidade</dt><dd>${r.cidade?esc(r.cidade):'—'}</dd>
+        <dt>Nascimento</dt><dd>${fmtDate(r.nascimento)}</dd>
+        <dt>E-mail</dt><dd>${r.email?esc(r.email):'—'}</dd>
+        <dt>Contato emerg.</dt><dd>${r.emergencia?esc(r.emergencia):'—'}</dd>
+        <dt>Cadastrado em</dt><dd>${fmtDate(r.criado_em)}</dd>
+      </dl>`;
+    ov.classList.add("on");
+    modal.querySelector(".close").onclick=()=>ov.classList.remove("on");
+  }
+  ov.onclick=e=>{if(e.target===ov)ov.classList.remove("on");};
+
+  function render(){
+    let list=rows.slice();
+    if(state.sit==="falta")list=list.filter(r=>!r.raced);
+    else if(state.sit==="correu")list=list.filter(r=>r.raced);
+    if(state.vinc!=="todos")list=list.filter(r=>r.vinculo===state.vinc);
+    if(state.q){const q=_norm(state.q);list=list.filter(r=>_norm(r.nome).includes(q));}
+    list.sort((a,b)=>{
+      let r;
+      if(state.sortBy==="peso")r=a.pesoNum-b.pesoNum;
+      else r=String(a.nome).localeCompare(String(b.nome),"pt");
+      return r*state.dir;
+    });
+    const arrow=(col)=>state.sortBy===col?`<span class="arrow">${state.dir>0?"▲":"▼"}</span>`:"";
+    const body=list.map((r,i)=>`<tr>
+      <td class="num muted">${i+1}</td>
+      <td class="pilot-name" data-i="${rows.indexOf(r)}">${esc(r.nome)}</td>
+      <td>${waLink(r.telefone)?`<a class="wa" href="${waLink(r.telefone)}" target="_blank" rel="noopener">${WA_SVG}${esc(r.telefone)}</a>`:'<span class="muted">—</span>'}</td>
+      <td><span class="badge bond">${esc(bondLabel(r.vinculo))}</span></td>
+      <td class="num">${fmtPeso(r.peso)}</td>
+      <td>${r.padrinho?esc(r.padrinho):'<span class="muted">—</span>'}</td>
+      <td>${r.raced?'<span class="badge raced">✓ já correu</span>':'<span class="badge pending">ainda não</span>'}</td>
+    </tr>`).join("");
+    app.innerHTML=`
+      <div class="mini-stats">
+        <span>Inscritos <b>${total}</b></span>
+        <span>Já correram <span class="g">${correu}</span></span>
+        <span>Ainda não correram <span class="r">${falta}</span></span>
+      </div>
+      <div class="toolbar">
+        <input type="search" id="q" placeholder="Buscar por nome…" value="${esc(state.q)}">
+        <div class="filters" id="fsit">
+          <button data-v="todos" class="${state.sit==='todos'?'active':''}">Todos</button>
+          <button data-v="falta" class="${state.sit==='falta'?'active':''}">Ainda não correram</button>
+          <button data-v="correu" class="${state.sit==='correu'?'active':''}">Já correram</button>
+        </div>
+        <div class="filters" id="fvinc">
+          <button data-v="todos" class="${state.vinc==='todos'?'active':''}">Todos vínculos</button>
+          ${vincs.map(v=>`<button data-v="${esc(v)}" class="${state.vinc===v?'active':''}">${esc(bondLabel(v))}</button>`).join("")}
+        </div>
+      </div>
+      <div class="table-wrap"><table>
+        <thead><tr>
+          <th class="num">#</th>
+          <th class="sortable" data-s="nome">Nome${arrow("nome")}</th>
+          <th>Telefone</th><th>Vínculo</th>
+          <th class="num sortable" data-s="peso">Peso${arrow("peso")}</th>
+          <th>Convidado por</th><th>Situação</th>
+        </tr></thead>
+        <tbody>${body||`<tr><td colspan="7" class="empty">Ninguém nesta lista.</td></tr>`}</tbody>
+      </table></div>
+      <div class="sub" style="margin-top:12px">Mostrando <b style="color:#fff">${list.length}</b> de ${total}. "Situação" cruza o nome com quem já tem resultado no campeonato. Contato e cadastro completo só nesta página restrita (CPF não é exibido).</div>`;
+    // eventos
+    app.querySelector("#q").addEventListener("input",e=>{state.q=e.target.value;const pos=e.target.selectionStart;render();const nq=app.querySelector("#q");nq.focus();try{nq.setSelectionRange(pos,pos);}catch(_){}} );
+    app.querySelectorAll("#fsit button").forEach(b=>b.onclick=()=>{state.sit=b.dataset.v;render();});
+    app.querySelectorAll("#fvinc button").forEach(b=>b.onclick=()=>{state.vinc=b.dataset.v;render();});
+    app.querySelectorAll("th.sortable").forEach(th=>th.onclick=()=>{const s=th.dataset.s;if(state.sortBy===s)state.dir*=-1;else{state.sortBy=s;state.dir=1;}render();});
+    app.querySelectorAll(".pilot-name").forEach(td=>td.onclick=()=>openDetail(rows[+td.dataset.i]));
+  }
+  render();
+})();
+</script>
+</body></html>
