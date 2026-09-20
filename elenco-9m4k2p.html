@@ -55,16 +55,16 @@ td.num,th.num{text-align:center;font-variant-numeric:tabular-nums}
 .wa:hover{color:#3fae63}
 .muted{color:var(--muted)}
 .empty{color:var(--muted);padding:22px;text-align:center}
-/* ---- modal de detalhe ---- */
-.overlay{position:fixed;inset:0;background:rgba(0,0,0,.72);display:none;padding:5vh 20px;z-index:50;overflow:auto}
-.overlay.on{display:block}
-#modal.modal{display:block;position:relative;background:linear-gradient(180deg,#1e1e20,#161618);border:1px solid var(--line);border-radius:14px;max-width:560px;width:100%;margin:0 auto;box-shadow:0 24px 60px rgba(0,0,0,.5)}
-.modal .mhead{background:linear-gradient(180deg,#232326,#1a1a1c);border-bottom:1px solid var(--line);border-radius:14px 14px 0 0;padding:18px 22px;display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
-.modal .mhead .checker-mini{height:4px;background:repeating-conic-gradient(var(--white) 0% 25%, transparent 0% 50%) 0/8px 8px;opacity:.5;border-radius:14px 14px 0 0}
-.modal h3{font-family:var(--font-display);font-style:italic;font-weight:700;text-transform:uppercase;font-size:24px;color:var(--white);line-height:1.05}
-.modal .msub{color:var(--gold);font-size:12px;margin-top:4px;letter-spacing:.5px}
-.modal .close{color:var(--muted);cursor:pointer;font-size:26px;line-height:1;border:none;background:none;padding:0 2px}
-.modal .close:hover{color:var(--white)}
+/* ---- kxpanel de detalhe ---- */
+.kxscrim{position:fixed;inset:0;background:rgba(0,0,0,.72);display:none;padding:5vh 20px;z-index:50;overflow:auto}
+.kxscrim.on{display:block}
+#kxpanel.kxpanel{display:block;position:relative;background:linear-gradient(180deg,#1e1e20,#161618);border:1px solid var(--line);border-radius:14px;max-width:560px;width:100%;margin:0 auto;box-shadow:0 24px 60px rgba(0,0,0,.5)}
+.kxpanel .mhead{background:linear-gradient(180deg,#232326,#1a1a1c);border-bottom:1px solid var(--line);border-radius:14px 14px 0 0;padding:18px 22px;display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+.kxpanel .mhead .checker-mini{height:4px;background:repeating-conic-gradient(var(--white) 0% 25%, transparent 0% 50%) 0/8px 8px;opacity:.5;border-radius:14px 14px 0 0}
+.kxpanel h3{font-family:var(--font-display);font-style:italic;font-weight:700;text-transform:uppercase;font-size:24px;color:var(--white);line-height:1.05}
+.kxpanel .msub{color:var(--gold);font-size:12px;margin-top:4px;letter-spacing:.5px}
+.kxpanel .close{color:var(--muted);cursor:pointer;font-size:26px;line-height:1;border:none;background:none;padding:0 2px}
+.kxpanel .close:hover{color:var(--white)}
 .mbody{padding:18px 22px 24px}
 .grp{margin-bottom:16px}
 .grp:last-child{margin-bottom:0}
@@ -89,7 +89,7 @@ footer .meta{color:var(--muted);font-size:11px;margin-top:8px;letter-spacing:1px
   <div class="sub">Base viva de quem se cadastrou, tenha corrido ou não. Atualiza sozinha a cada novo cadastro. Clique no nome para ver o cadastro completo.</div>
   <div id="app"><div class="empty">Carregando inscritos…</div></div>
 </main>
-<div class="overlay" id="ov"><div class="modal" id="modal"></div></div>
+<div class="kxscrim" id="ov"><div class="kxpanel" id="kxpanel"></div></div>
 <footer><div class="mark"><span class="k">KART</span> EXPERIENCE</div><div class="meta" id="foot">Área restrita</div></footer>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -136,10 +136,10 @@ footer .meta{color:var(--muted);font-size:11px;margin-top:8px;letter-spacing:1px
   const padrinhos=[...new Set(rows.map(r=>r.padrinho).filter(Boolean))].sort((a,b)=>a.localeCompare(b,"pt"));
 
   let state={sit:"todos", vinc:"todos", padrinho:"todos", q:"", sortBy:"nome", dir:1};
-  const ov=document.getElementById("ov"), modal=document.getElementById("modal");
+  const ov=document.getElementById("ov"), kxpanel=document.getElementById("kxpanel");
   function closeModal(){ov.classList.remove("on");}
   function openDetail(r){
-    modal.innerHTML=`
+    kxpanel.innerHTML=`
       <div class="mhead">
         <div>
           <h3>${esc(r.nome)}</h3>
@@ -180,7 +180,7 @@ footer .meta{color:var(--muted);font-size:11px;margin-top:8px;letter-spacing:1px
         </div>
       </div>`;
     ov.classList.add("on");
-    modal.querySelector(".close").onclick=closeModal;
+    kxpanel.querySelector(".close").onclick=closeModal;
   }
   ov.onclick=e=>{if(e.target===ov)closeModal();};
   document.addEventListener("keydown",e=>{if(e.key==="Escape")closeModal();});
