@@ -24,7 +24,10 @@ main{max-width:1200px;margin:0 auto;padding:26px 20px 60px}
 .mini-stats{display:flex;gap:20px;flex-wrap:wrap;margin:14px 0 10px;color:var(--muted);font-size:13px}
 .mini-stats b{color:var(--white);font-weight:700}.mini-stats .g{color:var(--gold);font-weight:700}.mini-stats .r{color:#E0A800;font-weight:700}
 .toolbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:8px 0 18px}
-.toolbar input[type=search]{background:var(--surface);color:var(--white);border:1px solid var(--line);border-radius:8px;padding:10px 12px;font-size:14px;min-width:220px}
+.toolbar input[type=search],.toolbar select{background:var(--surface);color:var(--white);border:1px solid var(--line);border-radius:8px;padding:10px 12px;font-size:14px}
+.toolbar input[type=search]{min-width:220px}
+.toolbar select{min-width:190px;cursor:pointer}
+.toolbar label.fld{display:flex;flex-direction:column;gap:4px;font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--muted)}
 .filters{display:flex;gap:8px;flex-wrap:wrap}
 .filters button{font-family:var(--font-sans);font-weight:700;font-size:12px;letter-spacing:.5px;text-transform:uppercase;padding:9px 12px;border:1px solid var(--line);border-radius:6px;color:var(--muted);background:var(--surface);cursor:pointer;transition:.15s}
 .filters button:hover{color:var(--white);border-color:var(--gold-lo)}
@@ -45,22 +48,31 @@ td.num,th.num{text-align:center;font-variant-numeric:tabular-nums}
 .badge.bond{background:var(--surface-2);color:var(--muted);border:1px solid var(--line)}
 .badge.raced{background:#12331e;color:#7fd99a;border:1px solid #2E7D32}
 .badge.pending{background:#2a2410;color:#E0A800;border:1px solid #8A6E1E}
+.badge.yes{background:#12331e;color:#7fd99a;border:1px solid #2E7D32}
+.badge.no{background:#3a1e1e;color:#e88;border:1px solid #7a3b3b}
 .wa{display:inline-flex;align-items:center;gap:6px;color:#7fd99a}
 .wa svg{width:15px;height:15px;fill:#7fd99a}
 .wa:hover{color:#3fae63}
 .muted{color:var(--muted)}
 .empty{color:var(--muted);padding:22px;text-align:center}
-/* modal detalhe */
-.overlay{position:fixed;inset:0;background:rgba(0,0,0,.7);display:none;align-items:center;justify-content:center;padding:20px;z-index:50}
-.overlay.on{display:flex}
-.modal{background:var(--surface);border:1px solid var(--line);border-top:4px solid var(--gold);border-radius:12px;max-width:520px;width:100%;max-height:88vh;overflow:auto;padding:22px}
-.modal h3{font-family:var(--font-display);font-style:italic;font-weight:700;text-transform:uppercase;font-size:22px;color:var(--white);margin-bottom:2px}
-.modal .msub{color:var(--muted);font-size:12px;margin-bottom:16px}
-.dl{display:grid;grid-template-columns:150px 1fr;gap:8px 14px;font-size:14px}
-.dl dt{color:var(--muted);text-transform:uppercase;font-size:11px;letter-spacing:1px;align-self:center}
-.dl dd{color:var(--white)}
-.modal .close{float:right;color:var(--muted);cursor:pointer;font-size:22px;line-height:1;border:none;background:none}
+/* ---- modal de detalhe ---- */
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.72);backdrop-filter:blur(3px);display:flex;align-items:center;justify-content:center;padding:20px;z-index:50;opacity:0;pointer-events:none;transition:opacity .18s ease}
+.overlay.on{opacity:1;pointer-events:auto}
+.modal{background:linear-gradient(180deg,#1e1e20,#161618);border:1px solid var(--line);border-radius:14px;max-width:560px;width:100%;max-height:88vh;overflow:auto;transform:translateY(12px) scale(.98);opacity:0;transition:transform .2s ease,opacity .2s ease;box-shadow:0 24px 60px rgba(0,0,0,.5)}
+.overlay.on .modal{transform:translateY(0) scale(1);opacity:1}
+.modal .mhead{position:sticky;top:0;background:linear-gradient(180deg,#232326,#1a1a1c);border-bottom:1px solid var(--line);border-radius:14px 14px 0 0;padding:18px 22px;display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+.modal .mhead .checker-mini{height:4px;background:repeating-conic-gradient(var(--white) 0% 25%, transparent 0% 50%) 0/8px 8px;opacity:.5;border-radius:14px 14px 0 0}
+.modal h3{font-family:var(--font-display);font-style:italic;font-weight:700;text-transform:uppercase;font-size:24px;color:var(--white);line-height:1.05}
+.modal .msub{color:var(--gold);font-size:12px;margin-top:4px;letter-spacing:.5px}
+.modal .close{color:var(--muted);cursor:pointer;font-size:26px;line-height:1;border:none;background:none;padding:0 2px}
 .modal .close:hover{color:var(--white)}
+.mbody{padding:18px 22px 24px}
+.grp{margin-bottom:16px}
+.grp:last-child{margin-bottom:0}
+.grp .gtit{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--gold-lo);border-bottom:1px solid var(--line);padding-bottom:6px;margin-bottom:10px;font-weight:700}
+.dl{display:grid;grid-template-columns:150px 1fr;gap:9px 14px;font-size:14px}
+.dl dt{color:var(--muted);text-transform:uppercase;font-size:11px;letter-spacing:1px;align-self:center}
+.dl dd{color:var(--white);word-break:break-word}
 footer{border-top:1px solid var(--line);margin-top:40px;padding:26px 20px;text-align:center}
 footer .mark{font-family:var(--font-display);font-style:italic;font-size:22px;letter-spacing:2px;color:var(--white);text-transform:uppercase}
 footer .mark .k{color:var(--gold)}
@@ -88,8 +100,8 @@ footer .meta{color:var(--muted);font-size:11px;margin-top:8px;letter-spacing:1px
   const SB_URL="https://uzghezeaxysdsgzpmejp.supabase.co";
   const SB_KEY="sb_publishable_SLv9hMsbMxAs7643nF6NJA_d8PNBBlV";
   const db=window.__DB__||{pilots:[],results:[],config:{}};
-  const cfg=db.config||{};
   const BOND={member:"Membro",guest:"Convidado",member_child:"Filho de Membro",referred:"Indicado",unconfirmed:"A confirmar"};
+  const BOND_ORDER={member:0,member_child:1,guest:2,referred:3,unconfirmed:4};
   function esc(s){return String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));}
   function _norm(s){return (s||"").normalize("NFD").replace(/[̀-ͯ]/g,"").toLowerCase();}
   function _tok(s){return _norm(s).split(/\s+/).filter(t=>t.length>2);}
@@ -97,9 +109,10 @@ footer .meta{color:var(--muted);font-size:11px;margin-top:8px;letter-spacing:1px
   function waLink(phone){if(!phone)return null;let n=String(phone).replace(/\D/g,"");if(!n)return null;if(n.length<=11)n="55"+n;return "https://wa.me/"+n;}
   function fmtDate(d){if(!d)return"—";const p=String(d).slice(0,10).split("-");return p.length===3?`${p[2]}/${p[1]}/${p[0]}`:d;}
   function fmtPeso(w){return (w==null||w==="")?"—":(String(w).replace(".",",")+" kg");}
+  function val(x){return (x==null||x==="")?'<span class="muted">—</span>':esc(x);}
+  function yesno(b){return b?'<span class="badge yes">Aceito</span>':'<span class="badge no">Não</span>';}
   const WA_SVG='<svg viewBox="0 0 24 24"><path d="M17.5 14.4c-.3-.15-1.7-.85-2-.95-.26-.1-.45-.15-.65.15-.2.3-.75.94-.92 1.14-.17.2-.34.22-.63.07-.3-.15-1.25-.46-2.38-1.47-.88-.78-1.47-1.75-1.65-2.05-.17-.3-.02-.46.13-.6.13-.13.3-.34.44-.5.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.65-1.57-.9-2.15-.24-.56-.48-.48-.65-.49l-.56-.01c-.2 0-.5.07-.77.37-.26.3-1 .98-1 2.4 0 1.4 1.02 2.76 1.17 2.95.15.2 2.02 3.08 4.9 4.32.68.3 1.22.47 1.63.6.69.22 1.31.19 1.8.11.55-.08 1.7-.7 1.94-1.36.24-.67.24-1.24.17-1.36-.07-.12-.26-.2-.56-.34zM12 2C6.48 2 2 6.48 2 12c0 1.77.46 3.43 1.27 4.87L2 22l5.25-1.38A9.94 9.94 0 0 0 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2z"/></svg>';
 
-  // quem já correu: pilotos do data.js com >=1 resultado
   const racedIds=new Set((db.results||[]).map(r=>r.pilot_id));
   const racedKeys=(db.pilots||[]).filter(p=>racedIds.has(p.pilot_id)).map(p=>{const t=_tok(p.name);return t.length?[t[0],t[t.length-1]]:null;}).filter(Boolean);
   function hasRaced(nome){const t=_tok(nome);if(!t.length)return false;const S=new Set(t);return racedKeys.some(([f,l])=>S.has(f)&&S.has(l));}
@@ -119,42 +132,70 @@ footer .meta{color:var(--muted);font-size:11px;margin-top:8px;letter-spacing:1px
 
   const total=rows.length, correu=rows.filter(r=>r.raced).length, falta=total-correu;
   document.getElementById("foot").textContent=`Kart Experience · ${total} inscritos · Área restrita`;
+  const vincs=[...new Set(rows.map(r=>r.vinculo).filter(Boolean))].sort((a,b)=>(BOND_ORDER[a]??9)-(BOND_ORDER[b]??9));
+  const padrinhos=[...new Set(rows.map(r=>r.padrinho).filter(Boolean))].sort((a,b)=>a.localeCompare(b,"pt"));
 
-  // vínculos presentes (para filtro dinâmico)
-  const vincs=[...new Set(rows.map(r=>r.vinculo).filter(Boolean))];
-
-  let state={sit:"todos", vinc:"todos", q:"", sortBy:"nome", dir:1};
+  let state={sit:"todos", vinc:"todos", padrinho:"todos", q:"", sortBy:"nome", dir:1};
   const ov=document.getElementById("ov"), modal=document.getElementById("modal");
+  function closeModal(){ov.classList.remove("on");}
   function openDetail(r){
-    modal.innerHTML=`<button class="close" aria-label="Fechar">×</button>
-      <h3>${esc(r.nome)}</h3>
-      <div class="msub">${r.apelido?('“'+esc(r.apelido)+'” · '):''}${esc(bondLabel(r.vinculo))}${r.raced?' · já correu':' · ainda não correu'}</div>
-      <dl class="dl">
-        <dt>Telefone</dt><dd>${waLink(r.telefone)?`<a class="wa" href="${waLink(r.telefone)}" target="_blank" rel="noopener">${WA_SVG}${esc(r.telefone)}</a>`:'—'}</dd>
-        <dt>Vínculo</dt><dd>${esc(bondLabel(r.vinculo))}</dd>
-        <dt>Convidado por</dt><dd>${r.padrinho?esc(r.padrinho):'—'}</dd>
-        <dt>Sexo</dt><dd>${r.sexo?esc(r.sexo):'—'}</dd>
-        <dt>Peso</dt><dd>${fmtPeso(r.peso)}</dd>
-        <dt>Cidade</dt><dd>${r.cidade?esc(r.cidade):'—'}</dd>
-        <dt>Nascimento</dt><dd>${fmtDate(r.nascimento)}</dd>
-        <dt>E-mail</dt><dd>${r.email?esc(r.email):'—'}</dd>
-        <dt>Contato emerg.</dt><dd>${r.emergencia?esc(r.emergencia):'—'}</dd>
-        <dt>Cadastrado em</dt><dd>${fmtDate(r.criado_em)}</dd>
-      </dl>`;
+    modal.innerHTML=`
+      <div class="mhead">
+        <div>
+          <h3>${esc(r.nome)}</h3>
+          <div class="msub">${r.apelido?('“'+esc(r.apelido)+'” · '):''}${esc(bondLabel(r.vinculo))} · ${r.raced?'já correu':'ainda não correu'}</div>
+        </div>
+        <button class="close" aria-label="Fechar">×</button>
+      </div>
+      <div class="mbody">
+        <div class="grp"><div class="gtit">Contato</div>
+          <dl class="dl">
+            <dt>Telefone</dt><dd>${waLink(r.telefone)?`<a class="wa" href="${waLink(r.telefone)}" target="_blank" rel="noopener">${WA_SVG}${esc(r.telefone)}</a>`:'<span class="muted">—</span>'}</dd>
+            <dt>E-mail</dt><dd>${val(r.email)}</dd>
+            <dt>Cidade</dt><dd>${val(r.cidade)}</dd>
+            <dt>Contato emergência</dt><dd>${val(r.emergencia)}</dd>
+          </dl>
+        </div>
+        <div class="grp"><div class="gtit">Perfil</div>
+          <dl class="dl">
+            <dt>Apelido</dt><dd>${val(r.apelido)}</dd>
+            <dt>Sexo</dt><dd>${val(r.sexo)}</dd>
+            <dt>Peso</dt><dd>${fmtPeso(r.peso)}</dd>
+            <dt>Nascimento</dt><dd>${fmtDate(r.nascimento)}</dd>
+          </dl>
+        </div>
+        <div class="grp"><div class="gtit">Vínculo</div>
+          <dl class="dl">
+            <dt>Vínculo</dt><dd>${esc(bondLabel(r.vinculo))}</dd>
+            <dt>Convidado por</dt><dd>${val(r.padrinho)}</dd>
+            <dt>Situação</dt><dd>${r.raced?'<span class="badge raced">✓ já correu</span>':'<span class="badge pending">ainda não correu</span>'}</dd>
+          </dl>
+        </div>
+        <div class="grp"><div class="gtit">Consentimentos & cadastro</div>
+          <dl class="dl">
+            <dt>Termo de resp.</dt><dd>${yesno(r.termo)}</dd>
+            <dt>Uso de imagem</dt><dd>${yesno(r.imagem)}</dd>
+            <dt>Cadastrado em</dt><dd>${fmtDate(r.criado_em)}</dd>
+          </dl>
+        </div>
+      </div>`;
     ov.classList.add("on");
-    modal.querySelector(".close").onclick=()=>ov.classList.remove("on");
+    modal.querySelector(".close").onclick=closeModal;
   }
-  ov.onclick=e=>{if(e.target===ov)ov.classList.remove("on");};
+  ov.onclick=e=>{if(e.target===ov)closeModal();};
+  document.addEventListener("keydown",e=>{if(e.key==="Escape")closeModal();});
 
   function render(){
     let list=rows.slice();
     if(state.sit==="falta")list=list.filter(r=>!r.raced);
     else if(state.sit==="correu")list=list.filter(r=>r.raced);
     if(state.vinc!=="todos")list=list.filter(r=>r.vinculo===state.vinc);
+    if(state.padrinho!=="todos")list=list.filter(r=>(r.padrinho||"")===state.padrinho);
     if(state.q){const q=_norm(state.q);list=list.filter(r=>_norm(r.nome).includes(q));}
     list.sort((a,b)=>{
       let r;
       if(state.sortBy==="peso")r=a.pesoNum-b.pesoNum;
+      else if(state.sortBy==="vinculo")r=((BOND_ORDER[a.vinculo]??9)-(BOND_ORDER[b.vinculo]??9))|| String(a.nome).localeCompare(String(b.nome),"pt");
       else r=String(a.nome).localeCompare(String(b.nome),"pt");
       return r*state.dir;
     });
@@ -176,6 +217,12 @@ footer .meta{color:var(--muted);font-size:11px;margin-top:8px;letter-spacing:1px
       </div>
       <div class="toolbar">
         <input type="search" id="q" placeholder="Buscar por nome…" value="${esc(state.q)}">
+        <label class="fld">Convidado por
+          <select id="fpad">
+            <option value="todos">Todos</option>
+            ${padrinhos.map(p=>`<option value="${esc(p)}" ${state.padrinho===p?"selected":""}>${esc(p)}</option>`).join("")}
+          </select>
+        </label>
         <div class="filters" id="fsit">
           <button data-v="todos" class="${state.sit==='todos'?'active':''}">Todos</button>
           <button data-v="falta" class="${state.sit==='falta'?'active':''}">Ainda não correram</button>
@@ -190,15 +237,17 @@ footer .meta{color:var(--muted);font-size:11px;margin-top:8px;letter-spacing:1px
         <thead><tr>
           <th class="num">#</th>
           <th class="sortable" data-s="nome">Nome${arrow("nome")}</th>
-          <th>Telefone</th><th>Vínculo</th>
+          <th>Telefone</th>
+          <th class="sortable" data-s="vinculo">Vínculo${arrow("vinculo")}</th>
           <th class="num sortable" data-s="peso">Peso${arrow("peso")}</th>
           <th>Convidado por</th><th>Situação</th>
         </tr></thead>
         <tbody>${body||`<tr><td colspan="7" class="empty">Ninguém nesta lista.</td></tr>`}</tbody>
       </table></div>
       <div class="sub" style="margin-top:12px">Mostrando <b style="color:#fff">${list.length}</b> de ${total}. "Situação" cruza o nome com quem já tem resultado no campeonato. Contato e cadastro completo só nesta página restrita (CPF não é exibido).</div>`;
-    // eventos
-    app.querySelector("#q").addEventListener("input",e=>{state.q=e.target.value;const pos=e.target.selectionStart;render();const nq=app.querySelector("#q");nq.focus();try{nq.setSelectionRange(pos,pos);}catch(_){}} );
+    const q=app.querySelector("#q");
+    q.addEventListener("input",e=>{state.q=e.target.value;const pos=e.target.selectionStart;render();const nq=app.querySelector("#q");nq.focus();try{nq.setSelectionRange(pos,pos);}catch(_){}} );
+    app.querySelector("#fpad").addEventListener("change",e=>{state.padrinho=e.target.value;render();});
     app.querySelectorAll("#fsit button").forEach(b=>b.onclick=()=>{state.sit=b.dataset.v;render();});
     app.querySelectorAll("#fvinc button").forEach(b=>b.onclick=()=>{state.vinc=b.dataset.v;render();});
     app.querySelectorAll("th.sortable").forEach(th=>th.onclick=()=>{const s=th.dataset.s;if(state.sortBy===s)state.dir*=-1;else{state.sortBy=s;state.dir=1;}render();});
