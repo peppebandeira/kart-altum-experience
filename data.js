@@ -1,6 +1,6 @@
 window.__DB__ = {
   "config": {
-    "championship": "Kart Altum Experience",
+    "championship": "Kart Experience",
     "season": 2026,
     "edition": "1ª Edição",
     "tagline": "Elevação que gera legado.",
