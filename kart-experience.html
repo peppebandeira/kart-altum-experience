@@ -416,5 +416,25 @@ document.addEventListener('DOMContentLoaded',function(){return;if(!window.gsap||
   setTimeout(fix,600);
 })();
 </script>
+<div id="closedPop" style="position:fixed;inset:0;z-index:999999;background:rgba(0,0,0,.88);display:none;align-items:center;justify-content:center;padding:22px;font-family:Arial,Helvetica,sans-serif">
+<div style="max-width:440px;background:#141416;border:1px solid #8A6E1E;border-radius:14px;padding:36px 28px;text-align:center">
+<div style="font-family:Georgia,serif;font-style:italic;font-weight:700;font-size:30px;color:#fff;margin-bottom:14px;line-height:1.1">Inscrições encerradas</div>
+<p style="color:#DEDBD4;font-size:16px;line-height:1.55;margin-bottom:24px">Baterias desta edição foram encerradas. Em breve, anunciaremos a data da próxima bateria.</p>
+<button id="closedOk" style="cursor:pointer;border:none;background:linear-gradient(180deg,#E8C558,#C9A227);color:#160f00;font-family:Georgia,serif;font-style:italic;font-weight:700;font-size:17px;padding:12px 30px;border-radius:8px">Entendi</button>
+</div>
+</div>
+<script>
+(function(){
+  function pop(){ var p=document.getElementById("closedPop"); if(p) p.style.display="flex"; }
+  document.addEventListener("click", function(e){
+    var el=e.target;
+    while(el && el!==document.body && el!==document.documentElement){
+      if(el.classList && (el.classList.contains("cta-mini")||el.classList.contains("btn-gold")||el.classList.contains("btn-pink"))){ e.preventDefault(); e.stopPropagation(); pop(); return; }
+      el=el.parentNode;
+    }
+  }, true);
+  var b=document.getElementById("closedOk"); if(b){ b.onclick=function(){ var p=document.getElementById("closedPop"); if(p) p.style.display="none"; }; }
+})();
+</script>
 </body>
 </html>
