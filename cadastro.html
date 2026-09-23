@@ -265,4 +265,19 @@ window.__jaCad=function(row){
 <a href="kart-experience.html" style="display:inline-block;text-decoration:none;cursor:pointer;background:linear-gradient(180deg,#E8C558,#C9A227);color:#160f00;font-family:Georgia,serif;font-style:italic;font-weight:700;font-size:17px;padding:12px 30px;border-radius:8px">Voltar ao site</a>
 </div>
 </div>
+<script>
+/* Link de convite da organização: cadastro.html?convite=piloto
+   Pula o aviso "Inscrições encerradas" e faz SÓ o cadastro (sem etapa de reserva/PIX). */
+(function(){
+  if(new URLSearchParams(location.search).get("convite")!=="piloto") return;
+  var c=document.getElementById("closedFull"); if(c) c.remove();
+  var b=document.getElementById("submitBtn"); if(b) b.textContent="Concluir cadastro";
+  var s=document.querySelector(".sub"); if(s) s.textContent="Cadastro de piloto a convite da organização. Preencha uma vez — contato é privado, só a organização vê.";
+  window.abrirReserva=function(row){
+    var box=document.getElementById("statusBox");
+    if(window.__dup){ window.__dup=false; if(box) box.innerHTML="<strong>Você já tem cadastro.</strong> Nada a fazer — já está na base do Kart Experience. 🏁"; return; }
+    if(box) box.innerHTML="<strong>Cadastro confirmado.</strong> Você já está na base do Kart Experience. 🏁";
+  };
+})();
+</script>
 </body></html>
