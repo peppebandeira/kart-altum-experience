@@ -322,6 +322,84 @@ window.__DB__ = {
       "name": "Eduardo",
       "nickname": null,
       "bond_type": "unconfirmed"
+    },
+    {
+      "pilot_id": "P049",
+      "name": "Daniel Brayer",
+      "nickname": null,
+      "bond_type": "unconfirmed"
+    },
+    {
+      "pilot_id": "P050",
+      "name": "Igor Müller",
+      "nickname": null,
+      "bond_type": "unconfirmed"
+    },
+    {
+      "pilot_id": "P051",
+      "name": "Victor Hugo Lima Pessoa",
+      "nickname": null,
+      "bond_type": "unconfirmed"
+    },
+    {
+      "pilot_id": "P052",
+      "name": "Júlio César Evangelista Silva",
+      "nickname": null,
+      "bond_type": "unconfirmed"
+    },
+    {
+      "pilot_id": "P053",
+      "name": "Guilherme Ferrari",
+      "nickname": null,
+      "bond_type": "unconfirmed"
+    },
+    {
+      "pilot_id": "P054",
+      "name": "Kevin Kauler Oliveira Santos",
+      "nickname": null,
+      "bond_type": "unconfirmed"
+    },
+    {
+      "pilot_id": "P055",
+      "name": "João Pedro Guimarães da Silveira",
+      "nickname": null,
+      "bond_type": "unconfirmed"
+    },
+    {
+      "pilot_id": "P056",
+      "name": "Pedro Leonardo Boaventura Silva Santana",
+      "nickname": null,
+      "bond_type": "unconfirmed"
+    },
+    {
+      "pilot_id": "P057",
+      "name": "Carlos Barbosa",
+      "nickname": null,
+      "bond_type": "unconfirmed"
+    },
+    {
+      "pilot_id": "P058",
+      "name": "Pedro Henrique de Freitas Pires",
+      "nickname": null,
+      "bond_type": "unconfirmed"
+    },
+    {
+      "pilot_id": "P059",
+      "name": "Ronaldo da Silva Barros",
+      "nickname": null,
+      "bond_type": "unconfirmed"
+    },
+    {
+      "pilot_id": "P060",
+      "name": "Henrique Bar",
+      "nickname": null,
+      "bond_type": "unconfirmed"
+    },
+    {
+      "pilot_id": "P061",
+      "name": "Lorenna Rodrigues Medeiros",
+      "nickname": null,
+      "bond_type": "unconfirmed"
     }
   ],
   "races": [
@@ -369,6 +447,28 @@ window.__DB__ = {
       "layout": "Pista 01",
       "kart_category": "rental_13hp",
       "hp": 13
+    },
+    {
+      "race_id": "R2026-05",
+      "round": 5,
+      "date": "2026-09-22",
+      "time": "08:50",
+      "venue": "Carrera Kart",
+      "track": "",
+      "layout": "",
+      "kart_category": "rental_6.5hp",
+      "hp": 6.5
+    },
+    {
+      "race_id": "R2026-06",
+      "round": 6,
+      "date": "2026-09-22",
+      "time": "09:00",
+      "venue": "Carrera Kart",
+      "track": "",
+      "layout": "",
+      "kart_category": "rental_6.5hp",
+      "hp": 6.5
     }
   ],
   "results": [
@@ -1107,6 +1207,314 @@ window.__DB__ = {
       "best_lap_ms": 57138,
       "laps_completed": 12,
       "gap_display": "+2 voltas",
+      "status": "classified"
+    },
+    {
+      "race_id": "R2026-05",
+      "pilot_id": "P003",
+      "kart_number": 7,
+      "grid_pole": true,
+      "finish_pos": 1,
+      "best_lap_ms": 49239,
+      "laps_completed": 17,
+      "gap_display": "—",
+      "status": "classified"
+    },
+    {
+      "race_id": "R2026-05",
+      "pilot_id": "P049",
+      "kart_number": 8,
+      "grid_pole": false,
+      "finish_pos": 2,
+      "best_lap_ms": 49101,
+      "laps_completed": 17,
+      "gap_display": "—",
+      "status": "classified"
+    },
+    {
+      "race_id": "R2026-05",
+      "pilot_id": "P050",
+      "kart_number": 10,
+      "grid_pole": false,
+      "finish_pos": 3,
+      "best_lap_ms": 48405,
+      "laps_completed": 17,
+      "gap_display": "—",
+      "status": "classified"
+    },
+    {
+      "race_id": "R2026-05",
+      "pilot_id": "P051",
+      "kart_number": 15,
+      "grid_pole": false,
+      "finish_pos": 4,
+      "best_lap_ms": 49979,
+      "laps_completed": 17,
+      "gap_display": "—",
+      "status": "classified"
+    },
+    {
+      "race_id": "R2026-05",
+      "pilot_id": "P026",
+      "kart_number": 3,
+      "grid_pole": false,
+      "finish_pos": 5,
+      "best_lap_ms": 50474,
+      "laps_completed": 17,
+      "gap_display": "—",
+      "status": "classified"
+    },
+    {
+      "race_id": "R2026-05",
+      "pilot_id": "P015",
+      "kart_number": 13,
+      "grid_pole": false,
+      "finish_pos": 6,
+      "best_lap_ms": 52808,
+      "laps_completed": 16,
+      "gap_display": "+1 volta",
+      "status": "classified"
+    },
+    {
+      "race_id": "R2026-05",
+      "pilot_id": "P007",
+      "kart_number": 20,
+      "grid_pole": false,
+      "finish_pos": 7,
+      "best_lap_ms": 52132,
+      "laps_completed": 16,
+      "gap_display": "+1 volta",
+      "status": "classified"
+    },
+    {
+      "race_id": "R2026-05",
+      "pilot_id": "P052",
+      "kart_number": 14,
+      "grid_pole": false,
+      "finish_pos": 8,
+      "best_lap_ms": 52060,
+      "laps_completed": 16,
+      "gap_display": "+1 volta",
+      "status": "classified"
+    },
+    {
+      "race_id": "R2026-05",
+      "pilot_id": "P053",
+      "kart_number": 2,
+      "grid_pole": false,
+      "finish_pos": 9,
+      "best_lap_ms": 54528,
+      "laps_completed": 16,
+      "gap_display": "+1 volta",
+      "status": "classified"
+    },
+    {
+      "race_id": "R2026-05",
+      "pilot_id": "P054",
+      "kart_number": 6,
+      "grid_pole": false,
+      "finish_pos": 10,
+      "best_lap_ms": 53539,
+      "laps_completed": 16,
+      "gap_display": "+1 volta",
+      "status": "classified"
+    },
+    {
+      "race_id": "R2026-05",
+      "pilot_id": "P055",
+      "kart_number": 12,
+      "grid_pole": false,
+      "finish_pos": 11,
+      "best_lap_ms": 52148,
+      "laps_completed": 16,
+      "gap_display": "+1 volta",
+      "status": "classified"
+    },
+    {
+      "race_id": "R2026-05",
+      "pilot_id": "P056",
+      "kart_number": 17,
+      "grid_pole": false,
+      "finish_pos": 12,
+      "best_lap_ms": 54477,
+      "laps_completed": 15,
+      "gap_display": "+2 voltas",
+      "status": "classified"
+    },
+    {
+      "race_id": "R2026-05",
+      "pilot_id": "P057",
+      "kart_number": 1,
+      "grid_pole": false,
+      "finish_pos": 13,
+      "best_lap_ms": 55628,
+      "laps_completed": 15,
+      "gap_display": "+2 voltas",
+      "status": "classified"
+    },
+    {
+      "race_id": "R2026-05",
+      "pilot_id": "P058",
+      "kart_number": 9,
+      "grid_pole": false,
+      "finish_pos": 14,
+      "best_lap_ms": 52535,
+      "laps_completed": 11,
+      "gap_display": "+6 voltas",
+      "status": "classified"
+    },
+    {
+      "race_id": "R2026-05",
+      "pilot_id": "P041",
+      "kart_number": 11,
+      "grid_pole": false,
+      "finish_pos": 15,
+      "best_lap_ms": 53037,
+      "laps_completed": 7,
+      "gap_display": "+10 voltas",
+      "status": "classified"
+    },
+    {
+      "race_id": "R2026-06",
+      "pilot_id": "P003",
+      "kart_number": 17,
+      "grid_pole": true,
+      "finish_pos": 1,
+      "best_lap_ms": 46312,
+      "laps_completed": 19,
+      "gap_display": "—",
+      "status": "classified"
+    },
+    {
+      "race_id": "R2026-06",
+      "pilot_id": "P058",
+      "kart_number": 10,
+      "grid_pole": false,
+      "finish_pos": 2,
+      "best_lap_ms": 47612,
+      "laps_completed": 19,
+      "gap_display": "—",
+      "status": "classified"
+    },
+    {
+      "race_id": "R2026-06",
+      "pilot_id": "P015",
+      "kart_number": 8,
+      "grid_pole": false,
+      "finish_pos": 3,
+      "best_lap_ms": 49428,
+      "laps_completed": 18,
+      "gap_display": "+1 volta",
+      "status": "classified"
+    },
+    {
+      "race_id": "R2026-06",
+      "pilot_id": "P060",
+      "kart_number": 3,
+      "grid_pole": false,
+      "finish_pos": 4,
+      "best_lap_ms": 49531,
+      "laps_completed": 18,
+      "gap_display": "+1 volta",
+      "status": "classified"
+    },
+    {
+      "race_id": "R2026-06",
+      "pilot_id": "P054",
+      "kart_number": 11,
+      "grid_pole": false,
+      "finish_pos": 5,
+      "best_lap_ms": 49741,
+      "laps_completed": 18,
+      "gap_display": "+1 volta",
+      "status": "classified"
+    },
+    {
+      "race_id": "R2026-06",
+      "pilot_id": "P028",
+      "kart_number": 1,
+      "grid_pole": false,
+      "finish_pos": 6,
+      "best_lap_ms": 50238,
+      "laps_completed": 18,
+      "gap_display": "+1 volta",
+      "status": "classified"
+    },
+    {
+      "race_id": "R2026-06",
+      "pilot_id": "P026",
+      "kart_number": 20,
+      "grid_pole": false,
+      "finish_pos": 7,
+      "best_lap_ms": 50538,
+      "laps_completed": 18,
+      "gap_display": "+1 volta",
+      "status": "classified"
+    },
+    {
+      "race_id": "R2026-06",
+      "pilot_id": "P051",
+      "kart_number": 12,
+      "grid_pole": false,
+      "finish_pos": 8,
+      "best_lap_ms": 50382,
+      "laps_completed": 18,
+      "gap_display": "+1 volta",
+      "status": "classified"
+    },
+    {
+      "race_id": "R2026-06",
+      "pilot_id": "P027",
+      "kart_number": 18,
+      "grid_pole": false,
+      "finish_pos": 9,
+      "best_lap_ms": 51319,
+      "laps_completed": 17,
+      "gap_display": "+2 voltas",
+      "status": "classified"
+    },
+    {
+      "race_id": "R2026-06",
+      "pilot_id": "P052",
+      "kart_number": 19,
+      "grid_pole": false,
+      "finish_pos": 10,
+      "best_lap_ms": 52585,
+      "laps_completed": 17,
+      "gap_display": "+2 voltas",
+      "status": "classified"
+    },
+    {
+      "race_id": "R2026-06",
+      "pilot_id": "P032",
+      "kart_number": 7,
+      "grid_pole": false,
+      "finish_pos": 11,
+      "best_lap_ms": 52773,
+      "laps_completed": 16,
+      "gap_display": "+3 voltas",
+      "status": "classified"
+    },
+    {
+      "race_id": "R2026-06",
+      "pilot_id": "P059",
+      "kart_number": 2,
+      "grid_pole": false,
+      "finish_pos": 12,
+      "best_lap_ms": 55009,
+      "laps_completed": 16,
+      "gap_display": "+3 voltas",
+      "status": "classified"
+    },
+    {
+      "race_id": "R2026-06",
+      "pilot_id": "P061",
+      "kart_number": 14,
+      "grid_pole": false,
+      "finish_pos": 13,
+      "best_lap_ms": 93045,
+      "laps_completed": 2,
+      "gap_display": "+17 voltas",
       "status": "classified"
     }
   ]
