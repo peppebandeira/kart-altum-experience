@@ -1,9 +1,9 @@
 <!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Campeonato — Kart Altum Experience</title>
+<title>Campeonato — Kart Experience</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Saira+Condensed:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
 <style>
 /* ================================================================
-   KART ALTUM EXPERIENCE — tema do sub-brand (racing / dark)
+   KART EXPERIENCE — tema (racing / dark)
    Preto + ouro metálico + branco. Ver marca-kartos.md
    ================================================================ */
 :root{
@@ -153,7 +153,7 @@ select:focus,input:focus,textarea:focus{outline:none;border-color:var(--gold)}
 .notice{background:#141416;border:1px solid var(--line);border-left:3px solid var(--gold);
   border-radius:8px;padding:12px 14px;color:var(--muted);font-size:13px;margin:14px 0}
 
-/* ---- rodapé com assinatura ALTUM ---- */
+/* ---- rodapé ---- */
 footer{border-top:1px solid var(--line);margin-top:40px;padding:26px 20px;text-align:center}
 footer .altum{font-family:var(--font-serif);font-size:26px;letter-spacing:6px;color:var(--white)}
 footer .tagline{font-family:var(--font-serif);font-style:italic;color:var(--gold);font-size:14px;margin-top:2px}
@@ -216,17 +216,17 @@ tr.podium-5 td:first-child{box-shadow:inset 3px 0 0 #6B6359}
   const _t=document.createElement("template");
   _t.innerHTML=`<div class="kae-chrome"><div class="checker"></div>
     <header class="top"><div class="brand-row">
-      <div class="brand"><h1><span class="k">KART</span> ALTUM EXPERIENCE</h1></div>
+      <div class="brand"><h1><span class="k">KART</span> EXPERIENCE</h1></div>
       <span class="badge" style="background:#3a1e1e;color:#e88;font-size:11px">🔒 Campeonato · restrito</span>
     </div></header></div>`.trim();
   document.body.prepend(_t.content.firstChild);
-  add(document.body,`<footer class="kae-foot"><div class="altum">ALTUM</div><div class="tagline">${esc(cfg.tagline)}</div><div class="meta">${esc(cfg.championship)} · Temporada ${cfg.season} · Área restrita aos sócios</div></footer>`);
+  add(document.body,`<footer class="kae-foot"><div class="altum">KART EXPERIENCE</div><div class="meta">${esc(cfg.championship)} · Temporada ${cfg.season} · Área restrita</div></footer>`);
 
   const root=document.getElementById("app");
   /* ---- cadastro ao vivo: marca "cadastrado" lendo o Supabase a cada refresh (só nomes, sem PII) ---- */
   const SB_URL="https://uzghezeaxysdsgzpmejp.supabase.co";
   const SB_KEY="sb_publishable_SLv9hMsbMxAs7643nF6NJA_d8PNBBlV";
-  function _norm(s){return (s||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase();}
+  function _norm(s){return (s||"").normalize("NFD").replace(/[̀-ͯ]/g,"").toLowerCase();}
   function _tok(s){return _norm(s).split(/\s+/).filter(t=>t.length>2);}
   async function markCadastrados(){try{if(!window.supabase||!window.supabase.createClient)return;const sb=window.supabase.createClient(SB_URL,SB_KEY);const {data,error}=await sb.rpc("kart_cadastrados");if(error||!data)return;db.pilots.forEach(p=>{const t=_tok(p.name);if(!t.length)return;const f=t[0],l=t[t.length-1];const hit=data.find(r=>{const s=new Set(_tok(r.nome));return s.has(f)&&s.has(l);});if(hit){p.registered=true;if(hit.vinculo)p.bond_type=hit.vinculo;if(hit.telefone)p.whatsapp=hit.telefone;if(hit.padrinho)p.sponsor=hit.padrinho;}});}catch(e){}}
   await markCadastrados();
