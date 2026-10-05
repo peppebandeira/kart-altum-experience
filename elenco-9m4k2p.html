@@ -119,7 +119,13 @@ footer .meta{color:var(--muted);font-size:11px;margin-top:8px;letter-spacing:1px
   function _pre(a,b){return a===b||(a.length>=3&&b.startsWith(a))||(b.length>=3&&a.startsWith(b));}
   const _racedNames=(db.pilots||[]).filter(p=>racedIds.has(p.pilot_id)).map(p=>_tk2(p.name)).filter(r=>r.length>1);
   /* regra 1: primeiro+ultimo nome do resultado no cadastro. regra 2: mesmo primeiro nome + outro nome igual ou abreviado (ex.: "Henrique Bar" = "Henrique Barata") */
-  function hasRaced(nome){const t=_tok(nome);if(!t.length)return false;const S=new Set(t);if(racedKeys.some(([f,l])=>S.has(f)&&S.has(l)))return true;const c=_tk2(nome);if(c.length<2)return false;return _racedNames.some(r=>r[0]===c[0]&&r.slice(1).some(x=>c.slice(1).some(y=>_pre(x,y))));}
+  /* Ajustes manuais (conferidos por CPF/telefone/contexto). Chave = nome do cadastro em minusculas, sem acento.
+     VINCULOS: cadastro -> pilot_id do data.js (correu com outro nome).
+     SEM_SEMELHANCA: nunca usar a regra 2 (nome parecido, pessoa diferente). */
+  const VINCULOS={"amanda almeida alves":"P020"};
+  const SEM_SEMELHANCA=["victor lima"];
+  function _key(s){return _norm(s).trim().replace(/\s+/g," ");}
+  function hasRaced(nome){const k=_key(nome);if(VINCULOS[k])return racedIds.has(VINCULOS[k]);const t=_tok(nome);if(!t.length)return false;const S=new Set(t);if(racedKeys.some(([f,l])=>S.has(f)&&S.has(l)))return true;if(SEM_SEMELHANCA.indexOf(k)>=0)return false;const c=_tk2(nome);if(c.length<2)return false;return _racedNames.some(r=>r[0]===c[0]&&r.slice(1).some(x=>c.slice(1).some(y=>_pre(x,y))));}
 
   const app=document.getElementById("app");
   let rows=[];
