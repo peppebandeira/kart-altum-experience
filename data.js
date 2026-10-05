@@ -139,7 +139,7 @@ window.__DB__ = {
     },
     {
       "pilot_id": "P018",
-      "name": "William Rezende",
+      "name": "William Mendes Rezende",
       "nickname": null,
       "bond_type": "unconfirmed"
     },
@@ -278,12 +278,6 @@ window.__DB__ = {
     {
       "pilot_id": "P041",
       "name": "Rodolfo",
-      "nickname": null,
-      "bond_type": "unconfirmed"
-    },
-    {
-      "pilot_id": "P042",
-      "name": "Willian Mendes",
       "nickname": null,
       "bond_type": "unconfirmed"
     },
@@ -1035,7 +1029,7 @@ window.__DB__ = {
     },
     {
       "race_id": "R2026-04",
-      "pilot_id": "P042",
+      "pilot_id": "P018",
       "kart_number": 50,
       "grid_pole": false,
       "finish_pos": 4,
