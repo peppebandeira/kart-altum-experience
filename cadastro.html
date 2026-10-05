@@ -48,8 +48,8 @@ footer .tagline{font-family:var(--font-serif);font-style:italic;color:var(--gold
 #reservaStep .opt,#reservaStep .optq{cursor:pointer;border:1px solid var(--line,#2C2C30);background:transparent;color:var(--soft,#DEDBD4);font-family:var(--font-display,'Barlow Condensed'),sans-serif;font-style:italic;font-weight:700;text-transform:uppercase;font-size:17px;padding:12px 22px;border-radius:8px}
 #reservaStep .optq{min-width:58px;text-align:center}
 #reservaStep .opt.sel,#reservaStep .optq.sel{border-color:var(--gold,#C9A227);color:var(--gold-hi,#E8C558);background:rgba(201,162,42,.1)}
-#reservaStep .kit{display:inline-flex;gap:11px;align-items:center;color:#D6D2C9;font-size:15px;margin:4px 0 22px;cursor:pointer}
-#reservaStep .kit input{width:20px;height:20px;accent-color:var(--gold,#C9A227)}
+#reservaStep .kit{display:flex;gap:14px;align-items:flex-start;max-width:560px;border:1.5px solid var(--gold,#C9A227);background:rgba(201,162,42,.08);border-radius:10px;padding:16px 18px;margin:6px 0 22px;cursor:pointer;transition:background .15s,border-color .15s} #reservaStep .kit:has(input:checked){background:rgba(201,162,42,.2);border-color:var(--gold-hi,#E8C558)} #reservaStep .kit b{display:block;color:var(--gold-hi,#E8C558);font-size:16px;font-weight:700;letter-spacing:.01em} #reservaStep .kit small{display:block;color:#C9C5BC;font-size:13.5px;line-height:1.45;margin-top:4px}
+#reservaStep .kit input{flex:none;margin-top:2px;width:22px;height:22px;accent-color:var(--gold,#C9A227)}
 #reservaStep .rwpp{width:100%;max-width:360px;min-height:50px;background:var(--black,#0A0A0B);border:1px solid var(--line,#2C2C30);color:#fff;font-size:16px;padding:0 15px;border-radius:8px}
 #reservaStep .valor{font-family:var(--font-display,'Barlow Condensed'),sans-serif;font-weight:800;font-size:32px;color:#fff;margin:16px 0}
 #reservaStep .valor b{color:var(--gold-hi,#E8C558)}
@@ -73,9 +73,9 @@ footer .tagline{font-family:var(--font-serif);font-style:italic;color:var(--gold
 <p class="rhi" id="rHi">Cadastro feito! Falta só reservar sua bateria.</p>
 <div class="rf"><span class="rl">Qual bateria?</span><div class="seg" id="segBat"><button type="button" class="opt sel" data-bat="geral">Geral</button><button type="button" class="opt" data-bat="feminina">Feminina</button></div></div>
 <div class="rf" id="qtdWrap"><span class="rl">Quantas baterias?</span><div class="seg" id="segQtd"><button type="button" class="optq sel" data-qtd="1">1</button><button type="button" class="optq" data-qtd="2">2</button><button type="button" class="optq" data-qtd="3">3</button></div></div>
-<label class="kit"><input type="checkbox" id="kitChk"> Quero o kit (luva + balaclava) — R$15</label>
+<label class="kit"><input type="checkbox" id="kitChk"><span class="kt"><b>Quero o kit luva + balaclava — R$15</b><small>Garanta agora e chegue pronto pra correr, sem precisar comprar na hora.</small></span></label>
 <div class="rf"><span class="rl">WhatsApp pra receber a confirmação</span><input class="rwpp" id="rWpp" type="text" placeholder="(61) 90000-0000"></div>
-<div class="valor">Total: <b id="rValor">R$120</b></div>
+<div class="valor">Total: <b id="rValor">R$130</b></div>
 <div class="pix"><div class="pl">Pague no PIX</div><div class="pk"><code id="pixKey">55359750000146</code><button type="button" id="copyPix">Copiar chave</button></div><div class="pm">GB Intermediações LTDA · Nubank · use o valor acima</div></div>
 <div class="rf"><span class="rl">Anexe o comprovante do PIX</span><input type="file" id="rComp" accept="image/*,application/pdf"></div>
 <button type="button" class="send" id="rSend">Enviar inscrição</button>
@@ -156,7 +156,7 @@ window.KART_CONFIG = {
      window.scrollTo(0,0);
    }catch(e){ console.error(e); }
  };
- function calc(){ var q=(bat==='feminina')?1:qtd; var kit=document.getElementById('kitChk').checked; var v=q*120+(kit?15:0); document.getElementById('rValor').textContent='R$'+v; return {q:q,kit:kit,v:v}; }
+ function calc(){ var q=(bat==='feminina')?1:qtd; var kit=document.getElementById('kitChk').checked; var v=q*130+(kit?15:0); document.getElementById('rValor').textContent='R$'+v; return {q:q,kit:kit,v:v}; }
  document.addEventListener('click',function(e){
    var ob=e.target.closest&&e.target.closest('#segBat .opt');
    if(ob){ document.querySelectorAll('#segBat .opt').forEach(function(x){x.classList.remove('sel')}); ob.classList.add('sel'); bat=ob.getAttribute('data-bat'); document.getElementById('qtdWrap').style.display=(bat==='feminina')?'none':''; calc(); return; }
@@ -258,13 +258,6 @@ window.__jaCad=function(row){
   if(document.readyState==="loading"){ document.addEventListener("DOMContentLoaded",presetSexo); } else { presetSexo(); }
 })();
 </script>
-<div id="closedFull" style="position:fixed;inset:0;z-index:999999;background:#0A0A0B;display:flex;align-items:center;justify-content:center;padding:22px;font-family:Arial,Helvetica,sans-serif">
-<div style="max-width:440px;background:#141416;border:1px solid #8A6E1E;border-radius:14px;padding:36px 28px;text-align:center">
-<div style="font-family:Georgia,serif;font-style:italic;font-weight:700;font-size:30px;color:#fff;margin-bottom:14px;line-height:1.1">Inscrições encerradas</div>
-<p style="color:#DEDBD4;font-size:16px;line-height:1.55;margin-bottom:24px">Baterias desta edição foram encerradas. Em breve, anunciaremos a data da próxima bateria.</p>
-<a href="kart-experience.html" style="display:inline-block;text-decoration:none;cursor:pointer;background:linear-gradient(180deg,#E8C558,#C9A227);color:#160f00;font-family:Georgia,serif;font-style:italic;font-weight:700;font-size:17px;padding:12px 30px;border-radius:8px">Voltar ao site</a>
-</div>
-</div>
 <script>
 /* Link de convite da organização: cadastro.html?convite=piloto
    Pula o aviso "Inscrições encerradas" e faz SÓ o cadastro (sem etapa de reserva/PIX). */
