@@ -114,7 +114,12 @@ footer .meta{color:var(--muted);font-size:11px;margin-top:8px;letter-spacing:1px
 
   const racedIds=new Set((db.results||[]).map(r=>r.pilot_id));
   const racedKeys=(db.pilots||[]).filter(p=>racedIds.has(p.pilot_id)).map(p=>{const t=_tok(p.name);return t.length?[t[0],t[t.length-1]]:null;}).filter(Boolean);
-  function hasRaced(nome){const t=_tok(nome);if(!t.length)return false;const S=new Set(t);return racedKeys.some(([f,l])=>S.has(f)&&S.has(l));}
+  const _STOP={de:1,da:1,do:1,dos:1,das:1,e:1,filho:1,junior:1,neto:1};
+  function _tk2(s){return _norm(s).split(/\s+/).filter(t=>t.length>=3&&!_STOP[t]);}
+  function _pre(a,b){return a===b||(a.length>=3&&b.startsWith(a))||(b.length>=3&&a.startsWith(b));}
+  const _racedNames=(db.pilots||[]).filter(p=>racedIds.has(p.pilot_id)).map(p=>_tk2(p.name)).filter(r=>r.length>1);
+  /* regra 1: primeiro+ultimo nome do resultado no cadastro. regra 2: mesmo primeiro nome + outro nome igual ou abreviado (ex.: "Henrique Bar" = "Henrique Barata") */
+  function hasRaced(nome){const t=_tok(nome);if(!t.length)return false;const S=new Set(t);if(racedKeys.some(([f,l])=>S.has(f)&&S.has(l)))return true;const c=_tk2(nome);if(c.length<2)return false;return _racedNames.some(r=>r[0]===c[0]&&r.slice(1).some(x=>c.slice(1).some(y=>_pre(x,y))));}
 
   const app=document.getElementById("app");
   let rows=[];
