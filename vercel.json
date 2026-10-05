@@ -1,0 +1,15 @@
+{
+  "redirects": [
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "kartexperience.vercel.app"
+        }
+      ],
+      "destination": "/kart-experience.html",
+      "permanent": false
+    }
+  ]
+}
