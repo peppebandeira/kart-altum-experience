@@ -87,6 +87,9 @@ h1{font-family:Georgia,serif;font-style:italic;font-size:30px;margin:0 0 4px;col
         else { for(var t2=0;t2<heats.length&&!found;t2++){ if(t2!==h&&cnt(t2,s.rv.id)===0&&heats[t2].length<CAP){ heats[t2].push(s); heats[h].splice(a,1); found=true; } } if(!found){ heats.push([s]); heats[h].splice(a,1); found=true; } }
       } }
       if(!found) break; }
+    /* completa cada bateria ate QUORUM puxando os mais pesados das seguintes (sem repetir piloto) */
+    for(var fi=0;fi<heats.length;fi++){ var g2=0; while(heats[fi].length<QUORUM&&g2++<60){ var bj=-1,bc=-1; for(var j2=fi+1;j2<heats.length;j2++){ heats[j2].forEach(function(cc,ci){ if(cc._pin) return; if(heats[fi].some(function(x){return x.rv.id===cc.rv.id;})) return; if(bj<0||byW(cc,heats[bj][bc])<0){ bj=j2; bc=ci; } }); } if(bj<0) break; heats[fi].push(heats[bj].splice(bc,1)[0]); } }
+    while(heats.length>1&&heats[heats.length-1].length===0) heats.pop();
     return heats;
   }
   function renderBoard(cf){ LASTCF=cf;
