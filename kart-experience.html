@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Reserve sua vaga — Kart Experience · 3ª Edição</title>
-<meta name="description" content="Kart Experience 3ª Edição — 22/09, Kart Point, Arena Mané Garrincha, 19h. Negócios, velocidade e competição.">
+<title>Reserve sua vaga — Kart Experience · 4ª Edição</title>
+<meta name="description" content="Kart Experience 4ª Edição — 13/10, Kart Point, Arena Mané Garrincha, 19h. Negócios, velocidade e competição.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,500;0,600;0,700;0,800;1,600;1,700;1,800&family=Barlow:wght@400;500;600;700&family=Syncopate:wght@400;700&display=swap" rel="stylesheet">
@@ -159,6 +159,8 @@
     *{animation:none!important;transition:none!important}
     html{scroll-behavior:auto} .proof .bg{transform:none}
   }
+  .edlabel{display:flex;align-items:center;justify-content:center;gap:12px;width:min(380px,74vw);margin:0 0 8px;font-family:var(--f-disp);font-style:italic;font-weight:600;text-transform:uppercase;letter-spacing:.32em;font-size:13px;color:#c7c7c7}
+  .edlabel::before,.edlabel::after{content:"";width:18%;height:1px;background:var(--pink)}
 </style>
 </head>
 <body>
@@ -166,7 +168,7 @@
   <div class="checker pink"></div>
   <header class="top">
     <div class="wrap row">
-      <img class="logoimg" src="ke-logo.png" alt="Kart Experience">
+      <img class="logoimg" src="ke-logo-base.png" alt="Kart Experience">
       <a href="#inscricao" class="cta-mini">Reservar vaga</a>
     </div>
   </header>
@@ -177,7 +179,7 @@
       <div class="hbg"></div><div class="hscrim"></div>
       <div class="wrap">
         <div class="hero-top">
-          <div class="hero-logo reveal"><img class="logoimg" src="ke-logo.png" alt="Kart Experience — 3ª Edição"></div>
+          <div class="hero-logo reveal"><div class="edlabel"><span id="edLabel">4ª Edição</span></div><img class="logoimg" src="ke-logo-base.png" alt="Kart Experience — 4ª Edição"></div>
           <div class="hero-actions reveal">
             <div class="countdown" id="countdown" aria-label="Contagem regressiva para a largada">
               <div class="cd-u"><div class="num" id="cdD">--</div><div class="lab">dias</div></div>
@@ -191,10 +193,10 @@
         </div>
         <div class="hero-tag reveal"><span class="g">Negócios.</span> Velocidade. <span class="p">Competição.</span></div>
         <div class="facts-strip reveal">
-          <span class="fs"><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></span><span id="fData">22/09</span></span>
+          <span class="fs"><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></span><span id="fData">13/10</span></span>
           <span class="fs"><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg></span><span id="fLocal">Kart Point – Arena Mané Garrincha</span></span>
           <span class="fs"><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 14"/></svg></span><span id="fHora">19h</span></span>
-          <span class="fs price"><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 9V5a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v4a2 2 0 0 0 0 6v4a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-4a2 2 0 0 0 0-6z"/></svg></span><b id="cTotal">R$135</b><small>bateria R$120 + kit R$15</small></span>
+          <span class="fs price"><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 9V5a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v4a2 2 0 0 0 0 6v4a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-4a2 2 0 0 0 0-6z"/></svg></span><b id="cTotal">R$145</b><small>bateria R$130 + kit R$15</small></span>
         </div>
         <div class="brief-line reveal"><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span><div><b>Chegue antes das 19h</b> — o briefing abre a noite e define largada. Quem atrasa, larga em desvantagem.</div></div>
       </div>
@@ -215,12 +217,11 @@
     <section class="block"><div class="wrap">
       
       <div class="fem reveal">
-        <div class="feed"><img src="ke-feed.jpg" alt="Kart Experience 3ª Edição — bateria feminina" loading="lazy" decoding="async"></div>
+        <div class="feed"><img src="ke-feed.jpg" alt="Kart Experience 4ª Edição — bateria feminina" loading="lazy" decoding="async"></div>
         <div class="txt">
-          <div style="font-family:var(--f-disp);font-style:italic;font-weight:800;text-transform:uppercase;font-size:clamp(30px,6vw,48px);line-height:.9;color:var(--white);margin-bottom:2px">Novidade desta edição</div>
           <div class="kick"><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="5"/><line x1="12" y1="13" x2="12" y2="22"/><line x1="9" y1="19" x2="15" y2="19"/></svg></span>Grid exclusivo</div>
           <h3>Bateria Feminina.</h3><p class="femsub">Elas também largam na frente.</p>
-          <p>Nesta edição tem grid só delas. Mesma pista, mesma adrenalina, uma bateria exclusiva pra mulheres que decidem — e que não correm pra ficar em segundo. Chama as sócias, as parceiras de negócio, as concorrentes.</p>
+          <p>Toda edição tem grid só delas. Mesma pista, mesma adrenalina, uma bateria exclusiva pra mulheres que decidem — e que não correm pra ficar em segundo. Chama as sócias, as parceiras de negócio, as concorrentes.</p>
           <div style="max-width:360px;align-self:center;width:100%"><a href="#inscricao" class="btn btn-pink">Quero na bateria feminina</a></div>
         </div>
       </div>
@@ -312,13 +313,13 @@
   </main>
 
   <footer class="foot"><div class="wrap">
-    <img class="logoimg" src="ke-logo.png" alt="Kart Experience">
+    <img class="logoimg" src="ke-logo-base.png" alt="Kart Experience">
     <div class="ftag">Negócios · Velocidade · Competição</div>
-    <div class="meta" id="footMeta">3ª Edição · 22/09 · Kart Point – Arena Mané Garrincha · 19h</div>
+    <div class="meta" id="footMeta">4ª Edição · 13/10 · Kart Point – Arena Mané Garrincha · 19h</div>
   </div></footer>
 
 <script>
-const EVENTO={edicao:"3ª",data:"22/09",hora:"19h",local:"Kart Point – Arena Mané Garrincha",dataISO:"2026-09-22T19:00:00-03:00",valorBateria:120,valorKit:15};
+const EVENTO={edicao:"4ª",data:"13/10",hora:"19h",local:"Kart Point – Arena Mané Garrincha",dataISO:"2026-10-13T19:00:00-03:00",valorBateria:130,valorKit:15};
 const SUPABASE={url:"",anonKey:"",table:""};
 const SEED_PILOTOS=[
  {nome:"Handerson Argenta",vinculo:"Convidado",status:"cadastrado"},{nome:"Rodrigo Alves",vinculo:"—",status:"pendente"},
@@ -335,7 +336,7 @@ const $=s=>document.querySelector(s);
 const brl=n=>"R$"+n.toLocaleString("pt-BR");
 $("#fData").textContent=EVENTO.data;$("#fLocal").textContent=EVENTO.local;$("#fHora").textContent=EVENTO.hora;
 $("#cTotal").textContent=brl(EVENTO.valorBateria+EVENTO.valorKit);
-$("#footMeta").textContent=EVENTO.edicao+" Edição · "+EVENTO.data+" · "+EVENTO.local+" · "+EVENTO.hora;
+var _el=$("#edLabel"); if(_el) _el.textContent=EVENTO.edicao+" Edição"; $("#footMeta").textContent=EVENTO.edicao+" Edição · "+EVENTO.data+" · "+EVENTO.local+" · "+EVENTO.hora;
 
 (function(){const t=new Date(EVENTO.dataISO).getTime(),pad=n=>String(n).padStart(2,"0");
  function tick(){const d=t-Date.now();if(d<=0){$("#countdown").innerHTML='<div class="cd-u" style="padding:12px 18px"><div class="num" style="font-size:24px">É HOJE</div></div>';return;}
@@ -414,26 +415,6 @@ document.addEventListener('DOMContentLoaded',function(){return;if(!window.gsap||
   }
   if(document.readyState==="loading"){ document.addEventListener("DOMContentLoaded",fix); } else { fix(); }
   setTimeout(fix,600);
-})();
-</script>
-<div id="closedPop" style="position:fixed;inset:0;z-index:999999;background:rgba(0,0,0,.88);display:none;align-items:center;justify-content:center;padding:22px;font-family:Arial,Helvetica,sans-serif">
-<div style="max-width:440px;background:#141416;border:1px solid #8A6E1E;border-radius:14px;padding:36px 28px;text-align:center">
-<div style="font-family:Georgia,serif;font-style:italic;font-weight:700;font-size:30px;color:#fff;margin-bottom:14px;line-height:1.1">Inscrições encerradas</div>
-<p style="color:#DEDBD4;font-size:16px;line-height:1.55;margin-bottom:24px">Baterias desta edição foram encerradas. Em breve, anunciaremos a data da próxima bateria.</p>
-<button id="closedOk" style="cursor:pointer;border:none;background:linear-gradient(180deg,#E8C558,#C9A227);color:#160f00;font-family:Georgia,serif;font-style:italic;font-weight:700;font-size:17px;padding:12px 30px;border-radius:8px">Entendi</button>
-</div>
-</div>
-<script>
-(function(){
-  function pop(){ var p=document.getElementById("closedPop"); if(p) p.style.display="flex"; }
-  document.addEventListener("click", function(e){
-    var el=e.target;
-    while(el && el!==document.body && el!==document.documentElement){
-      if(el.classList && (el.classList.contains("cta-mini")||el.classList.contains("btn-gold")||el.classList.contains("btn-pink"))){ e.preventDefault(); e.stopPropagation(); pop(); return; }
-      el=el.parentNode;
-    }
-  }, true);
-  var b=document.getElementById("closedOk"); if(b){ b.onclick=function(){ var p=document.getElementById("closedPop"); if(p) p.style.display="none"; }; }
 })();
 </script>
 </body>
